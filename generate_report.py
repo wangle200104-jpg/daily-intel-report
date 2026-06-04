@@ -246,15 +246,30 @@ def select_topics(pool: list[dict]) -> tuple[list[dict], list[dict]]:
 
 ---
 
-请完成两项选题任务：
+请完成两项选题任务。以下领域配额是硬性要求，不是建议，必须严格执行。
 
-## 任务A：深度长文选题（选{TARGET_DEEP}条）
-{DEEP_DISTRIBUTION}
-选题标准：影响力大、角度独特、值得500字深挖、有投资/商业价值
+## 任务A：深度长文（必须恰好{TARGET_DEEP}条，领域配额不可违反）
 
-## 任务B：快讯简报选题（选{TARGET_BRIEF}条，不得与A重复）
-{BRIEF_DISTRIBUTION}
-选题标准：今日发生、信息密度高、一句话能说清楚
+硬性配额：
+1. 半导体/芯片/GPU/算力/HBM/封装 → 必须3篇（最高优先级）
+2. 人工智能/大模型/推理 → 必须2篇
+3. 中国科技/国产替代/A股产业链 → 必须2篇
+4. 投资/融资/估值 → 必须1篇
+5. 宏观/政策/地缘/出口管制 → 必须1篇
+6. 新材料/先进制造/能源/机器人 → 必须1篇
+
+重要：软件工程/SaaS/企业服务类不得占用上述名额。如当日半导体新闻不足3条，选相关产业链（HBM/封装/存储/EDA/设备）补充。
+
+## 任务B：快讯简报（必须恰好{TARGET_BRIEF}条，不得与A重复）
+
+硬性配额：
+1. 半导体/芯片/算力/HBM → 必须5条
+2. 人工智能/大模型 → 必须4条
+3. 中国科技/A股/产业链 → 必须3条
+4. 投资/融资/并购 → 必须3条
+5. 政策/宏观/地缘 → 必须2条
+6. 材料/制造/能源/机器人 → 必须2条
+7. 其他前沿科技 → 必须1条
 
 仅输出JSON，不要任何解释：
 {{
@@ -438,41 +453,60 @@ def write_all_deep(deep: list[dict]) -> str:
 # ══════════════════════════════════════════════════════
 # Step 4 · 生成导读（Flash，快速省钱）
 # ══════════════════════════════════════════════════════
-def make_header(articles_text: str, selected: list[dict]) -> str:
+def make_header(deep_text: str, selected: list[dict]) -> str:
+    """导读生成：用各篇标题+首句摘要构建上下文，避免截断问题"""
     domains = [a.get("domain","") for a in selected]
     domain_list = "、".join(dict.fromkeys(d for d in domains if d))
+
+    # 从 deep_text 提取每篇标题+首句，给AI足够的上下文
+    summaries = []
+    articles = [a.strip() for a in deep_text.split('\n---\n') if a.strip()]
+    for i, art in enumerate(articles[:10], 1):
+        # 提取标题行
+        title_m = re.search(r'##\s+深度[文章]*\d*[：:]\s*(.+)', art)
+        title = title_m.group(1).strip() if title_m else f"文章{i}"
+        # 提取领域
+        domain_m = re.search(r'\*\*领域\*\*[：:](.+)', art)
+        domain = domain_m.group(1).strip() if domain_m else ""
+        # 提取正文第一段（去掉标题和来源行）
+        body = re.sub(r'^##[^\n]+\n', '', art, count=1)
+        body = re.sub(r'\*\*来源\*\*[^\n]+\n', '', body)
+        body = body.strip()
+        first_para = body[:120].replace('\n', ' ')
+        summaries.append(f"{i}. 【{domain}】{title}——{first_para}…")
+
+    summary_text = "\n".join(summaries)
 
     return _chat(
         MODEL_FAST,
         [{"role": "user", "content": f"""
-今天是{TODAY}。以下是今日深度文章和快讯的核心内容摘要：
+今天是{TODAY}。以下是今日10篇深度文章的标题和摘要：
 
-{articles_text[:2500]}
+{summary_text}
 
----
 今日覆盖领域：{domain_list}
 
-请写一段**每日导读**，严格按以下要求：
+---
 
-【第一句固定格式，不得更改】
-「早，今天是{TODAY}，王sir为您汇报今天的重要资讯。」
+你的任务：写一段每日导读。
 
-【正文要求】
-- 风格：中国顶级财经记者，沉稳、精准、有判断力，不用感叹号
-- 字数：正文150-180字（含开头那句，不含关键词行）
-- 结构：1句固定开头 + 3条今日最重要资讯（每条1-2句，说清楚发生了什么+为什么重要）+ 今日关键词
-- 每条资讯必须包含：事实判断 + 产业或投资意义
-- 今日最值得关注的1条资讯用**加粗**标注
-- 优先选取半导体、算力、AI、材料、产业链相关内容
-- 最后一行固定格式：「今日关键词：XXX · XXX · XXX」（3-5个，精准反映今日主题）
+第一步：逐字输出这句话，一个字都不能改：
+早，今天是{TODAY}，王sir为您汇报今天的重要资讯。
 
-【严格禁止】
-- 禁止"早安""大家好""让我们""值得关注"等套话
-- 禁止感叹号
-- 禁止"颠覆性""革命性""历史性"等空洞形容词
-- 禁止重复昨天或前几天已报道过的同类内容
+第二步：紧接着写3条今日重要资讯（不换行空行，自然衔接）：
+- 每条1-2句，说清楚：发生了什么 + 为什么对投资或产业重要
+- 优先选半导体、算力、AI、产业链相关内容
+- 最值得关注的1条用**加粗**标出
+- 语气：中国顶级财经记者，克制精准，不用感叹号
+
+第三步：最后一行固定格式（单独一行）：
+今日关键词：XXX · XXX · XXX
+
+总字数：150-180字（含第一句，不含关键词行）
+
+禁止："早安""大家好""让我们""颠覆性""革命性""历史性"，禁止感叹号。
 """}],
-        max_tokens=600, temperature=0.45,
+        max_tokens=600, temperature=0.4,
     )
 
 # ══════════════════════════════════════════════════════
