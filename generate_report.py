@@ -21,8 +21,8 @@ from sources import ALL_SOURCES, KEYWORDS
 
 # ── 配置 ──────────────────────────────────────────────
 API_KEY        = os.environ.get("DEEPSEEK_API_KEY", "").strip()
-MODEL_WRITER   = "deepseek-v4-pro"
-MODEL_FAST     = "deepseek-v4-flash"
+MODEL_WRITER   = "deepseek-v4-pro"   # 深度长文
+MODEL_FAST     = "deepseek-v4-pro"   # 选题/快讯/导读 全部用pro（用户要求）
 TODAY          = datetime.date.today().strftime("%Y年%m月%d日")
 DATE_STR       = datetime.date.today().strftime("%Y-%m-%d")
 TARGET_DEEP    = 10
@@ -190,6 +190,7 @@ def fetch_rss(source: dict) -> list[dict]:
     return articles
 
 def collect_news() -> list[dict]:
+    """抓取新闻并分层采样——保证半导体/算力/材料有足够候选条目"""
     print(f"📡 抓取 {len(ALL_SOURCES)} 个新闻源…")
     pool, seen = [], set()
     for i, src in enumerate(ALL_SOURCES):
@@ -201,9 +202,59 @@ def collect_news() -> list[dict]:
         if new:
             print(f"  [{i+1:3d}/{len(ALL_SOURCES)}] {src['name']}: +{len(new)} 条")
         time.sleep(0.18)
-    pool.sort(key=lambda x: x["weight"], reverse=True)
-    print(f"\n✅ 去重后 {len(pool)} 条有效资讯\n")
-    return pool
+
+    print(f"\n✅ 去重后 {len(pool)} 条有效资讯")
+
+    # ── 分层采样：按领域分桶，保证各领域有足够候选 ──
+    SEMI_KEYS = ['semiconductor','chip','gpu','hbm','tsmc','nvidia','amd','intel',
+                 'arm','asml','qualcomm','算力','芯片','半导体','封装','存储','制程',
+                 'fab','wafer','foundry','eda','litho']
+    AI_KEYS   = ['ai','llm','gpt','claude','gemini','deepseek','openai','anthropic',
+                 '大模型','人工智能','机器学习','neural','transformer','inference']
+    CN_KEYS   = ['china','chinese','华为','中国','国产','A股','腾讯','阿里','百度',
+                 '小米','字节','比亚迪','宁德','中芯','紫光']
+    MAT_KEYS  = ['material','材料','新材料','碳纤维','钛','锂','稀土','先进制造',
+                 'robot','机器人','energy','能源','electric','电池']
+
+    def tag_article(a):
+        text = (a.get('title','') + ' ' + a.get('desc','')).lower()
+        tags = a.get('tags', [])
+        tag_str = ' '.join(tags).lower()
+        combined = text + ' ' + tag_str
+        if any(k in combined for k in SEMI_KEYS): return 'semi'
+        if any(k in combined for k in CN_KEYS):   return 'china'
+        if any(k in combined for k in MAT_KEYS):  return 'material'
+        if any(k in combined for k in AI_KEYS):   return 'ai'
+        return 'other'
+
+    buckets = {'semi': [], 'ai': [], 'china': [], 'material': [], 'other': []}
+    for a in sorted(pool, key=lambda x: x['weight'], reverse=True):
+        cat = tag_article(a)
+        buckets[cat].append(a)
+
+    print(f"  领域分布 → 半导体:{len(buckets['semi'])} AI:{len(buckets['ai'])} "
+          f"中国:{len(buckets['china'])} 材料:{len(buckets['material'])} 其他:{len(buckets['other'])}")
+
+    # 构建候选池：半导体优先保证40条，AI30条，中国30条，材料20条，其他30条
+    candidate = []
+    quotas = [('semi',40), ('ai',30), ('china',30), ('material',20), ('other',30)]
+    seen_in_candidate = set()
+    for cat, quota in quotas:
+        for a in buckets[cat][:quota]:
+            if a['uid'] not in seen_in_candidate:
+                candidate.append(a)
+                seen_in_candidate.add(a['uid'])
+
+    # 如果某领域不足，用高权重文章补足到150条
+    if len(candidate) < 150:
+        for a in sorted(pool, key=lambda x: x['weight'], reverse=True):
+            if a['uid'] not in seen_in_candidate:
+                candidate.append(a)
+                seen_in_candidate.add(a['uid'])
+            if len(candidate) >= 150: break
+
+    print(f"✅ 候选池 {len(candidate)} 条（分层采样，半导体优先）\n")
+    return candidate
 
 # ══════════════════════════════════════════════════════
 # Step 2 · 选题（Flash模型，快速省钱）
@@ -281,9 +332,14 @@ def select_topics(pool: list[dict]) -> tuple[list[dict], list[dict]]:
   ]
 }}"""
 
-    print(f"  🎯 选题中（Flash）…")
-    content = _chat(MODEL_FAST, [{"role": "user", "content": prompt}],
-                    max_tokens=3000, temperature=0.3)
+    print(f"  🎯 选题中（Pro）…")
+    content = _chat(MODEL_FAST,
+                    [{"role": "system", "content":
+                      "你是一位专注半导体和AI产业的选题编辑。"
+                      "你必须严格按照用户给出的硬性配额执行，不得自行调整领域比例。"
+                      "半导体/芯片/算力是最高优先级，必须保证名额。"},
+                     {"role": "user", "content": prompt}],
+                    max_tokens=3000, temperature=0.2)
     if not content:
         return pool[:TARGET_DEEP], pool[TARGET_DEEP:TARGET_DEEP+TARGET_BRIEF]
     m   = re.search(r'\{[\s\S]+\}', content)
@@ -313,7 +369,35 @@ def select_topics(pool: list[dict]) -> tuple[list[dict], list[dict]]:
         deep_uids = {a["uid"] for a in deep}
         brief     = [a for a in brief if a["uid"] not in deep_uids][:TARGET_BRIEF]
 
+        # ── 验证并强制半导体配额 ──
+        SEMI_KEYS = ['semiconductor','chip','gpu','hbm','tsmc','nvidia','算力',
+                     '芯片','半导体','封装','存储','制程','wafer','eda']
+        def is_semi(a):
+            text = (a.get('title','') + ' ' + a.get('desc','') + ' ' +
+                    a.get('domain','')).lower()
+            return any(k in text for k in SEMI_KEYS)
+
+        semi_in_deep = [a for a in deep if is_semi(a)]
+        if len(semi_in_deep) < 3:
+            # 从候选池里补充半导体文章
+            pool_semi = [a for a in pool if is_semi(a) and
+                         a["uid"] not in {x["uid"] for x in deep}]
+            needed = 3 - len(semi_in_deep)
+            # 替换掉deep里非核心领域的文章
+            non_core = [a for a in deep if not is_semi(a) and
+                        a.get('domain','') not in ['人工智能','大模型','中国科技','国产替代']]
+            replace_count = min(needed, len(non_core), len(pool_semi))
+            for i in range(replace_count):
+                deep.remove(non_core[i])
+                pool_semi[i]['domain'] = pool_semi[i].get('domain','') or '半导体'
+                pool_semi[i]['angle']  = '从产业链和投资角度分析此事件对中国算力/芯片产业的影响'
+                deep.append(pool_semi[i])
+            print(f"⚡ 半导体配额补充：+{replace_count}篇 → 总计{len([a for a in deep if is_semi(a)])}篇")
+
         print(f"✅ 选题完成 → 深度 {len(deep)} 篇 · 快讯 {len(brief)} 条")
+        # 打印领域分布供核查
+        deep_domains = [a.get('domain','未分类') for a in deep]
+        print(f"   深度领域分布: {', '.join(deep_domains)}")
         return deep, brief
     except Exception as ex:
         print(f"⚠️  选题解析错误: {ex}")
@@ -427,7 +511,7 @@ def write_briefs(briefs: list[dict]) -> str:
 
 重要：必须输出全部{len(briefs)}条，每条都要有完整的领域/标题/正文/启示四个字段。"""
 
-    print(f"  ⚡ 快讯 ({len(briefs)}条) → {MODEL_FAST}…")
+    print(f"  ⚡ 快讯 ({len(briefs)}条) → {MODEL_FAST}（Pro）…")
     return _chat(
         MODEL_FAST,
         [{"role": "system", "content": (
@@ -665,6 +749,7 @@ if __name__ == "__main__":
     print(f"  🧠 每日科技投资深度简报  ·  {TODAY}")
     print(f"  深度：{TARGET_DEEP}篇 × {MODEL_WRITER}")
     print(f"  快讯：{TARGET_BRIEF}条 × {MODEL_FAST}")
+    print(f"  导读：全部 Pro 模型")
     print(f"{'═'*58}\n")
 
     # 1. 抓取
