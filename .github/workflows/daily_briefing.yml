@@ -2,7 +2,7 @@ name: 🧠 每日科技投资深度简报
 
 on:
   schedule:
-    - cron: '0 0 * * *'       # 北京时间 08:00（UTC 00:00）
+    - cron: '0 1 * * *'       # 北京时间 08:00（UTC 00:00）
   workflow_dispatch:
 
 jobs:
