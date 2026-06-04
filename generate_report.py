@@ -20,17 +20,121 @@ except ImportError:
 from sources import ALL_SOURCES, KEYWORDS
 
 # ── 配置 ──────────────────────────────────────────────
-API_KEY        = os.environ["DEEPSEEK_API_KEY"]
-MODEL_WRITER   = "deepseek-v4-pro"    # 写作主力：最强推理+创作
-MODEL_FAST     = "deepseek-v4-flash"  # 快速任务：导读、去重判断
+API_KEY        = os.environ.get("DEEPSEEK_API_KEY", "").strip()
+MODEL_WRITER   = "deepseek-v4-pro"
+MODEL_FAST     = "deepseek-v4-flash"
 TODAY          = datetime.date.today().strftime("%Y年%m月%d日")
 DATE_STR       = datetime.date.today().strftime("%Y-%m-%d")
-TARGET_DEEP     = 10      # 深度长文数量（~500字，Pro模型）
-TARGET_BRIEF    = 20      # 快讯简报数量（~80字，Flash模型）
-MAX_PER_SOURCE  = 6       # 每源最多取几条
-BATCH_DEEP      = 5       # 深度文章每批写几篇（Pro限速）
+TARGET_DEEP    = 10
+TARGET_BRIEF   = 20
+MAX_PER_SOURCE = 6
+BATCH_DEEP     = 5
+BATCH_SLEEP    = 12   # 批次间等待秒数（防并发限速）
+API_CALL_SLEEP = 3    # 每次API调用后基础等待
+
+if not API_KEY:
+    print("❌ 未找到 DEEPSEEK_API_KEY 环境变量，请检查 GitHub Secrets")
+    sys.exit(1)
+
+# 打印Key末尾4位，便于确认是否读取正确
+print(f"✅ API Key 已加载（末尾4位：...{API_KEY[-4:]}）")
 
 client = OpenAI(api_key=API_KEY, base_url="https://api.deepseek.com")
+
+
+# ── API 统一调用包装（含重试 + 清晰报错）─────────────
+def _chat(model: str, messages: list, max_tokens: int = 4000,
+          temperature: float = 0.7) -> str:
+    """
+    DeepSeek API 统一调用 — 含完整错误处理和自动重试
+    401 → Key 带空格 / Key 失效 / DeepSeek 并发触发的临时封禁
+    402 → 余额不足
+    429 → 请求过快，指数退避重试
+    5xx → 服务端错误，等待重试
+    """
+    from openai import AuthenticationError, RateLimitError, APIStatusError
+
+    max_retries = 4
+    for attempt in range(1, max_retries + 1):
+        try:
+            resp = client.chat.completions.create(
+                model=model,
+                max_tokens=max_tokens,
+                temperature=temperature,
+                messages=messages,
+            )
+            result = resp.choices[0].message.content
+            # 每次成功调用后基础等待，防止连续请求触发限速
+            time.sleep(API_CALL_SLEEP)
+            return result
+
+        except AuthenticationError as e:
+            raw = str(e)
+            msg = raw.lower()
+            print(f"\n{'='*58}")
+            print(f"❌  DeepSeek 401 认证失败（第{attempt}次）")
+            print(f"    原始错误：{raw[:120]}")
+            print()
+
+            if attempt < max_retries:
+                # 401 有时是瞬时并发触发，先等待重试
+                wait = 20 * attempt
+                print(f"  ⏳ 等待 {wait}s 后重试（{attempt}/{max_retries-1}）…")
+                print(f"     注：DeepSeek 高并发时会临时返回 401，等待可恢复")
+                print(f"{'='*58}\n")
+                time.sleep(wait)
+                continue
+
+            # 最后一次仍失败，给出明确指引
+            print("  ── 排查步骤 ──────────────────────────────────")
+            print("  1. 余额检查（最常见原因）：")
+            print("     → platform.deepseek.com → 余额")
+            print("     → 如果 ¥0，充值后重新 Run workflow")
+            print()
+            print("  2. Key 是否带了空格（第二常见）：")
+            print("     → 仓库 Settings → Secrets → DEEPSEEK_API_KEY")
+            print("     → 删除重建，重新复制粘贴 Key，注意不要带空格")
+            print(f"     → 当前 Key 末尾4位：...{API_KEY[-4:]}")
+            print()
+            print("  3. 如以上正常，等待 30 分钟后重试")
+            print("     → DeepSeek 高并发期间会临时拒绝部分请求")
+            print(f"{'='*58}\n")
+            sys.exit(1)
+
+        except RateLimitError as e:
+            wait = 20 * attempt
+            print(f"  ⚠️  429 限速（第{attempt}次），等待 {wait}s 后重试…")
+            time.sleep(wait)
+            if attempt == max_retries:
+                print("❌  持续限速，跳过本次调用")
+                return ""
+
+        except APIStatusError as e:
+            code = e.status_code
+            if code == 402:
+                print(f"\n{'='*58}")
+                print("❌  余额不足（402）")
+                print("    → platform.deepseek.com → 充值后重新触发 Actions")
+                print(f"{'='*58}\n")
+                sys.exit(1)
+            elif code >= 500:
+                wait = 15 * attempt
+                print(f"  ⚠️  服务端错误 {code}（第{attempt}次），{wait}s 后重试…")
+                time.sleep(wait)
+                if attempt == max_retries:
+                    print(f"❌  {code} 持续，跳过")
+                    return ""
+            else:
+                print(f"❌  API 错误 {code}: {e}")
+                sys.exit(1)
+
+        except Exception as e:
+            print(f"  ⚠️  未知错误（第{attempt}次）: {e}")
+            if attempt == max_retries:
+                return ""
+            time.sleep(8)
+
+    return ""
 
 # ══════════════════════════════════════════════════════
 # Step 1 · RSS 抓取
@@ -162,12 +266,12 @@ def select_topics(pool: list[dict]) -> tuple[list[dict], list[dict]]:
   ]
 }}"""
 
-    resp = client.chat.completions.create(
-        model=MODEL_FAST, max_tokens=3000, temperature=0.3,
-        messages=[{"role": "user", "content": prompt}]
-    )
-    raw = resp.choices[0].message.content
-    m   = re.search(r'\{[\s\S]+\}', raw)
+    print(f"  🎯 选题中（Flash）…")
+    content = _chat(MODEL_FAST, [{"role": "user", "content": prompt}],
+                    max_tokens=3000, temperature=0.3)
+    if not content:
+        return pool[:TARGET_DEEP], pool[TARGET_DEEP:TARGET_DEEP+TARGET_BRIEF]
+    m   = re.search(r'\{[\s\S]+\}', content)
     if not m:
         print("⚠️  选题JSON解析失败，使用权重降级方案")
         return pool[:TARGET_DEEP], pool[TARGET_DEEP:TARGET_DEEP+TARGET_BRIEF]
@@ -262,16 +366,12 @@ def write_deep_batch(articles: list[dict], batch_num: int, total_batches: int) -
 提醒：每篇独立，专业名词每篇首次出现都要括号解释。"""
 
     print(f"  📝 深度第{batch_num}批 ({len(articles)}篇) → {MODEL_WRITER}…")
-    resp = client.chat.completions.create(
-        model=MODEL_WRITER,
-        max_tokens=8000,
-        temperature=0.72,
-        messages=[
-            {"role": "system", "content": SYSTEM_PROMPT_WRITER},
-            {"role": "user",   "content": prompt},
-        ]
+    return _chat(
+        MODEL_WRITER,
+        [{"role": "system", "content": SYSTEM_PROMPT_WRITER},
+         {"role": "user",   "content": prompt}],
+        max_tokens=8000, temperature=0.72,
     )
-    return resp.choices[0].message.content
 
 
 def write_briefs(briefs: list[dict]) -> str:
@@ -300,30 +400,26 @@ def write_briefs(briefs: list[dict]) -> str:
 输出全部{len(briefs)}条，顺序不变。"""
 
     print(f"  ⚡ 快讯 ({len(briefs)}条) → {MODEL_FAST}…")
-    resp = client.chat.completions.create(
-        model=MODEL_FAST,
-        max_tokens=6000,
-        temperature=0.6,
-        messages=[
-            {"role": "system", "content": (
-                "你是一位顶级财经编辑，专门为高净值投资人写每日科技快讯。"
-                "每条快讯要精准、有密度、让人一眼抓住核心价值。"
-                "专业名词首次出现必须括号解释。语气直接，不废话。"
-            )},
-            {"role": "user", "content": prompt},
-        ]
+    return _chat(
+        MODEL_FAST,
+        [{"role": "system", "content": (
+              "你是一位顶级财经编辑，专门为高净值投资人写每日科技快讯。"
+              "每条快讯要精准、有密度、让人一眼抓住核心价值。"
+              "专业名词首次出现必须括号解释。语气直接，不废话。")},
+         {"role": "user",   "content": prompt}],
+        max_tokens=6000, temperature=0.6,
     )
-    return resp.choices[0].message.content
 
 
 def write_all_deep(deep: list[dict]) -> str:
-    """深度长文：分2批写，每批5篇"""
+    """深度长文：分2批写，每批5篇，批次间等待防限速"""
     batches = [deep[i:i+BATCH_DEEP] for i in range(0, len(deep), BATCH_DEEP)]
     parts   = []
     for idx, batch in enumerate(batches, 1):
         parts.append(write_deep_batch(batch, idx, len(batches)))
         if idx < len(batches):
-            time.sleep(4)
+            print(f"  ⏳ 批次间等待 {BATCH_SLEEP}s（防并发限速）…")
+            time.sleep(BATCH_SLEEP)
     return "\n\n---\n\n".join(parts)
 
 # ══════════════════════════════════════════════════════
@@ -333,9 +429,9 @@ def make_header(articles_text: str, selected: list[dict]) -> str:
     domains = [a.get("domain","") for a in selected]
     domain_list = "、".join(dict.fromkeys(d for d in domains if d))
 
-    resp = client.chat.completions.create(
-        model=MODEL_FAST, max_tokens=600, temperature=0.55,
-        messages=[{"role":"user","content":f"""
+    return _chat(
+        MODEL_FAST,
+        [{"role": "user", "content": f"""
 今天是{TODAY}。以下是今日20篇深度文章的内容（节选前2500字）：
 
 {articles_text[:2500]}
@@ -348,9 +444,9 @@ def make_header(articles_text: str, selected: list[dict]) -> str:
 - 用3-4个要点勾出今天最值得知道的事
 - 点出今天最值得特别关注的1件事（加粗）
 - 最后一行：「今日关键词：XXX · XXX · XXX」（3-5个）
-"""}]
+"""}],
+        max_tokens=600, temperature=0.55,
     )
-    return resp.choices[0].message.content
 
 # ══════════════════════════════════════════════════════
 # Step 5 · 保存
