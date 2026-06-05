@@ -1,10 +1,12 @@
 """
 generate_report.py — 每日科技投资深度简报
-100个新闻源 → 去重评分 → DeepSeek V4 Pro
-  · 10篇深度长文（每篇~500字，三重身份写作）
-  · 20条快讯简报（每条~80字，直击要点）
+100个新闻源 → 分层采样 → DeepSeek V4 Pro
+  · 10篇深度长文（每篇~500字）
+  · 20条快讯简报（每条~80字）
+  · 每天09:00 + 16:00 各推一次，内容不同
+  · 3天内不重复同一篇文章
 """
-import os, datetime, time, hashlib, re, sys
+import os, datetime, time, hashlib, re, sys, json
 import xml.etree.ElementTree as ET
 
 try:
@@ -21,23 +23,34 @@ from sources import ALL_SOURCES, KEYWORDS
 
 # ── 配置 ──────────────────────────────────────────────
 API_KEY        = os.environ.get("DEEPSEEK_API_KEY", "").strip()
-MODEL_WRITER   = "deepseek-v4-pro"   # 深度长文
-MODEL_FAST     = "deepseek-v4-pro"   # 选题/快讯/导读 全部用pro（用户要求）
+MODEL_WRITER   = "deepseek-v4-pro"
+MODEL_FAST     = "deepseek-v4-pro"   # 全部用Pro
+
+NOW_HOUR       = datetime.datetime.utcnow().hour + 8  # 北京时间
+NOW_HOUR       = NOW_HOUR % 24
+# 时段判断：UTC 01:xx = 北京 09:xx（早班），UTC 08:xx = 北京 16:xx（午班）
+SESSION        = "午班" if NOW_HOUR >= 14 else "早班"
+
 TODAY          = datetime.date.today().strftime("%Y年%m月%d日")
 DATE_STR       = datetime.date.today().strftime("%Y-%m-%d")
 TARGET_DEEP    = 10
 TARGET_BRIEF   = 20
 MAX_PER_SOURCE = 6
 BATCH_DEEP     = 5
-BATCH_SLEEP    = 12   # 批次间等待秒数（防并发限速）
-API_CALL_SLEEP = 3    # 每次API调用后基础等待
+BATCH_SLEEP    = 12
+API_CALL_SLEEP = 3
+
+# ── 历史去重配置 ──────────────────────────────────────
+HISTORY_FILE   = "reports/published_uids.json"   # 已发布uid记录
+HISTORY_DAYS   = 3    # 保留最近N天的记录
+NEWS_MAX_DAYS  = 3    # 只抓取最近N天内的新闻
 
 if not API_KEY:
     print("❌ 未找到 DEEPSEEK_API_KEY 环境变量，请检查 GitHub Secrets")
     sys.exit(1)
 
-# 打印Key末尾4位，便于确认是否读取正确
 print(f"✅ API Key 已加载（末尾4位：...{API_KEY[-4:]}）")
+print(f"📅 当前时段：{SESSION}（北京时间约 {NOW_HOUR:02d}:00）")
 
 client = OpenAI(api_key=API_KEY, base_url="https://api.deepseek.com")
 
@@ -137,6 +150,96 @@ def _chat(model: str, messages: list, max_tokens: int = 4000,
     return ""
 
 # ══════════════════════════════════════════════════════
+# 历史去重模块 — 3天内不重复，早班/午班内容不同
+# ══════════════════════════════════════════════════════
+
+def load_published_history() -> dict:
+    """
+    读取已发布文章的uid记录。
+    结构：{
+      "2026-06-04_早班": ["uid1", "uid2", ...],
+      "2026-06-04_午班": ["uid1", ...],
+      ...
+    }
+    只保留最近 HISTORY_DAYS 天的记录。
+    """
+    os.makedirs("reports", exist_ok=True)
+    if not os.path.exists(HISTORY_FILE):
+        return {}
+    try:
+        with open(HISTORY_FILE, encoding="utf-8") as f:
+            data = json.load(f)
+        # 清理超过HISTORY_DAYS天的旧记录
+        cutoff = datetime.date.today() - datetime.timedelta(days=HISTORY_DAYS)
+        cleaned = {}
+        for key, uids in data.items():
+            # key格式: "2026-06-04_早班" 或 "2026-06-04_午班"
+            date_part = key.split("_")[0]
+            try:
+                record_date = datetime.date.fromisoformat(date_part)
+                if record_date >= cutoff:
+                    cleaned[key] = uids
+            except ValueError:
+                pass
+        return cleaned
+    except Exception as e:
+        print(f"  ⚠️  读取历史记录失败: {e}")
+        return {}
+
+
+def get_published_uids(history: dict) -> set:
+    """获取过去HISTORY_DAYS天内所有已发布的uid集合"""
+    all_uids = set()
+    for uids in history.values():
+        all_uids.update(uids)
+    print(f"📋 历史记录：{len(history)} 个时段，共 {len(all_uids)} 个已发布uid")
+    # 打印最近记录
+    sorted_keys = sorted(history.keys(), reverse=True)[:5]
+    for k in sorted_keys:
+        print(f"   {k}: {len(history[k])} 篇")
+    return all_uids
+
+
+def save_published_uids(history: dict, new_uids: list) -> None:
+    """将本次发布的uid追加到历史记录"""
+    session_key = f"{DATE_STR}_{SESSION}"
+    history[session_key] = new_uids
+    os.makedirs("reports", exist_ok=True)
+    try:
+        with open(HISTORY_FILE, "w", encoding="utf-8") as f:
+            json.dump(history, f, ensure_ascii=False, indent=2)
+        print(f"✅ 历史记录已更新：{session_key} → {len(new_uids)} 篇")
+    except Exception as e:
+        print(f"  ⚠️  写入历史记录失败: {e}")
+
+
+def is_recent_news(pub_date_str: str, max_days: int = 3) -> bool:
+    """判断新闻是否在最近max_days天内"""
+    if not pub_date_str:
+        return True  # 没有日期的新闻默认保留
+    # 尝试解析常见日期格式
+    formats = [
+        "%a, %d %b %Y %H:%M:%S %z",   # RSS标准
+        "%a, %d %b %Y %H:%M:%S GMT",
+        "%Y-%m-%dT%H:%M:%S%z",          # ISO8601
+        "%Y-%m-%dT%H:%M:%SZ",
+        "%Y-%m-%d",
+    ]
+    today = datetime.date.today()
+    for fmt in formats:
+        try:
+            dt = datetime.datetime.strptime(pub_date_str.strip(), fmt)
+            article_date = dt.date() if hasattr(dt, 'date') else dt
+            if hasattr(article_date, 'date'):
+                article_date = article_date.date()
+            delta = (today - article_date).days
+            return delta <= max_days
+        except (ValueError, TypeError):
+            continue
+    return True  # 解析失败默认保留
+
+
+# ══════════════════════════════════════════════════════
 # Step 1 · RSS 抓取
 # ══════════════════════════════════════════════════════
 def _first(entry, *tags):
@@ -166,13 +269,19 @@ def fetch_rss(source: dict) -> list[dict]:
             link  = _first(e,
                 "link", "{http://www.w3.org/2005/Atom}link")
             pub   = _first(e,
-                "pubDate", "{http://www.w3.org/2005/Atom}published")
+                "pubDate", "updated",
+                "{http://www.w3.org/2005/Atom}published",
+                "{http://www.w3.org/2005/Atom}updated")
             if not title:
+                continue
+            # ── 时效过滤：只保留最近NEWS_MAX_DAYS天内的新闻 ──
+            if pub and not is_recent_news(pub, NEWS_MAX_DAYS):
                 continue
             combined = (title + " " + desc).lower()
             if not any(k.lower() in combined for k in KEYWORDS):
                 continue
             desc_clean = re.sub(r"<[^>]+>", "", desc)[:350]
+            uid = hashlib.md5(title.lower().strip().encode()).hexdigest()[:12]
             articles.append({
                 "source":  source["name"],
                 "tags":    source["tags"],
@@ -181,7 +290,7 @@ def fetch_rss(source: dict) -> list[dict]:
                 "desc":    desc_clean,
                 "link":    link,
                 "pub":     pub,
-                "uid":     hashlib.md5(title.lower().encode()).hexdigest()[:10],
+                "uid":     uid,
             })
             if len(articles) >= MAX_PER_SOURCE:
                 break
@@ -189,9 +298,15 @@ def fetch_rss(source: dict) -> list[dict]:
         print(f"  ⚠️  {source['name']}: {str(ex)[:70]}")
     return articles
 
-def collect_news() -> list[dict]:
-    """抓取新闻并分层采样——保证半导体/算力/材料有足够候选条目"""
-    print(f"📡 抓取 {len(ALL_SOURCES)} 个新闻源…")
+def collect_news(published_uids: set = None) -> list[dict]:
+    """
+    抓取新闻并分层采样。
+    published_uids: 过去3天已发布的uid集合，抓取后排除这些文章
+    """
+    if published_uids is None:
+        published_uids = set()
+
+    print(f"📡 抓取 {len(ALL_SOURCES)} 个新闻源（最近{NEWS_MAX_DAYS}天内容）…")
     pool, seen = [], set()
     for i, src in enumerate(ALL_SOURCES):
         arts = fetch_rss(src)
@@ -205,7 +320,28 @@ def collect_news() -> list[dict]:
 
     print(f"\n✅ 去重后 {len(pool)} 条有效资讯")
 
-    # ── 分层采样：按领域分桶，保证各领域有足够候选 ──
+    # ── 排除已发布文章 ──
+    before_filter = len(pool)
+    pool = [a for a in pool if a["uid"] not in published_uids]
+    excluded = before_filter - len(pool)
+    if excluded > 0:
+        print(f"  🚫 排除已发布文章：{excluded} 条 → 剩余 {len(pool)} 条新鲜内容")
+
+    if len(pool) < 30:
+        print(f"  ⚠️  新鲜内容不足30条（{len(pool)}条），放宽历史限制")
+        # 放宽：只排除今天已发布的（不排除昨天的）
+        today_prefix = DATE_STR
+        # 找今天已发布的uid
+        today_uids = set()
+        history = load_published_history()
+        for key, uids in history.items():
+            if key.startswith(today_prefix):
+                today_uids.update(uids)
+        # 从原始pool重新过滤（只排除今天的）
+        pool = [a for a in [x for x in pool] if a["uid"] not in today_uids]
+        print(f"  📖 放宽后剩余：{len(pool)} 条")
+
+    # ── 分层采样 ──
     SEMI_KEYS = ['semiconductor','chip','gpu','hbm','tsmc','nvidia','amd','intel',
                  'arm','asml','qualcomm','算力','芯片','半导体','封装','存储','制程',
                  'fab','wafer','foundry','eda','litho']
@@ -218,8 +354,7 @@ def collect_news() -> list[dict]:
 
     def tag_article(a):
         text = (a.get('title','') + ' ' + a.get('desc','')).lower()
-        tags = a.get('tags', [])
-        tag_str = ' '.join(tags).lower()
+        tag_str = ' '.join(a.get('tags', [])).lower()
         combined = text + ' ' + tag_str
         if any(k in combined for k in SEMI_KEYS): return 'semi'
         if any(k in combined for k in CN_KEYS):   return 'china'
@@ -229,31 +364,26 @@ def collect_news() -> list[dict]:
 
     buckets = {'semi': [], 'ai': [], 'china': [], 'material': [], 'other': []}
     for a in sorted(pool, key=lambda x: x['weight'], reverse=True):
-        cat = tag_article(a)
-        buckets[cat].append(a)
+        buckets[tag_article(a)].append(a)
 
     print(f"  领域分布 → 半导体:{len(buckets['semi'])} AI:{len(buckets['ai'])} "
           f"中国:{len(buckets['china'])} 材料:{len(buckets['material'])} 其他:{len(buckets['other'])}")
 
-    # 构建候选池：半导体优先保证40条，AI30条，中国30条，材料20条，其他30条
-    candidate = []
-    quotas = [('semi',40), ('ai',30), ('china',30), ('material',20), ('other',30)]
-    seen_in_candidate = set()
-    for cat, quota in quotas:
+    candidate, seen2 = [], set()
+    for cat, quota in [('semi',40), ('ai',30), ('china',30), ('material',20), ('other',30)]:
         for a in buckets[cat][:quota]:
-            if a['uid'] not in seen_in_candidate:
+            if a['uid'] not in seen2:
                 candidate.append(a)
-                seen_in_candidate.add(a['uid'])
+                seen2.add(a['uid'])
 
-    # 如果某领域不足，用高权重文章补足到150条
     if len(candidate) < 150:
         for a in sorted(pool, key=lambda x: x['weight'], reverse=True):
-            if a['uid'] not in seen_in_candidate:
+            if a['uid'] not in seen2:
                 candidate.append(a)
-                seen_in_candidate.add(a['uid'])
+                seen2.add(a['uid'])
             if len(candidate) >= 150: break
 
-    print(f"✅ 候选池 {len(candidate)} 条（分层采样，半导体优先）\n")
+    print(f"✅ 候选池 {len(candidate)} 条（分层采样，已排除历史重复）\n")
     return candidate
 
 # ══════════════════════════════════════════════════════
@@ -663,14 +793,19 @@ def update_readme(header: str, body_preview: str) -> None:
 # ══════════════════════════════════════════════════════
 # Step 5 · 保存（区分深度+快讯两块）
 # ══════════════════════════════════════════════════════
-def save(header: str, deep_text: str, brief_text: str, pool_size: int) -> str:
+def save(header: str, deep_text: str, brief_text: str,
+         pool_size: int, deep_list: list, brief_list: list) -> tuple:
+    """
+    保存报告，返回 (报告路径, 本次发布的uid列表)
+    报告名区分时段：2026-06-04_早班.md / 2026-06-04_午班.md
+    """
     os.makedirs("reports", exist_ok=True)
-    path = f"reports/{DATE_STR}.md"
-    content = f"""# 🧠 每日科技投资深度简报 · {TODAY}
+    path = f"reports/{DATE_STR}_{SESSION}.md"
+    content = f"""# 🧠 每日科技投资简报 · {TODAY} · {SESSION}
 
-> 数据来源：{len(ALL_SOURCES)} 个精选新闻源 · 今日抓取 {pool_size} 条相关资讯
-> 写作模型：**DeepSeek V4 Pro**（选题+导读：V4 Flash）
-> 格式：10篇深度长文（~500字）· 20条快讯简报（~80字）
+> 数据来源：{len(ALL_SOURCES)} 个精选新闻源 · 候选池 {pool_size} 条
+> 写作模型：**DeepSeek V4 Pro**（全链路）
+> 发布时段：{SESSION} · 格式：10篇深度长文 + 20条快讯
 
 ---
 
@@ -692,13 +827,15 @@ def save(header: str, deep_text: str, brief_text: str, pool_size: int) -> str:
 
 ---
 
-*本简报由 GitHub Actions + DeepSeek API 自动生成 · {TODAY}*
-*专业名词解释仅供参考，不构成投资建议*
+*由 GitHub Actions + DeepSeek API 自动生成 · {TODAY} {SESSION}*
 """
     with open(path, "w", encoding="utf-8") as f:
         f.write(content)
     print(f"\n✅ 报告保存：{path}")
-    return path
+
+    # 收集本次发布的所有uid
+    published = [a["uid"] for a in deep_list] + [a["uid"] for a in brief_list]
+    return path, published
 
 
 def update_readme(header: str, deep_preview: str, brief_preview: str) -> None:
@@ -746,39 +883,45 @@ def update_readme(header: str, deep_preview: str, brief_preview: str) -> None:
 # ══════════════════════════════════════════════════════
 if __name__ == "__main__":
     print(f"\n{'═'*58}")
-    print(f"  🧠 每日科技投资深度简报  ·  {TODAY}")
+    print(f"  🧠 每日科技投资简报  ·  {TODAY}  ·  {SESSION}")
     print(f"  深度：{TARGET_DEEP}篇 × {MODEL_WRITER}")
     print(f"  快讯：{TARGET_BRIEF}条 × {MODEL_FAST}")
-    print(f"  导读：全部 Pro 模型")
+    print(f"  去重范围：最近 {HISTORY_DAYS} 天 · 新闻时效：{NEWS_MAX_DAYS} 天")
     print(f"{'═'*58}\n")
 
-    # 1. 抓取
-    pool = collect_news()
-    if not pool:
-        print("❌ 未抓取到任何资讯，退出"); sys.exit(1)
+    # 0. 读取历史已发布uid（用于去重）
+    history       = load_published_history()
+    published_uids = get_published_uids(history)
 
-    # 2. 选题（一次分两档）
+    # 1. 抓取（排除已发布内容）
+    pool = collect_news(published_uids)
+    if not pool:
+        print("❌ 未抓取到任何新鲜资讯，退出"); sys.exit(1)
+
+    # 2. 选题（硬性配额 + 自动补充）
     deep_list, brief_list = select_topics(pool)
     print(f"\n📌 深度 {len(deep_list)} 篇 · 快讯 {len(brief_list)} 条，开始写作…\n")
 
-    # 3. 写作
+    # 3. 写作（全部Pro模型）
     deep_text  = write_all_deep(deep_list)
     brief_text = write_briefs(brief_list)
 
     # 4. 导读
     header = make_header(deep_text, deep_list + brief_list)
 
-    # 5. 保存
-    save(header, deep_text, brief_text, len(pool))
+    # 5. 保存报告 + 记录已发布uid
+    report_path, new_uids = save(header, deep_text, brief_text,
+                                  len(pool), deep_list, brief_list)
+    save_published_uids(history, new_uids)
     update_readme(header, deep_text, brief_text)
 
-    # 6. 推送（微信 + QQ + Server酱）
+    # 6. 推送微信
     from push import push_all
     push_all(header, deep_text, brief_text, DATE_STR)
 
     print("\n" + "─"*58)
-    print("📋 今日导读：")
+    print(f"📋 {SESSION} 导读：")
     print("─"*58)
     print(header)
     print("─"*58)
-    print(f"\n🎉 完成！{TARGET_DEEP}篇深度 + {TARGET_BRIEF}条快讯 · 已推送")
+    print(f"\n🎉 {SESSION}完成！{TARGET_DEEP}篇深度 + {TARGET_BRIEF}条快讯 · 已推送")
