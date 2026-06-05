@@ -39,6 +39,7 @@ MAX_PER_SOURCE = 6
 BATCH_DEEP     = 5
 BATCH_SLEEP    = 12
 API_CALL_SLEEP = 3
+SOURCES_PER_SESSION = 30  # 每次推送随机选30个源，早晚班各不同
 
 # ── 历史去重配置 ──────────────────────────────────────
 HISTORY_FILE   = "reports/published_uids.json"   # 已发布uid记录
@@ -53,6 +54,61 @@ print(f"✅ API Key 已加载（末尾4位：...{API_KEY[-4:]}）")
 print(f"📅 当前时段：{SESSION}（北京时间约 {NOW_HOUR:02d}:00）")
 
 client = OpenAI(api_key=API_KEY, base_url="https://api.deepseek.com")
+
+
+# ══════════════════════════════════════════════════════
+# 随机选源：早班/午班各取不同的30个源
+# 策略：按 Tier 分层加权随机，保证每 Tier 都有覆盖
+# ══════════════════════════════════════════════════════
+
+def pick_session_sources(session: str, n: int = SOURCES_PER_SESSION) -> list[dict]:
+    """
+    从 ALL_SOURCES（104个）按分层加权随机选 n 个源。
+    早班/午班使用不同的随机种子，确保每次选出不同的源组合。
+    同一天同一时段种子固定，重跑结果一致。
+    """
+    import random
+    import hashlib
+
+    # 种子 = 日期 + 时段，保证同天同时段结果一致，早晚班不同
+    seed_str = f"{DATE_STR}-{session}"
+    seed_int = int(hashlib.md5(seed_str.encode()).hexdigest(), 16) % (2**31)
+    rng = random.Random(seed_int)
+
+    # 按权重分层，高权重源必须保留，低权重源随机抽样
+    weight10 = [s for s in ALL_SOURCES if s["weight"] == 10]   # 17个 → 全要
+    weight9  = [s for s in ALL_SOURCES if s["weight"] == 9]    # 29个 → 抽8个
+    weight8  = [s for s in ALL_SOURCES if s["weight"] == 8]    # 35个 → 抽7个
+    weight7  = [s for s in ALL_SOURCES if s["weight"] <= 7]    # 23个 → 抽5个
+
+    # 从低权重层随机抽取
+    # 总计：17 + 8 + 7 + 5 = 37，再精简到30
+    picked = (
+        weight10 +                             # 全部17个高质量源
+        rng.sample(weight9, min(8, len(weight9))) +
+        rng.sample(weight8, min(7, len(weight8))) +
+        rng.sample(weight7, min(5, len(weight7)))
+    )
+
+    # 如果超过n个，再随机裁到n个（但保留全部weight10）
+    if len(picked) > n:
+        # 必须保留weight10，从其他里随机裁
+        must_keep = weight10[:]
+        optional  = [s for s in picked if s not in must_keep]
+        need_more = max(0, n - len(must_keep))
+        picked    = must_keep + rng.sample(optional, min(need_more, len(optional)))
+
+    rng.shuffle(picked)  # 打乱顺序，避免每次同样的抓取顺序
+
+    source_names = [s["name"] for s in picked]
+    print(f"🎲 {session}随机选源：{len(picked)}/{len(ALL_SOURCES)} 个")
+    print(f"   权重10全选({len(weight10)}) + 其他随机抽取")
+    print(f"   首5个：{', '.join(source_names[:5])}…")
+    return picked
+
+
+# 选出本次时段的源
+SESSION_SOURCES = pick_session_sources(SESSION, SOURCES_PER_SESSION)
 
 
 # ── API 统一调用包装（含重试 + 清晰报错）─────────────
@@ -300,22 +356,23 @@ def fetch_rss(source: dict) -> list[dict]:
 
 def collect_news(published_uids: set = None) -> list[dict]:
     """
-    抓取新闻并分层采样。
-    published_uids: 过去3天已发布的uid集合，抓取后排除这些文章
+    用本时段随机选出的30个源抓取新闻，早晚班各不同。
+    published_uids: 过去3天已发布的uid集合，排除重复文章。
     """
     if published_uids is None:
         published_uids = set()
 
-    print(f"📡 抓取 {len(ALL_SOURCES)} 个新闻源（最近{NEWS_MAX_DAYS}天内容）…")
+    sources = SESSION_SOURCES
+    print(f"📡 {SESSION} 抓取 {len(sources)} 个源（来自{len(ALL_SOURCES)}个总源库，最近{NEWS_MAX_DAYS}天内容）…")
     pool, seen = [], set()
-    for i, src in enumerate(ALL_SOURCES):
+    for i, src in enumerate(sources):
         arts = fetch_rss(src)
         new  = [a for a in arts if a["uid"] not in seen]
         for a in new:
             seen.add(a["uid"])
         pool.extend(new)
         if new:
-            print(f"  [{i+1:3d}/{len(ALL_SOURCES)}] {src['name']}: +{len(new)} 条")
+            print(f"  [{i+1:2d}/{len(sources)}] {src['name']}: +{len(new)} 条")
         time.sleep(0.18)
 
     print(f"\n✅ 去重后 {len(pool)} 条有效资讯")
@@ -789,7 +846,7 @@ def save(header: str, body: str, pool_size: int) -> str:
     path = f"reports/{DATE_STR}.md"
     content = f"""# 🧠 每日科技投资深度简报 · {TODAY}
 
-> 数据来源：{len(ALL_SOURCES)} 个精选新闻源 · 今日抓取 {pool_size} 条相关资讯  
+> 数据来源：{len(SESSION_SOURCES)}/{len(ALL_SOURCES)} 个精选新闻源 · 今日抓取 {pool_size} 条相关资讯  
 > 写作模型：**DeepSeek V4 Pro**（选题+导读：V4 Flash）  
 > 涵盖：人工智能 · 大模型 · 半导体 · 算力 · 投资 · 智能体 · 政策
 
@@ -861,7 +918,7 @@ def save(header: str, deep_text: str, brief_text: str,
     path = f"reports/{DATE_STR}_{SESSION}.md"
     content = f"""# 🧠 每日科技投资简报 · {TODAY} · {SESSION}
 
-> 数据来源：{len(ALL_SOURCES)} 个精选新闻源 · 候选池 {pool_size} 条
+> 数据来源：{len(SESSION_SOURCES)}/{len(ALL_SOURCES)} 个精选新闻源 · 候选池 {pool_size} 条
 > 写作模型：**DeepSeek V4 Pro**（全链路）
 > 发布时段：{SESSION} · 格式：10篇深度长文 + 20条快讯
 
