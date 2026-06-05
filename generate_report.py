@@ -1009,3 +1009,70 @@ if __name__ == "__main__":
     published_uids = get_published_uids(history)
 
     # 1. 抓取（排除已发布内容）
+    pool = collect_news(published_uids)
+    if not pool:
+        print("❌ 未抓取到任何新鲜资讯，退出"); sys.exit(1)
+
+    # 2. 选题（硬性配额 + 主题去重）
+    deep_list, brief_list = select_topics(pool)
+    print(f"\n📌 深度 {len(deep_list)} 篇 · 快讯 {len(brief_list)} 条，开始写作…\n")
+
+    # 3. 写作（全部Pro模型）
+    deep_text  = write_all_deep(deep_list)
+    brief_text = write_briefs(brief_list)
+
+    # 4. 导读（用 deep_list 而不是截断的 deep_text）
+    header = make_header(deep_text, deep_list)
+
+    # 5. 保存报告 + 记录已发布uid
+    os.makedirs("reports", exist_ok=True)
+    report_path = f"reports/{DATE_STR}_{SESSION}.md"
+    content = f"""# 🧠 每日科技投资简报 · {TODAY} · {SESSION}
+
+> 数据来源：{len(SESSION_SOURCES)}/{len(ALL_SOURCES)} 个精选新闻源（随机分层采样）
+> 写作模型：DeepSeek V4 Pro（全链路）
+> 发布时段：{SESSION}
+
+---
+
+## 📋 今日导读
+
+{header}
+
+---
+
+## 📰 深度长文（{TARGET_DEEP}篇）
+
+{deep_text}
+
+---
+
+## ⚡ 精选快讯（{TARGET_BRIEF}条）
+
+{brief_text}
+
+---
+
+*由 GitHub Actions + DeepSeek API 自动生成 · {TODAY} {SESSION}*
+"""
+    with open(report_path, "w", encoding="utf-8") as f:
+        f.write(content)
+    print(f"\n✅ 报告保存：{report_path}")
+
+    # 记录已发布uid，用于明天去重
+    new_uids = [a["uid"] for a in deep_list] + [a["uid"] for a in brief_list]
+    save_published_uids(history, new_uids)
+
+    # 更新README
+    update_readme(header, deep_text, brief_text)
+
+    # 6. 推送微信
+    from push import push_all
+    push_all(header, deep_text, brief_text, DATE_STR)
+
+    print("\n" + "─"*58)
+    print(f"📋 {SESSION} 导读：")
+    print("─"*58)
+    print(header[:300])
+    print("─"*58)
+    print(f"\n🎉 {SESSION}完成！{TARGET_DEEP}篇深度 + {TARGET_BRIEF}条快讯 · 已推送")
