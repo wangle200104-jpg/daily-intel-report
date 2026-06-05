@@ -34,7 +34,7 @@ SESSION        = "午班" if NOW_HOUR >= 14 else "早班"
 TODAY          = datetime.date.today().strftime("%Y年%m月%d日")
 DATE_STR       = datetime.date.today().strftime("%Y-%m-%d")
 TARGET_DEEP    = 10
-TARGET_BRIEF   = 20
+TARGET_BRIEF   = 10   # 粉丝反馈：宁缺毋滥，从20条减为10条精华
 MAX_PER_SOURCE = 6
 BATCH_DEEP     = 5
 BATCH_SLEEP    = 12
@@ -410,8 +410,34 @@ BRIEF_DISTRIBUTION = """
 - 其他前沿科技              (1条)
 """
 
+def get_recent_topics() -> list[str]:
+    """
+    读取最近3天的报告文件，提取已经写过的主题关键词。
+    返回类似 ['OpenAI生物防御', '英伟达Blackwell出口管制', '台积电涨价'] 这样的主题列表。
+    """
+    topics = []
+    today = datetime.date.today()
+    for days_ago in range(1, HISTORY_DAYS + 1):
+        d = today - datetime.timedelta(days=days_ago)
+        date_str = d.strftime("%Y-%m-%d")
+        # 早班/午班/无时段 三种格式都试
+        for suffix in ['_早班', '_午班', '']:
+            path = f"reports/{date_str}{suffix}.md"
+            if not os.path.exists(path):
+                continue
+            try:
+                with open(path, encoding='utf-8') as f:
+                    text = f.read()
+                # 提取所有深度文章标题
+                titles = re.findall(r'##\s+深度[文章]*\d*[：:]\s*(.+)', text)
+                topics.extend(titles)
+            except Exception:
+                continue
+    return topics[:40]  # 最多带40条
+
+
 def select_topics(pool: list[dict]) -> tuple[list[dict], list[dict]]:
-    """Flash模型一次选题，返回 (deep_10, brief_20) 两个列表"""
+    """Pro模型一次选题，返回 (deep_10, brief_10) 两个列表"""
     items = []
     for i, a in enumerate(pool[:150]):
         items.append(
@@ -420,8 +446,28 @@ def select_topics(pool: list[dict]) -> tuple[list[dict], list[dict]]:
         )
     news_text = "\n".join(items)
 
-    prompt = f"""今天是{TODAY}。
+    # 读取最近3天已写过的主题，作为禁选清单
+    recent_topics = get_recent_topics()
+    forbidden_block = ""
+    if recent_topics:
+        forbidden_list = "\n".join(f"  • {t}" for t in recent_topics)
+        forbidden_block = f"""
 
+━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+⛔ 主题去重清单（过去3天已写过的文章标题，共{len(recent_topics)}篇）
+
+{forbidden_list}
+
+【硬性规则】今天的10篇深度长文，**主题或核心事件**不得与上面任何一篇重复。
+- 同一公司的同类事件视为重复（如已经写过"OpenAI生物防御"，今天不能再写"OpenAI生物安全""OpenAI预防滥用"等任何角度）
+- 同一技术/产品的不同侧面视为重复（如已写过"台积电涨价"，今天不能再写"台积电产能紧张"等关联报道）
+- 必须切换到全新的事件/公司/技术方向
+━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+"""
+        print(f"📋 历史主题排除：过去3天已写过 {len(recent_topics)} 篇，今天必须切换主题")
+
+    prompt = f"""今天是{TODAY}。
+{forbidden_block}
 以下是从100个新闻源抓取的资讯（共{len(items)}条）：
 {news_text}
 
@@ -433,29 +479,32 @@ def select_topics(pool: list[dict]) -> tuple[list[dict], list[dict]]:
 
 硬性配额：
 1. 半导体/芯片/GPU/算力/HBM/封装 → 必须3篇（最高优先级）
-2. 人工智能/大模型/推理 → 必须2篇
-3. 中国科技/国产替代/A股产业链 → 必须2篇
-4. 投资/融资/估值 → 必须1篇
-5. 宏观/政策/地缘/出口管制 → 必须1篇
-6. 新材料/先进制造/能源/机器人 → 必须1篇
+2. 人工智能/大模型/推理/Agent → 必须2篇
+3. AI+人形机器人/具身智能/工业自动化 → 必须2篇（AI如何落地物理世界，必须分析上下游产业链）
+4. 中国科技/国产替代/A股产业链 → 必须1篇
+5. 投资/融资/估值/商业模式 → 必须1篇
+6. 宏观/政策/地缘/出口管制/新材料 → 必须1篇
 
-重要：软件工程/SaaS/企业服务类不得占用上述名额。如当日半导体新闻不足3条，选相关产业链（HBM/封装/存储/EDA/设备）补充。
+规则：
+- 软件工程/SaaS/企业服务不得占用上述名额
+- 同一公司同一事件类的文章一天只能写1篇（如 OpenAI 生物防御类，写过就不能再换角度重写）
+- "AI+人形机器人"2篇写作角度：AI技术如何驱动机器人，产业链上游（电机/减速器/传感器）→ 中游（系统集成/本体）→ 下游（应用场景）各有哪些代表公司
+- 如某领域当日无新闻，可往相关产业链方向找替代
 
-## 任务B：快讯简报（必须恰好{TARGET_BRIEF}条，不得与A重复）
+## 任务B：精选快讯（必须恰好{TARGET_BRIEF}条，不得与A重复，宁缺毋滥）
 
-硬性配额：
-1. 半导体/芯片/算力/HBM → 必须5条
-2. 人工智能/大模型 → 必须4条
-3. 中国科技/A股/产业链 → 必须3条
-4. 投资/融资/并购 → 必须3条
-5. 政策/宏观/地缘 → 必须2条
-6. 材料/制造/能源/机器人 → 必须2条
-7. 其他前沿科技 → 必须1条
+注意：只选信息价值最高的{TARGET_BRIEF}条，每条必须有具体数字或具体事件，没有实质信息量的不要。
+
+硬性配额（共{TARGET_BRIEF}条）：
+1. 半导体/芯片/算力/HBM → 必须3条
+2. 人工智能/大模型/机器人 → 必须3条
+3. 中国科技/A股/产业链 → 必须2条
+4. 投资/融资/并购/政策 → 必须2条
 
 仅输出JSON，不要任何解释：
 {{
   "deep": [
-    {{"index": 编号, "title": "原标题", "source": "来源", "domain": "领域标签", "angle": "深度写作角度（一句话）"}}
+    {{"index": 编号, "title": "原标题", "source": "来源", "domain": "领域标签", "angle": "深度写作角度（机器人类必须注明产业链视角）"}}
   ],
   "brief": [
     {{"index": 编号, "title": "原标题", "source": "来源", "domain": "领域标签"}}
@@ -540,33 +589,37 @@ SYSTEM_PROMPT_WRITER = """你是一位中国顶级财经记者，同时具备产
 
 ━━ 核心写作原则：
 
-① 【沉稳克制】不用感叹号，不堆砌形容词，不说"颠覆性""革命性"等空话。用事实和数字说话，让读者自己得出结论。
+① 【沉稳克制】不用感叹号，不堆砌形容词，不说"颠覆性""革命性"等空话。用事实和数字说话。
 
-② 【产业链思维】每篇文章必须回答：这件事在整条产业链上处于哪个位置？上游/中游/下游谁受益、谁受损？三年后这个方向会走向哪里？
+② 【产业链思维】每篇文章必须回答：这件事在整条产业链上处于哪个位置？上游/中游/下游谁受益、谁受损？
 
-③ 【投资视角】投资人最关心的问题是：谁赚钱？谁会亏？这件事改变了哪家公司的竞争壁垒？估值逻辑是否需要重新定价？
+③ 【投资视角】谁赚钱？谁会亏？哪家公司的竞争壁垒被改变？
 
-④ 【给人思考空间】文章结尾不说"我们拭目以待"这类废话。给出一个具体的、有见地的判断，让读者产生"没想到还有这个角度"的感觉。
+④ 【人形机器人/具身智能专项】凡涉及机器人的文章必须分析：
+   - AI与机器人的连接点（感知/决策/控制哪个环节AI在发挥作用）
+   - 产业链结构：上游零部件（电机、谐波减速器、RV减速器、力矩传感器、视觉芯片）→ 中游本体与系统集成 → 下游应用场景（汽车/物流/服务业）
+   - 中国产业链位置：哪些环节有优势，哪些依赖进口
+   - 代表性企业：只梳理产业链各环节代表公司帮助理解结构，不做股票推荐
 
 ━━ 铁律（违反则重写）：
 
-① 每篇约500字（允许±80字），重点领域（半导体/算力）可适当延伸到600字
+① 每篇约500字（±80字）
 
-② 【最核心铁律】每个专业名词第一次出现时，必须立即在括号内解释，格式：
+② 【最核心铁律】每个专业名词第一次出现时，必须立即在括号内解释：
    名词（通俗解释——为什么对普通投资者重要）
    示例：
-   · HBM（高带宽内存——AI训练的"血管"，决定GPU的数据吞吐速度，SK海力士和三星凭此垄断AI供应链上游）
-   · CoWoS（晶圆级封装技术——把芯片和内存"焊"在一起的工艺，台积电独家优势，产能瓶颈直接卡住了英伟达交货）
-   · 倒装芯片（Flip Chip——先进封装的基础工艺，把芯片倒过来焊接以缩短信号路径，是先进封装的入门门槛）
+   · HBM（高带宽内存——AI训练的"血管"，决定GPU数据吞吐速度，SK海力士和三星垄断供应链上游）
+   · 谐波减速器（机器人关节核心精密零件——决定运动精度，日本Harmonic Drive长期垄断，国内绿的谐波在追赶）
+   · 力矩传感器（让机器人有"触觉"的零件——具身智能的关键，国内汉威科技、柯力传感等在突破）
    解释融入正文，自然流畅，绝不单独列术语表
 
-③ 开头第一句必须是有信息量的结论或判断，禁止用"近日""随着""据悉""日前"开头
+③ 开头第一句必须是有信息量的结论，禁止用"近日""随着""据悉""日前"开头
 
-④ 结尾必须有【今日启示】：一个具体的、可操作的投资或认知建议，不超过两句话
+④ 结尾必须有【今日启示】：一个具体可操作的产业或投资建议，不超过两句话
 
-⑤ 文章结构：核心判断(1段) → 产业背景与链条分析(2段) → 竞争格局与赢家/输家(1段) → 启示(1句)
+⑤ 文章结构：核心判断(1段) → 产业背景与链条分析(2段) → 竞争格局/赢家输家(1段) → 启示(1句)
 
-⑥ 重点关注领域（半导体、算力、AI、材料、产业链）的文章，要重点分析中国视角：国产替代进度、A股相关标的逻辑、地缘政治影响"""
+⑥ 重点领域必须分析中国视角：国产替代、A股产业链、地缘政治"""
 
 
 def write_deep_batch(articles: list[dict], batch_num: int, total_batches: int) -> str:
@@ -668,33 +721,27 @@ def write_all_deep(deep: list[dict]) -> str:
 # Step 4 · 生成导读（Flash，快速省钱）
 # ══════════════════════════════════════════════════════
 def make_header(deep_text: str, selected: list[dict]) -> str:
-    """导读生成：用各篇标题+首句摘要构建上下文，避免截断问题"""
-    domains = [a.get("domain","") for a in selected]
-    domain_list = "、".join(dict.fromkeys(d for d in domains if d))
+    """
+    导读生成：直接从 selected（选题阶段的文章对象）构造摘要，
+    不再从 deep_text（拼接后的长文）反向解析——因为分隔符匹配不稳定会导致空输出。
+    """
+    domains = [a.get("domain","") for a in selected if a.get("domain")]
+    domain_list = "、".join(dict.fromkeys(domains)) if domains else "AI/半导体/产业"
 
-    # 从 deep_text 提取每篇标题+首句，给AI足够的上下文
+    # 直接用 selected 前10篇（即深度文章列表）构造摘要
     summaries = []
-    articles = [a.strip() for a in deep_text.split('\n---\n') if a.strip()]
-    for i, art in enumerate(articles[:10], 1):
-        # 提取标题行
-        title_m = re.search(r'##\s+深度[文章]*\d*[：:]\s*(.+)', art)
-        title = title_m.group(1).strip() if title_m else f"文章{i}"
-        # 提取领域
-        domain_m = re.search(r'\*\*领域\*\*[：:](.+)', art)
-        domain = domain_m.group(1).strip() if domain_m else ""
-        # 提取正文第一段（去掉标题和来源行）
-        body = re.sub(r'^##[^\n]+\n', '', art, count=1)
-        body = re.sub(r'\*\*来源\*\*[^\n]+\n', '', body)
-        body = body.strip()
-        first_para = body[:120].replace('\n', ' ')
-        summaries.append(f"{i}. 【{domain}】{title}——{first_para}…")
+    for i, a in enumerate(selected[:10], 1):
+        title  = a.get('title', f'文章{i}')[:50]
+        domain = a.get('domain', '科技')
+        desc   = a.get('desc', '')[:140].replace('\n', ' ')
+        summaries.append(f"{i}. 【{domain}】{title} —— {desc}")
 
     summary_text = "\n".join(summaries)
+    if not summary_text.strip():
+        # 兜底：万一selected为空也不能让导读为空
+        summary_text = "（今日选题数据缺失，按通用框架生成导读）"
 
-    return _chat(
-        MODEL_FAST,
-        [{"role": "user", "content": f"""
-今天是{TODAY}。以下是今日10篇深度文章的标题和摘要：
+    prompt = f"""今天是{TODAY}。以下是今日10篇深度文章的标题和摘要：
 
 {summary_text}
 
@@ -702,25 +749,36 @@ def make_header(deep_text: str, selected: list[dict]) -> str:
 
 ---
 
-你的任务：写一段每日导读。
+任务：写一段每日导读，严格按下面三步执行。
 
-第一步：逐字输出这句话，一个字都不能改：
-早，今天是{TODAY}，王sir为您汇报今天的重要资讯。
+【第一步】导读必须以这句话开头，逐字输出，一个字都不能省：
 
-第二步：紧接着写3条今日重要资讯（不换行空行，自然衔接）：
-- 每条1-2句，说清楚：发生了什么 + 为什么对投资或产业重要
-- 优先选半导体、算力、AI、产业链相关内容
-- 最值得关注的1条用**加粗**标出
-- 语气：中国顶级财经记者，克制精准，不用感叹号
+早，今天是{TODAY},王sir为您汇报今天的重要资讯。
 
-第三步：最后一行固定格式（单独一行）：
-今日关键词：XXX · XXX · XXX
+【第二步】紧接着写一段正文（约150字），点出今日3条最重要资讯：
+- 每条用"·"分隔，1-2句说清楚发生了什么+为什么对投资或产业重要
+- 优先半导体/算力/AI/机器人/产业链内容
+- 用**加粗**标出今天最值得关注的1条
+- 风格：中国顶级财经记者，沉稳克制，不用感叹号，不用"颠覆性""革命性"等空话
 
-总字数：150-180字（含第一句，不含关键词行）
+【第三步】最后一行（单独一行）输出关键词：
+今日关键词：XXX · XXX · XXX · XXX
 
-禁止："早安""大家好""让我们""颠覆性""革命性""历史性"，禁止感叹号。
-"""}],
-        max_tokens=600, temperature=0.4,
+整体输出示例（参照格式但不要复制内容）：
+
+早，今天是2026年XX月XX日,王sir为您汇报今天的重要资讯。今日**台积电再次表态AI需求超预期并明示先进制程将涨价**，全球GPU/手机/汽车芯片BOM成本面临上行压力·英伟达Blackwell GPU出口管制被参议院传唤，中美算力割裂加深·索尼携手台积电推出边缘AI图像传感器，端侧推理产业链迎来新的价值锚点。
+
+今日关键词：先进制程涨价 · 算力管制 · 边缘AI · 产业链
+
+注意：第一步那句话必须原样输出，不能改成"早上好"或加任何前缀。如果省略这句话，整段导读视为失败。"""
+
+    return _chat(
+        MODEL_FAST,
+        [{"role": "system", "content":
+          "你是中国顶级财经记者，写作沉稳精准。你的任务是写每日导读。"
+          "用户的第一步指令是'逐字输出一句话'，你必须严格执行，不得省略或改写。"},
+         {"role": "user", "content": prompt}],
+        max_tokens=800, temperature=0.4,
     )
 
 # ══════════════════════════════════════════════════════
@@ -894,34 +952,3 @@ if __name__ == "__main__":
     published_uids = get_published_uids(history)
 
     # 1. 抓取（排除已发布内容）
-    pool = collect_news(published_uids)
-    if not pool:
-        print("❌ 未抓取到任何新鲜资讯，退出"); sys.exit(1)
-
-    # 2. 选题（硬性配额 + 自动补充）
-    deep_list, brief_list = select_topics(pool)
-    print(f"\n📌 深度 {len(deep_list)} 篇 · 快讯 {len(brief_list)} 条，开始写作…\n")
-
-    # 3. 写作（全部Pro模型）
-    deep_text  = write_all_deep(deep_list)
-    brief_text = write_briefs(brief_list)
-
-    # 4. 导读
-    header = make_header(deep_text, deep_list + brief_list)
-
-    # 5. 保存报告 + 记录已发布uid
-    report_path, new_uids = save(header, deep_text, brief_text,
-                                  len(pool), deep_list, brief_list)
-    save_published_uids(history, new_uids)
-    update_readme(header, deep_text, brief_text)
-
-    # 6. 推送微信
-    from push import push_all
-    push_all(header, deep_text, brief_text, DATE_STR)
-
-    print("\n" + "─"*58)
-    print(f"📋 {SESSION} 导读：")
-    print("─"*58)
-    print(header)
-    print("─"*58)
-    print(f"\n🎉 {SESSION}完成！{TARGET_DEEP}篇深度 + {TARGET_BRIEF}条快讯 · 已推送")
