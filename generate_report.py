@@ -268,55 +268,130 @@ def fetch_source(src: dict) -> list[dict]:
 # ──────────────────────────────────────────────────────
 # 领域关键词权重表（匹配越多分越高）
 DOMAIN_SCORES = {
-    # 半导体/算力（最高优先级）
-    "semiconductor": 5, "chip": 5, "gpu": 5, "hbm": 6, "tsmc": 5,
-    "nvidia": 5, "amd": 4, "intel": 4, "asml": 6, "euv": 6,
-    "cowos": 6, "chiplet": 5, "packaging": 5, "foundry": 5, "3nm": 5,
-    "datacenter": 4, "compute": 4, "算力": 5, "芯片": 5, "半导体": 5,
-    "封装": 5, "存储": 4, "制程": 5, "光刻": 6,
-    # 材料（你的专业背景）
-    "materials": 4, "battery": 4, "solid-state": 5, "rare-earth": 5,
-    "sic": 5, "gan": 5, "graphene": 4, "perovskite": 4,
-    "新材料": 5, "碳化硅": 5, "稀土": 5, "固态电池": 5,
-    # AI
-    "llm": 3, "model": 2, "inference": 3, "training": 3, "agent": 3,
-    "deepseek": 4, "大模型": 3, "人工智能": 3,
-    # 机器人/具身
-    "humanoid": 5, "robot": 4, "embodied": 5, "reducer": 5,
-    "人形机器人": 5, "具身智能": 5, "减速器": 5,
-    # 投资/产业链
-    "billion": 3, "funding": 3, "investment": 3, "supply chain": 4,
-    "产业链": 4, "国产替代": 4,
-    # 地缘/出口管制
-    "export control": 5, "ban": 3, "sanction": 4, "出口管制": 5,
+    # ── 半导体设备（最高优先级，你的核心领域）
+    "asml":10, "euv":10, "high-na":10, "光刻机":10,
+    "lam research":8, "applied materials":8, "kla":8, "tokyo electron":8,
+    "etch":6, "deposition":6, "cvd":6, "pvd":6, "ald":6, "cmp":6,
+    "metrology":6, "inspection":6, "process control":6,
+    "wafer fab equipment":8, "wfe":8, "设备":5,
+    # ── 晶圆制造/代工
+    "tsmc":8, "台积电":8, "foundry":6, "wafer":6, "晶圆":6,
+    "2nm":8, "3nm":7, "n2":7, "gaa":7, "finfet":5,
+    "smic":7, "中芯":7, "samsung foundry":7, "intel foundry":6,
+    "cowos":9, "soic":8, "emib":7, "chiplet":8, "3d-ic":8,
+    "advanced packaging":8, "先进封装":8,
+    # ── 存储芯片
+    "hbm":10, "hbm4":10, "hbm3":9, "high bandwidth memory":9,
+    "sk hynix":7, "skhynix":7, "micron":6, "samsung memory":6,
+    "dram":6, "nand":5, "flash":4, "存储":5,
+    # ── GPU/算力芯片
+    "nvidia":8, "gpu":8, "blackwell":9, "rubin":9, "gb200":9,
+    "h100":7, "h200":7, "b200":9, "amd":6, "intel":5,
+    "算力芯片":8, "ai chip":8, "ai加速":7,
+    # ── 半导体材料（你的专业背景）
+    "sic":9, "silicon carbide":9, "碳化硅":9,
+    "gan":8, "gallium nitride":8, "氮化镓":8,
+    "compound semiconductor":7, "化合物半导体":7,
+    "substrate":6, "衬底":6, "晶圆基板":7,
+    "photoresist":7, "光刻胶":7, "etchant":6,
+    "rare earth":7, "稀土":7, "critical mineral":7, "关键矿产":7,
+    # ── 先进材料
+    "solid-state battery":9, "固态电池":9,
+    "perovskite":7, "钙钛矿":7,
+    "graphene":6, "石墨烯":6,
+    "carbon fiber":6, "碳纤维":6,
+    "new materials":5, "新材料":5,
+    # ── AI/大模型
+    "llm":5, "large language model":5, "大模型":5,
+    "deepseek":7, "qwen":6, "kimi":5,
+    "gpt-5":8, "claude":5, "gemini":5,
+    "reasoning":5, "inference":5, "推理":5,
+    # ── AI基础设施
+    "datacenter":5, "data center":5, "数据中心":5,
+    "gigawatt":7, "液冷":6, "liquid cooling":6,
+    "ai infrastructure":6, "算力基础设施":6,
+    # ── 机器人/具身
+    "humanoid":8, "人形机器人":8, "embodied":7, "具身智能":7,
+    "harmonic reducer":8, "谐波减速器":8, "rv reducer":7,
+    "torque sensor":7, "力矩传感器":7,
+    "boston dynamics":6, "optimus":7,
+    # ── 中国产业链
+    "国产替代":8, "华为":7, "昇腾":8, "ascend":8,
+    "中芯国际":7, "export control":8, "出口管制":8,
+    "ban":6, "entity list":7,
+    # ── 投资/市场
+    "billion":4, "funding":4, "ipo":5, "m&a":5, "acquisition":5,
+    "chips act":7, "补贴":5, "产业链":5,
 }
 
+# 热点加权：这些词出现在标题里额外加分（学自 nocmt 的timeliness评分）
+HOTSPOT_TITLE_BONUS = {
+    "euv": 4, "hbm4": 4, "asml": 3, "blackwell": 3, "rubin": 3,
+    "固态电池": 3, "碳化硅": 3, "出口管制": 3, "人形机器人": 3,
+    "2nm": 3, "gaa": 3, "高带宽内存": 3, "wfe": 3,
+}
+
+def _title_similar(t1: str, t2: str, threshold: float = 0.65) -> bool:
+    """
+    标题相似度检测（学自 nocmt/dailynews）
+    解决"同一事件换不同标题"的重复问题，比uid更强
+    """
+    t1 = t1.lower().strip()
+    t2 = t2.lower().strip()
+    # 包含关系直接判重
+    if t1 in t2 or t2 in t1:
+        return True
+    # 去掉空格/标点后的词集合重叠率
+    import re
+    w1 = set(re.sub(r"[\s,，。！？:：、\-—()（）]", "", t1))
+    w2 = set(re.sub(r"[\s,，。！？:：、\-—()（）]", "", t2))
+    if not w1 or not w2:
+        return False
+    overlap = len(w1 & w2) / min(len(w1), len(w2))
+    return overlap > threshold
+
+
 def score_article(a: dict) -> float:
+    """
+    多维评分（学自 nocmt/dailynews relevance_score + 热点权重）
+    = 来源权重 + 正文关键词 + 标题×1.5 + 热点词bonus
+    """
     text  = (a["title"] + " " + a["desc"]).lower()
-    score = float(a["weight"])  # 基础分 = 来源权重
+    title = a["title"].lower()
+    score = float(a["weight"])
     for kw, pts in DOMAIN_SCORES.items():
         if kw in text:
             score += pts
-    # 标题命中额外加分
-    title_lower = a["title"].lower()
     for kw, pts in DOMAIN_SCORES.items():
-        if kw in title_lower:
-            score += pts * 0.5
-    return round(score, 2)
+        if kw in title:
+            score += pts * 0.8
+    for kw, bonus in HOTSPOT_TITLE_BONUS.items():
+        if kw in title:
+            score += bonus
+    return round(score, 1)
 
 # ──────────────────────────────────────────────────────
 # Step 1+2 综合：抓取 → 评分 → 去重 → 分层候选池
 # ──────────────────────────────────────────────────────
 def collect_news(used_uids: set) -> list[dict]:
     print(f"\n📡 {SESSION} 抓取 {len(SESSION_SOURCES)}/{len(ALL_SOURCES)} 个源…")
-    pool, seen = [], set()
+    pool, seen_uids, seen_titles = [], set(), []
 
-    for i, src in enumerate(SESSION_SOURCES, 1):
-        arts = fetch_source(src)
-        new  = [a for a in arts if a["uid"] not in seen]
-        for a in new:
-            seen.add(a["uid"])
+    for i, src_item in enumerate(SESSION_SOURCES, 1):
+        arts = fetch_source(src_item)
+        new  = []
+        for a in arts:
+            if a["uid"] in seen_uids:
+                continue
+            # 标题相似度去重（学自 nocmt/dailynews）
+            is_dup = any(_title_similar(a["title"], t) for t in seen_titles[-200:])
+            if is_dup:
+                continue
+            seen_uids.add(a["uid"])
+            seen_titles.append(a["title"])
+            new.append(a)
         pool.extend(new)
+        src = src_item  # 保持命名一致
         if new:
             print(f"  [{i:2d}/{len(SESSION_SOURCES)}] {src['name']}: +{len(new)}")
         time.sleep(0.15)
@@ -507,25 +582,42 @@ B. 精选快讯（恰好{N_BRIEF}条，不与A重复）— 宁缺毋滥，每条
 # ──────────────────────────────────────────────────────
 # Step 5  写作
 # ──────────────────────────────────────────────────────
-WRITER_SYSTEM = """你是一位中国顶级财经记者，同时具备产业研究员和价值投资人的双重视角。
-文章风格参照《财经》杂志、《第一财经》最高水准——沉稳、真实、有判断力。
+WRITER_SYSTEM = """你是中国顶级财经记者，具备产业研究员和价值投资人的双重视角。
+文章风格参照《财经》杂志和《第一财经》最高水准：沉稳、真实、有判断力。
 
-━━ 核心原则 ━━
-① 【克制】不用感叹号，不堆砌形容词，不说"颠覆性""革命性"。数字说话。
-② 【产业链思维】每篇必须回答：这件事在整条产业链哪个位置？上中下游谁受益谁受损？
-③ 【投资视角】谁赚钱？谁会亏？哪家公司的竞争壁垒被改变？
-④ 【机器人专项】涉及机器人/具身智能的文章必须分析：
-   AI与机器人的连接点 → 产业链（上游：电机/谐波减速器/力矩传感器/视觉芯片
-   → 中游：本体制造/系统集成 → 下游：汽车/物流/制造）→ 中国各环节竞争力
+━━ 三重身份 ━━
+① 产业研究员：每篇必须回答——这件事在整条产业链哪个位置？上中下游谁受益谁受损？
+② 价值投资人：谁赚钱？谁会亏？哪家公司的竞争壁垒被改变？估值逻辑需要重新定价吗？
+③ 财经记者：结论先行，数字精准，把复杂的技术/金融事件翻译给聪明但非行内人的读者。
 
-━━ 铁律 ━━
-① 每篇约500字（±80字）
-② 【最核心】每个专业名词第一次出现必须括号解释：名词（解释——为什么重要）
-   示例：HBM（高带宽内存——AI训练的"血管"，SK海力士和三星垄断供应链上游）
-         谐波减速器（机器人关节精密零件——决定运动精度，日本Harmonic Drive长期垄断）
-③ 开头第一句必须是有信息量的结论，禁止"近日""随着""据悉"
-④ 结尾必须有【今日启示】：具体可操作的产业或投资建议，不超过两句
-⑤ 结构：核心判断(1段) → 产业背景与链条分析(2段) → 竞争格局/赢家输家(1段) → 启示"""
+━━ 专业名词解释规范（最核心铁律）━━
+每个专业名词第一次出现，立即在括号内解释，格式：
+  名词（通俗解释——为什么对投资者重要）
+
+强制要求的示例（必须用这种格式，不能单独列术语表）：
+  · EUV光刻机（极紫外光刻——制造7nm以下芯片的唯一工具，全球只有ASML会造，一台价值2亿美元）
+  · HBM（高带宽内存——AI训练的"血管"，决定GPU吞吐速度，SK海力士和三星垄断90%以上供应）
+  · CoWoS（台积电的晶圆级封装技术——把GPU和HBM"焊"在同一基板上，英伟达AI芯片的核心工艺）
+  · 谐波减速器（机器人关节的核心精密零件——决定运动精度和寿命，日本Harmonic Drive长期垄断）
+  · GaN（氮化镓——新一代功率半导体材料，充电效率比硅高30%，国内英诺赛科等在快速追赶）
+  · SiC（碳化硅——耐高温高压的功率器件材料，电动车逆变器的核心，比亚迪、特斯拉都在大量用）
+  · GAA（环绕栅极晶体管——替代FinFET的下一代芯片架构，2nm及以下节点的关键工艺）
+  · WFE（晶圆制造设备——ASML/AMAT/LAM等公司卖给芯片厂的机器，AI驱动下全球市场规模超千亿美元）
+
+━━ 文章铁律 ━━
+① 每篇约500字（±80字），半导体/设备类可延伸至600字
+② 开头第一句必须是有信息量的结论，禁止"近日""随着""据悉""日前"
+③ 结尾必须有【今日启示】：具体可操作的产业或认知建议，≤2句
+④ 文章结构：核心判断(1段) → 产业背景与链条(2段) → 竞争格局/赢家输家(1段) → 启示
+⑤ 重点领域必须有中国视角：国产替代进度、A股产业链意义、地缘政治影响
+⑥ 禁止感叹号、禁止"颠覆性""革命性""里程碑式"等空洞词
+
+━━ 机器人/具身智能专项 ━━
+涉及机器人的文章必须分析产业链：
+上游零部件（电机/谐波减速器/RV减速器/力矩传感器/视觉芯片）
+→ 中游（本体制造/系统集成）
+→ 下游（汽车制造/物流/半导体厂/服务业）
+中国各环节的优劣势、国产化率、代表公司（不做股票推荐）"""
 
 def write_batch(articles: list[dict], batch_num: int, total: int) -> str:
     items = []
@@ -558,26 +650,38 @@ def write_all_deep(deep: list[dict]) -> str:
 def write_briefs(briefs: list[dict]) -> str:
     items = []
     for i, a in enumerate(briefs, 1):
-        items.append(f"[{i:02d}] 【{a['source']}】{a['title']} | {a['desc'][:120]}")
+        items.append(
+            f"[{i:02d}|评分{a.get('score',0):.0f}] "
+            f"【{a['source']}】{a['title']} | {a['desc'][:120]}"
+        )
 
-    prompt = f"""今天是{TODAY}。以下是{len(briefs)}条精选新闻，逐条改写为快讯，必须全部输出。
+    prompt = f"""今天是{TODAY}。以下是按热度评分排序的{len(briefs)}条精选新闻，逐条改写为快讯，必须全部输出。
 
 {chr(10).join(items)}
 
-输出格式（每条用 ===第N条=== 分隔）：
+━━ 输出格式（每条用 ===第N条=== 分隔）━━
 
 ===第1条===
-领域：[标签]
-标题：[≤15字，必须含具体数字或关键事实]
-正文：[70-100字，必须有：具体数字/金额/比例 + 为什么重要 + 产业链影响。专业名词括号解释]
-启示：[一句话，点明对产业链哪个环节影响最大]
+领域：[半导体设备/晶圆制造/HBM/AI算力/大模型/材料/机器人/投资/政策/产业链 中选一]
+标题：[≤15字，必须含核心事实或数字]
+正文：[75-100字，必须包含：
+  - 具体数字/金额/比例/百分比
+  - 专业名词括号即时解释：名词（解释——为什么重要），禁止单独列术语表
+  - 产业链影响（谁受益/谁受损）]
+启示：[1句，点明对哪个产业链环节影响最大]
 
-以此类推到第{len(briefs)}条，不可省略任何一条。"""
+===第2条===
+... 以此类推到第{len(briefs)}条，不可省略。"""
 
     print(f"  ⚡ 精选快讯 {len(briefs)} 条 → Pro…")
     return _chat([{"role": "user", "content": prompt}],
-                 max_tokens=5000, temperature=0.55,
-                 system="你是顶级财经编辑，为高净值投资人写精选快讯。每条必须有具体数字和产业链意义。")
+                 max_tokens=5000, temperature=0.5,
+                 system=(
+                     "你是顶级财经编辑，为高净值投资人写精选科技快讯。"
+                     "每条必须有具体数字和明确的产业链影响。"
+                     "专业名词首次出现必须在括号内即时解释：名词（通俗解释——为什么对投资者重要）。"
+                     f"必须输出全部{len(briefs)}条，使用===第N条===分隔。"
+                 ))
 
 # ──────────────────────────────────────────────────────
 # Step 6  生成导读
