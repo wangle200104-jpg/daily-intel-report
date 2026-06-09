@@ -2,14 +2,14 @@
 
 === 主推（中文）===
 今日科技产业信号 📡 2026年06月09日
-🔹 国产人形机器人价格击穿iPhone底线，RV减速器成本腰斩，宇树被预测主导全球产能，传统工业机器人链承压
-🔹 华为发布H20替代品，燧原/粤芯6.15科创板上会，长鑫存储上市与逻辑芯片路线图突破并行，半导体设备ETF单日涨超7%，卖铲人确定受益
-🔹 AI算力推高存储变局，国产刻蚀机首进全球顶尖3D NAND供应链，设备材料成主战场
+🔹 昇腾910C完成1.6万亿参数DeepSeek全参数后训练，国产算力首次覆盖超大模型全流程，华为AI服务器、光模块链直接受益，英伟达GPU供应依赖面临重构。
+🔹 首台光芯片纳米压印光刻机交付，亚10纳米精度绕过传统EUV瓶颈，光子芯片制造新路线打开，光库科技、源杰科技等企业或迎替代窗口。
+🔹 宇树科技与英伟达合作搁浅，人形机器人芯片/OS层自主可控告急，绿的谐波市销率超50倍背后，根技术短板仍是估值之锚。
 #AI #半导体 #产业链 @wangsir1w
 
 === 主推（英文）===
 Today's key signals from the chip & AI supply chain 📡
-🔹 China’s humanoid robot prices drop below iPhone level
+🔹 Huawei's Ascend 910C completes full-parameter post-training of a 1.
 
 === Thread长推 ===
 
