@@ -3,8 +3,8 @@ name: 🧠 每日科技投资简报
 on:
   schedule:
     - cron: '0 1 * * *'    # 北京时间 09:00（UTC 01:00）早班
-    - cron: '0 8 * * *'    # 北京时间 16:00（UTC 08:00）午班
-  workflow_dispatch:        # 手动触发（用于测试）
+    - cron: '30 7 * * *'   # 北京时间 15:30（UTC 07:30）午班
+  workflow_dispatch:
 
 jobs:
   generate:
@@ -15,10 +15,10 @@ jobs:
       contents: write
 
     steps:
-      - name: 📥 检出仓库（含历史记录）
+      - name: 📥 检出仓库
         uses: actions/checkout@v4
         with:
-          fetch-depth: 0    # 拉取完整历史，确保 published_uids.json 存在
+          fetch-depth: 0
 
       - name: 🐍 Python 3.11
         uses: actions/setup-python@v5
@@ -37,11 +37,11 @@ jobs:
           SERVERCHAN_KEY:        ${{ secrets.SERVERCHAN_KEY }}
         run: python generate_report.py
 
-      - name: 📤 提交报告 + 历史记录
+      - name: 📤 提交报告
         run: |
           git config --global user.name  "IntelBriefBot"
           git config --global user.email "bot@intel-briefing.ai"
-          git add reports/ README.md
+          git add reports/ README.md docs/ 2>/dev/null || git add reports/ README.md
           git diff --staged --quiet || \
-            git commit -m "🧠 简报 $(date +'%Y-%m-%d %H:%M') UTC · 10深度+20快讯 [skip ci]"
+            git commit -m "🧠 简报 $(date +'%Y-%m-%d %H:%M') UTC [skip ci]"
           git push
