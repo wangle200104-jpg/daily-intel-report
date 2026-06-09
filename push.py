@@ -315,7 +315,21 @@ def build_msg2_combined(header, brief_text, date_str):
     brief_block += '<div style="font-size:11px;color:' + C_MUTED + ';margin-bottom:10px;padding-bottom:8px;border-bottom:1px solid ' + C_BORDER + '">' + str(len(brief_cards)) + ' 条快讯 · 每条约80字</div>'
     brief_block += ''.join(brief_cards) + '</div>'
 
-    return _wrap(header_block + brief_block, full_footer=True)
+    # 网页版链接按钮
+    link_block = ""
+    purl = getattr(build_msg2_combined, '_page_url', '')
+    if purl:
+        link_block = (
+            '<div style="margin-top:14px;padding-top:12px;'
+            'border-top:1px solid ' + C_BORDER + '">'
+            '<a href="' + purl + '" style="display:inline-flex;align-items:center;'
+            'gap:6px;padding:9px 18px;background:#0d1117;color:#fff;'
+            'border-radius:6px;font-size:13px;font-weight:600;text-decoration:none">'
+            '🌐 查看完整网页版 →</a>'
+            '<div style="font-size:11px;color:' + C_MUTED + ';margin-top:5px">'
+            + purl + '</div></div>'
+        )
+    return _wrap(header_block + brief_block + link_block, full_footer=True)
 
 
 # ══════════════════════════════════════════════════
@@ -332,7 +346,8 @@ def _wxp_send(token, uid_list, html, summary):
     return ok
 
 
-def push_wxpusher(header, deep_text, brief_text, date_str, repo_url="", deep_list=None):
+def push_wxpusher(header, deep_text, brief_text, date_str,
+                  repo_url="", deep_list=None, page_url=""):
     token = os.environ.get("WXPUSHER_APP_TOKEN","")
     uids  = os.environ.get("WXPUSHER_UIDS","")
 
@@ -345,6 +360,9 @@ def push_wxpusher(header, deep_text, brief_text, date_str, repo_url="", deep_lis
 
     uid_list = [u.strip() for u in uids.split(",") if u.strip()]
     print(f"  👥 推送对象: {len(uid_list)} 人")
+
+    # 把 page_url 注入到消息②（导读+快讯）
+    build_msg2_combined._page_url = page_url
 
     msgs = [
         (build_msg1_deep(deep_text, date_str, deep_list=deep_list),
@@ -385,12 +403,15 @@ def push_serverchan(header, deep_text, brief_text, date_str):
         print("  ❌ Server酱 异常: " + str(e)); return False
 
 
-def push_all(header, deep_text, brief_text, date_str, repo_url="", deep_list=None):
+def push_all(header, deep_text, brief_text, date_str,
+             repo_url="", deep_list=None, page_url=""):
     print("\n" + "─"*50)
     print("📤 开始推送…")
+    if page_url:
+        print(f"  🌐 网页版：{page_url}")
     print("─"*50)
     wx_ok = push_wxpusher(header, deep_text, brief_text, date_str,
-                          repo_url=repo_url, deep_list=deep_list)
+                          repo_url=repo_url, deep_list=deep_list, page_url=page_url)
     sc_ok = push_serverchan(header, deep_text, brief_text, date_str)
     print("─"*50)
     print(f"  WxPusher: {'✅ 成功' if wx_ok else '❌ 失败'}")
