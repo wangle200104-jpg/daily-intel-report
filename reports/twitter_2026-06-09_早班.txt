@@ -1,0 +1,26 @@
+配图建议: 
+
+=== 主推（中文）===
+今日科技产业信号 📡 2026年06月09日  
+🔹 半导体设备材料进入量价齐升周期，国产刻蚀机首度跻身全球顶尖供应链，设备ETF（159558）单日涨超7%，华海清科拿下国内首台全自动板级CMP量产订单。  
+🔹 人形机器人价格击穿iPhone防线，消费级渗透窗口打开，利好伺服、减速器与AI模组链条。  
+🔹 燧原科技、粤芯半导体6月15日IPO上会，算力芯片资本化提速，设备材料“卖铲人”逻辑进一步夯实。  
+#AI #半导体 #产业链 @wangsir1w
+
+=== 主推（英文）===
+Today's key signals from the chip & AI supply chain 📡  
+🔹 China's semiconductor equipment enters a volume-price upturn—domestic etching tools break into the top global chain, with an equipment ETF up over 7% in one session. HWATSING secured the country’s first fully automatic panel-level CMP tool order.  
+🔹 Humanoid robot prices drop below an iPhone, unlocking consumer-grade scale; servo, reducer and AI module beneficiaries come into focus.  
+🔹 Enflame Technology and CanSemi’s IPO hearing set for June 15, accelerating AI chip capitalisation and reinforcing the “shovel seller” logic for equipment and materials.  
+#Semiconductor #AIChip #ChinaTech @wangsir1w
+
+=== Thread长推 ===
+[1/5] 半导体设备材料进入景气大周期。国产刻蚀机首次打入全球顶尖供应链，半导体设备ETF（159558）单日涨超7%。华海清科获得国内首台全自动板级CMP量产装备订单，板级封装设备从零到一突破。长鑫存储上市预期叠加逻辑芯片路线图推进，设备材料“量价双升”逻辑获三重共振。资金正向“卖铲人”集中。
+
+[2/5] 算力芯片资本化提速。燧原科技、粤芯半导体将于6月15日IPO上会，二者分别覆盖云端训练/推理芯片与特色工艺代工，反映监管对硬科技IPO的定向支持。算力产业链基金明确投资方向，光模块进入“量价齐升”甜蜜期，科创创业人工智能ETF（159142）捕捉其中机会。6月策略锁定中国硬科技。
+
+[3/5] 机器人成本曲线陡降。人形机器人终端售价已低于一部iPhone，核心部件供应链成本压缩超预期，行星滚柱丝杠、六维力传感器等环节国产化率快速攀升。广州卫健委与华为共建鸿蒙健康生态，中广核数科联合中国卫通成立“未来通信与具身智能技术联合实验室”，机器人+通信融合场景落地加速。
+
+[4/5] 国产替代从材料向系统渗透。光模块国产化提速，AI数据中心800G/1.6T需求拉动下，光芯片、电芯片、DSP等环节国内厂商份额扩大。半导体设备ETF招商（561980）涨超6%，首席鄢凡指出设备材料已进入量价双升的景气大周期。鸿蒙生态向医疗关键行业延伸，国产OS+AIoT闭环初现。
+
+[5/5] 今日信号清晰：设备材料景气上行、算力芯片IPO窗口打开、机器人平价化启动消费级市场。产业链利润从制造向上游“铲子”迁移，国产替代从单点突破走向系统覆盖。更多产业链深度分析，关注 @wangsir1w 微信13973780026。
