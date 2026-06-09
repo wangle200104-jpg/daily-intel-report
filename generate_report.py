@@ -40,7 +40,8 @@ API_KEY   = os.environ.get("DEEPSEEK_API_KEY", "").strip()
 MODEL     = "deepseek-v4-pro"          # 全链路使用同一个 Pro 模型
 
 _now_utc  = datetime.datetime.utcnow()
-NOW_HOUR  = (_now_utc.hour + 8) % 24  # 北京时间
+NOW_HOUR  = (_now_utc.hour + 8) % 24   # 北京时间
+# 早班 = 北京09:00（UTC 01:00），午班 = 北京15:30（UTC 07:30）
 SESSION   = "午班" if NOW_HOUR >= 14 else "早班"
 TODAY     = datetime.date.today().strftime("%Y年%m月%d日")
 DATE_STR  = datetime.date.today().strftime("%Y-%m-%d")
@@ -222,6 +223,47 @@ def is_recent(pub: str) -> bool:
             pass
     return True
 
+def extract_image(entry) -> str:
+    """
+    从RSS条目提取图片URL，支持4种格式：
+    1. enclosure（Substack等）
+    2. media:content / media:thumbnail（IEEE Spectrum/EE Times等）
+    3. description 或 content:encoded 里的 <img> 标签
+    """
+    # 1. enclosure
+    enc = entry.find('enclosure')
+    if enc is not None:
+        url = enc.get('url', '')
+        if url and ('image' in enc.get('type', '') or
+                    any(url.lower().endswith(x) for x in
+                        ['.jpg', '.jpeg', '.png', '.webp', '.gif'])):
+            return url
+
+    # 2. media:content / media:thumbnail
+    for ns in ['http://search.yahoo.com/mrss/']:
+        for tag in ['content', 'thumbnail']:
+            el = entry.find(f'{{{ns}}}{tag}')
+            if el is not None and el.get('url'):
+                u = el.get('url')
+                if u.startswith('http'):
+                    return u
+
+    # 3. description / content:encoded 里的第一张 img
+    for field in ['description',
+                  '{http://www.w3.org/2005/Atom}summary',
+                  '{http://purl.org/rss/1.0/modules/content/}encoded']:
+        el = entry.find(field)
+        if el is not None and el.text:
+            imgs = re.findall(r'src=["\']([^"\']+)["\']', el.text)
+            for img in imgs:
+                if (img.startswith('http') and
+                        'pixel' not in img and
+                        '1x1' not in img and
+                        len(img) > 20):
+                    return img
+    return ""
+
+
 def fetch_source(src: dict) -> list[dict]:
     articles, headers = [], {"User-Agent": "IntelBriefBot/4.0"}
     try:
@@ -246,7 +288,8 @@ def fetch_source(src: dict) -> list[dict]:
             combined = (title + " " + desc).lower()
             if not any(k.lower() in combined for k in KEYWORDS):
                 continue
-            uid = hashlib.md5(title.lower().strip().encode()).hexdigest()[:12]
+            uid   = hashlib.md5(title.lower().strip().encode()).hexdigest()[:12]
+            image = extract_image(e)   # ← 提取来源图片
             articles.append({
                 "uid":    uid,
                 "title":  title,
@@ -256,6 +299,7 @@ def fetch_source(src: dict) -> list[dict]:
                 "tags":   src.get("tags", []),
                 "pub":    pub,
                 "link":   link,
+                "image":  image,       # 文章封面/配图 URL
             })
             if len(articles) >= 6:
                 break
@@ -717,6 +761,97 @@ def make_header(deep_list: list[dict]) -> str:
                  max_tokens=700, temperature=0.4,
                  system="你是中国顶级财经记者。必须严格执行第一步指令，逐字输出固定句，不得省略或改写。")
 
+
+# ──────────────────────────────────────────────────────
+# Step 6b  生成推特文案（中英双语）
+# ──────────────────────────────────────────────────────
+def make_twitter_posts(deep_list: list, brief_list: list) -> dict:
+    """
+    生成每日推特文案：
+    - main_cn  中文主推（含图片提示）
+    - main_en  英文主推
+    - thread   Thread长推（5条）
+    保存到 reports/twitter_YYYY-MM-DD_SESSION.txt
+    """
+    arts = "\n".join(
+        f"{i}. 【{a.get('domain','科技')}】{a['title'][:45]}"
+        for i, a in enumerate(deep_list[:10], 1)
+    )
+    briefs = "\n".join(
+        f"{i}. {a['title'][:40]}"
+        for i, a in enumerate(brief_list[:5], 1)
+    )
+    # 今日评分最高文章的图片作为推特配图提示
+    top_img = next((a.get("image","") for a in deep_list if a.get("image")), "")
+
+    prompt = f"""今天是{TODAY}（{SESSION}）。以下是今日科技投资简报的核心内容：
+
+深度文章：
+{arts}
+
+今日快讯（前5条）：
+{briefs}
+
+━━ 任务：生成推特(X)发帖文案 ━━
+请输出3部分内容，每部分之间用 ---SPLIT--- 分隔：
+
+【第1部分】中文主推（200字以内，适合X平台）
+格式：
+- 开头：今日科技产业信号 📡 {TODAY}
+- 2-3个核心判断，用 🔹 开头，每个一行
+- 要有具体数字或事件
+- 产业链视角：谁受益/谁承压
+- 结尾：#AI #半导体 #产业链 @wangsir1w
+- 不用感叹号，克制精准
+
+---SPLIT---
+
+【第2部分】英文主推（240字以内）
+同样内容英文版，面向全球读者：
+- 开头：Today's key signals from the chip & AI supply chain 📡
+- 核心判断（英文）
+- 结尾：#Semiconductor #AIChip #ChinaTech @wangsir1w
+
+---SPLIT---
+
+【第3部分】Thread长推（5条，每条用 [N/5] 标注）
+[1/5] 半导体/算力最重要动态
+[2/5] 第二重要消息
+[3/5] 材料/机器人方向
+[4/5] 中国产业链视角（国产替代/A股）
+[5/5] 总结+引导关注：更多产业链深度分析 @wangsir1w 微信13973780026
+
+要求：每条都有具体数字，禁止感叹号，每条≤240字"""
+
+    print("  🐦 生成推特文案 → Pro…")
+    raw = _chat([{"role": "user", "content": prompt}],
+                max_tokens=2000, temperature=0.6,
+                system=(
+                    "你是中英双语科技投资账号运营者，"
+                    "把复杂产业链信息浓缩成高传播力推文。"
+                    "风格：观点明确、数字精准、克制不夸张。"
+                ))
+
+    parts = [p.strip() for p in (raw or "").split("---SPLIT---")]
+    result = {
+        "main_cn": parts[0] if len(parts) > 0 else "",
+        "main_en": parts[1] if len(parts) > 1 else "",
+        "thread":  parts[2] if len(parts) > 2 else "",
+        "top_img": top_img,   # 推荐配图URL
+    }
+
+    # 保存到文件
+    os.makedirs("reports", exist_ok=True)
+    twitter_path = f"reports/twitter_{DATE_STR}_{SESSION}.txt"
+    with open(twitter_path, "w", encoding="utf-8") as f:
+        f.write(f"配图建议: {top_img}\n\n")
+        f.write(f"=== 主推（中文）===\n{result['main_cn']}\n\n")
+        f.write(f"=== 主推（英文）===\n{result['main_en']}\n\n")
+        f.write(f"=== Thread长推 ===\n{result['thread']}\n")
+    print(f"✅ 推特文案已保存：{twitter_path}")
+    return result
+
+
 # ──────────────────────────────────────────────────────
 # Step 7  保存 + 更新 README
 # ──────────────────────────────────────────────────────
@@ -811,15 +946,27 @@ if __name__ == "__main__":
     # Step 6: 导读
     header = make_header(deep_list)
 
+    # Step 6b: 推特文案（中英双语，含配图建议）
+    twitter = make_twitter_posts(deep_list, brief_list)
+    if twitter["main_cn"]:
+        print("\n" + "─"*55)
+        print("🐦 今日推特中文主推：")
+        print("─"*55)
+        print(twitter["main_cn"])
+        print("─"*55)
+        if twitter["top_img"]:
+            print(f"📷 推荐配图：{twitter['top_img'][:80]}")
+        print("─"*55)
+
     # Step 7: 保存
     _, new_uids = save(header, deep_text, brief_text,
                        len(pool), deep_list, brief_list)
     save_history(history, new_uids)
     update_readme(header, deep_text)
 
-    # 推送
+    # 推送（传入deep_list用于文章配图）
     from push import push_all
-    push_all(header, deep_text, brief_text, DATE_STR)
+    push_all(header, deep_text, brief_text, DATE_STR, deep_list=deep_list)
 
     print("\n" + "─"*60)
     print(f"📋 {SESSION} 导读：")
