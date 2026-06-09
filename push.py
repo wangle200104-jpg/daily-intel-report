@@ -150,7 +150,10 @@ def _md(text, accent=None):
 # ══════════════════════════════════════════════════
 # 消息① 深度长文
 # ══════════════════════════════════════════════════
-def build_msg1_deep(deep_text, date_str):
+def build_msg1_deep(deep_text, date_str, deep_list=None):
+    """构建深度长文消息，如有 deep_list 则每篇文章下方显示来源图片"""
+    if deep_list is None:
+        deep_list = []
     arts = [a.strip() for a in re.split(r'\n-{3,}\n', deep_text)
             if a.strip() and len(a.strip()) > 50]
     cards = []
@@ -164,6 +167,11 @@ def build_msg1_deep(deep_text, date_str):
         body   = re.sub(r'^##[^\n]+\n', '', art, count=1).strip()
         if len(body) > 950: body = body[:950] + '…'
 
+        # 从 deep_list 获取该文章的图片 URL
+        img_url = ""
+        if i <= len(deep_list):
+            img_url = deep_list[i-1].get("image", "") or ""
+
         card  = '<div style="padding:11px 0;border-bottom:1px solid ' + C_BORDER + '">'
         card += '<div style="display:flex;gap:6px;align-items:flex-start;margin-bottom:5px">'
         card += '<span style="font-size:10px;font-weight:800;color:#fff;background:' + C_RED + ';padding:1px 5px;border-radius:3px;flex-shrink:0;margin-top:2px">' + str(i).zfill(2) + '</span>'
@@ -171,6 +179,12 @@ def build_msg1_deep(deep_text, date_str):
             card += '<span style="font-size:10px;font-weight:600;color:' + dg + ';background:' + db + ';padding:1px 5px;border-radius:3px;flex-shrink:0;margin-top:2px">' + domain + '</span>'
         card += '<span style="font-size:13px;font-weight:700;color:' + C_INK + ';line-height:1.4">' + title + '</span>'
         card += '</div>'
+        # 图片（来自 RSS 来源）
+        if img_url:
+            card += ('<img src="' + img_url + '" '
+                     'style="width:100%;max-height:200px;object-fit:cover;'
+                     'border-radius:6px;margin-bottom:7px;display:block" '
+                     'onerror="this.style.display=\'none\'">')
         card += '<div style="font-size:13px;color:' + C_INK2 + ';line-height:1.82">' + _md(body, C_RED) + '</div>'
         card += '</div>'
         cards.append(card)
@@ -318,16 +332,25 @@ def _wxp_send(token, uid_list, html, summary):
     return ok
 
 
-def push_wxpusher(header, deep_text, brief_text, date_str, repo_url=""):
+def push_wxpusher(header, deep_text, brief_text, date_str, repo_url="", deep_list=None):
     token = os.environ.get("WXPUSHER_APP_TOKEN","")
     uids  = os.environ.get("WXPUSHER_UIDS","")
+
+    print(f"  🔑 WXPUSHER_APP_TOKEN: {'✅ 已设置(长度'+str(len(token))+')' if token else '❌ 未设置'}")
+    print(f"  🔑 WXPUSHER_UIDS:      {'✅ 已设置' if uids else '❌ 未设置'}")
+
     if not token or not uids:
-        print("  ⏭  WxPusher 未配置"); return False
+        print("  ❌ WxPusher 未配置 → 跳过")
+        return False
+
     uid_list = [u.strip() for u in uids.split(",") if u.strip()]
+    print(f"  👥 推送对象: {len(uid_list)} 人")
 
     msgs = [
-        (build_msg1_deep(deep_text, date_str),       "📰 [" + date_str + "] 深度长文 10篇"),
-        (build_msg2_combined(header, brief_text, date_str), "📋⚡ [" + date_str + "] 今日导读+快讯"),
+        (build_msg1_deep(deep_text, date_str, deep_list=deep_list),
+         "📰 [" + date_str + "] 深度长文 10篇"),
+        (build_msg2_combined(header, brief_text, date_str),
+         "📋⚡ [" + date_str + "] 今日导读+快讯"),
     ]
     ok = 0
     for i, (html, summary) in enumerate(msgs):
@@ -362,10 +385,15 @@ def push_serverchan(header, deep_text, brief_text, date_str):
         print("  ❌ Server酱 异常: " + str(e)); return False
 
 
-def push_all(header, deep_text, brief_text, date_str, repo_url=""):
-    print("\n📤 推送到微信（2条）…")
-    wx_ok = push_wxpusher(header, deep_text, brief_text, date_str, repo_url)
-    if not wx_ok:
-        print("  ⚠️  WxPusher 失败，Server酱 备援…")
-    push_serverchan(header, deep_text, brief_text, date_str)
+def push_all(header, deep_text, brief_text, date_str, repo_url="", deep_list=None):
+    print("\n" + "─"*50)
+    print("📤 开始推送…")
+    print("─"*50)
+    wx_ok = push_wxpusher(header, deep_text, brief_text, date_str,
+                          repo_url=repo_url, deep_list=deep_list)
+    sc_ok = push_serverchan(header, deep_text, brief_text, date_str)
+    print("─"*50)
+    print(f"  WxPusher: {'✅ 成功' if wx_ok else '❌ 失败'}")
+    print(f"  Server酱: {'✅ 成功' if sc_ok else '❌ 失败/未配置'}")
+    print("─"*50)
     print("✅ 推送完成\n")
