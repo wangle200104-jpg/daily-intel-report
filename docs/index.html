@@ -1,0 +1,165 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<link rel="alternate" type="application/rss+xml" title="每日科技投资简报 RSS" href="feed.xml">
+<meta property="og:title" content="每日科技投资简报 | 王sir">
+<meta property="og:description" content="聚焦半导体·算力·材料·AI·机器人 每天09:00+16:00推送">
+<meta property="og:image" content="https://wangle200104-jpg.github.io/daily-intel-report/og.jpg">
+<title>🧠 每日科技投资简报 | 王sir @wangsir1w</title>
+<style>
+  :root {
+    --bg: #0d1117; --card: #161b22; --border: #30363d;
+    --text: #e6edf3; --text2: #8b949e;
+    --accent: #c0392b; --accent2: #1a6fc4; --green: #1a7340;
+  }
+  @media (prefers-color-scheme: light) {
+    :root {
+      --bg: #f8f9fa; --card: #ffffff; --border: #e9ecef;
+      --text: #0d1117; --text2: #6c757d;
+      --accent: #c0392b; --accent2: #1a6fc4; --green: #1a7340;
+    }
+  }
+  * { margin: 0; padding: 0; box-sizing: border-box; }
+  body {
+    font-family: -apple-system, BlinkMacSystemFont, "PingFang SC",
+                 "Helvetica Neue", Arial, sans-serif;
+    background: var(--bg); color: var(--text);
+    max-width: 680px; margin: 0 auto; padding: 40px 16px 60px;
+  }
+  a { color: var(--accent2); text-decoration: none; }
+  a:hover { text-decoration: underline; }
+
+  .brand {
+    display: flex; align-items: center; gap: 12px;
+    margin-bottom: 28px;
+  }
+  .brand-logo {
+    width: 48px; height: 48px; border-radius: 50%;
+    border: 2px solid var(--accent);
+    background: var(--card); flex-shrink: 0;
+    display: flex; align-items: center; justify-content: center;
+    font-size: 22px;
+  }
+  .brand-info h1 { font-size: 22px; font-weight: 800; color: var(--text); }
+  .brand-info p  { font-size: 13px; color: var(--text2); margin-top: 2px; }
+
+  .tags {
+    display: flex; flex-wrap: wrap; gap: 6px; margin-bottom: 24px;
+  }
+  .tag {
+    font-size: 11px; font-weight: 600; padding: 3px 10px;
+    border-radius: 20px; border: 1px solid;
+  }
+  .tag-semi  { color: #6f42c1; border-color: #6f42c140; background: #6f42c110; }
+  .tag-ai    { color: var(--accent2); border-color: #1a6fc440; background: #1a6fc410; }
+  .tag-mat   { color: var(--green); border-color: #1a734040; background: #1a734010; }
+  .tag-robot { color: #d9730d; border-color: #d9730d40; background: #d9730d10; }
+  .tag-invest{ color: var(--accent); border-color: #c0392b40; background: #c0392b10; }
+
+  .section-title {
+    font-size: 13px; font-weight: 700; color: var(--text2);
+    text-transform: uppercase; letter-spacing: 1px;
+    margin-bottom: 10px; padding-bottom: 8px;
+    border-bottom: 1px solid var(--border);
+  }
+
+  .day-list { list-style: none; }
+  .day-item {
+    padding: 14px 16px;
+    border: 1px solid var(--border);
+    border-radius: 10px; margin-bottom: 8px;
+    background: var(--card);
+    display: flex; align-items: center; justify-content: space-between;
+    transition: border-color 0.15s, transform 0.1s;
+    cursor: pointer;
+  }
+  .day-item:hover {
+    border-color: var(--accent);
+    transform: translateX(2px);
+  }
+  .day-item a {
+    font-size: 15px; font-weight: 600;
+    color: var(--text); flex: 1;
+  }
+  .day-item a:hover { text-decoration: none; color: var(--accent); }
+  .day-meta {
+    font-size: 12px; color: var(--text2);
+    margin-top: 3px; display: flex; gap: 8px;
+  }
+  .session-badge {
+    font-size: 11px; padding: 2px 8px;
+    border-radius: 4px; font-weight: 600;
+    background: var(--accent); color: #fff;
+    flex-shrink: 0; margin-left: 8px;
+  }
+  .session-badge.pm {
+    background: var(--accent2);
+  }
+
+  .social {
+    display: flex; gap: 10px; margin: 24px 0;
+    flex-wrap: wrap;
+  }
+  .social a {
+    display: flex; align-items: center; gap: 6px;
+    padding: 8px 14px; border-radius: 8px;
+    font-size: 13px; font-weight: 600;
+    border: 1px solid var(--border);
+    background: var(--card); color: var(--text);
+    transition: border-color 0.15s;
+  }
+  .social a:hover { border-color: var(--accent2); text-decoration: none; }
+
+  .footer {
+    margin-top: 40px; text-align: center;
+    font-size: 12px; color: var(--text2); line-height: 2;
+  }
+</style>
+</head>
+<body>
+
+<div class="brand">
+  <div class="brand-logo">🧠</div>
+  <div class="brand-info">
+    <h1>每日科技投资简报</h1>
+    <p>半导体 · 算力 · 材料 · AI · 机器人 | 每天 09:00 + 16:00</p>
+  </div>
+</div>
+
+<div class="tags">
+  <span class="tag tag-semi">半导体设备</span>
+  <span class="tag tag-semi">晶圆制造</span>
+  <span class="tag tag-ai">AI大模型</span>
+  <span class="tag tag-ai">算力基础设施</span>
+  <span class="tag tag-mat">先进材料</span>
+  <span class="tag tag-robot">人形机器人</span>
+  <span class="tag tag-invest">产业链投资</span>
+</div>
+
+<div class="social">
+  <a href="https://x.com/wangsir1w" target="_blank">
+    <span>𝕏</span> @wangsir1w
+  </a>
+  <a href="https://github.com/wangle200104-jpg/daily-intel-report" target="_blank">
+    <span>📦</span> GitHub
+  </a>
+  <a href="feed.xml" target="_blank">
+    <span>📡</span> RSS 订阅
+  </a>
+</div>
+
+<div class="section-title">📅 历史简报</div>
+<ul class="day-list" id="list">
+  <!-- 由 GitHub Actions 自动更新 -->
+</ul>
+
+<div class="footer">
+  王sir · 材料工程师 / 投资人 · 深圳<br>
+  微信 13973780026（备注已关注X账号）<br>
+  由 GitHub Actions + DeepSeek V4 Pro 自动生成
+</div>
+
+</body>
+</html>
