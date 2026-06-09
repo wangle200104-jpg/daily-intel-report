@@ -1,26 +1,22 @@
 配图建议: 
 
 === 主推（中文）===
-今日科技产业信号 📡 2026年06月09日  
-🔹 半导体设备材料进入量价齐升周期，国产刻蚀机首度跻身全球顶尖供应链，设备ETF（159558）单日涨超7%，华海清科拿下国内首台全自动板级CMP量产订单。  
-🔹 人形机器人价格击穿iPhone防线，消费级渗透窗口打开，利好伺服、减速器与AI模组链条。  
-🔹 燧原科技、粤芯半导体6月15日IPO上会，算力芯片资本化提速，设备材料“卖铲人”逻辑进一步夯实。  
+今日科技产业信号 📡 2026年06月09日
+🔹半导体设备端单日215亿资金抄底，北方华创、长电科技等获加仓，国产光刻机新突破强化设备链预期。
+🔹巴克莱预测人形机器人市场2036年达2000亿美元，万元机时代逼近，具身智能产业政策与博览会密集催化。
+🔹AI算力与国产替代共振：两年诞生32只十倍股，腾讯拥抱国产芯片，国产GPU开始构筑普惠算力体系。
 #AI #半导体 #产业链 @wangsir1w
 
 === 主推（英文）===
-Today's key signals from the chip & AI supply chain 📡  
-🔹 China's semiconductor equipment enters a volume-price upturn—domestic etching tools break into the top global chain, with an equipment ETF up over 7% in one session. HWATSING secured the country’s first fully automatic panel-level CMP tool order.  
-🔹 Humanoid robot prices drop below an iPhone, unlocking consumer-grade scale; servo, reducer and AI module beneficiaries come into focus.  
-🔹 Enflame Technology and CanSemi’s IPO hearing set for June 15, accelerating AI chip capitalisation and reinforcing the “shovel seller” logic for equipment and materials.  
+Today's key signals from the chip & AI supply chain 📡
+🔹Semiconductor equipment saw RMB21.5bn inflows in a single day, targeting NAURA, JCET; new domestic lithography breakthrough reinforces equipment chain momentum.
+🔹Barclays projects the humanoid robot market could hit $200bn by 2036, with sub-RMB10k models emerging; supporting policies and expos are ramping up.
+🔹AI compute + localization drive 32 ten-baggers in under two years; Tencent embraces domestic chips, and local GPUs begin building pervasive compute infrastructure.
 #Semiconductor #AIChip #ChinaTech @wangsir1w
 
 === Thread长推 ===
-[1/5] 半导体设备材料进入景气大周期。国产刻蚀机首次打入全球顶尖供应链，半导体设备ETF（159558）单日涨超7%。华海清科获得国内首台全自动板级CMP量产装备订单，板级封装设备从零到一突破。长鑫存储上市预期叠加逻辑芯片路线图推进，设备材料“量价双升”逻辑获三重共振。资金正向“卖铲人”集中。
+[1/5] 半导体设备端今日出现215亿资金抄底，北方华创、长电科技等核心标的获集中买入。叠加国产光刻机新突破，设备国产化预期再次抬升。AI算力需求爆发叠加Token推理增量，半导体设备ETF成为长期资金布局方向，产业链上游耗材与零部件同步受益。
 
-[2/5] 算力芯片资本化提速。燧原科技、粤芯半导体将于6月15日IPO上会，二者分别覆盖云端训练/推理芯片与特色工艺代工，反映监管对硬科技IPO的定向支持。算力产业链基金明确投资方向，光模块进入“量价齐升”甜蜜期，科创创业人工智能ETF（159142）捕捉其中机会。6月策略锁定中国硬科技。
+[2/5] 巴克莱最新报告指出，自动化3.0时代来临，人形机器人市场10年后或有2000亿美元规模。国内万元机时代加速落地，Daimon Robotics与Galbot联合发布新品，具身智能产业博览会即将召开，减速器、传感器等核心部件企业频获机构调研，板块热度持续。
 
-[3/5] 机器人成本曲线陡降。人形机器人终端售价已低于一部iPhone，核心部件供应链成本压缩超预期，行星滚柱丝杠、六维力传感器等环节国产化率快速攀升。广州卫健委与华为共建鸿蒙健康生态，中广核数科联合中国卫通成立“未来通信与具身智能技术联合实验室”，机器人+通信融合场景落地加速。
-
-[4/5] 国产替代从材料向系统渗透。光模块国产化提速，AI数据中心800G/1.6T需求拉动下，光芯片、电芯片、DSP等环节国内厂商份额扩大。半导体设备ETF招商（561980）涨超6%，首席鄢凡指出设备材料已进入量价双升的景气大周期。鸿蒙生态向医疗关键行业延伸，国产OS+AIoT闭环初现。
-
-[5/5] 今日信号清晰：设备材料景气上行、算力芯片IPO窗口打开、机器人平价化启动消费级市场。产业链利润从制造向上游“铲子”迁移，国产替代从单点突破走向系统覆盖。更多产业链深度分析，关注 @wangsir1w 微信13973780026。
+[3/5] 机器人方向政策密集出台，国内具身智能产业发展提速。华为ICT大赛吸引超22万人参赛，下届增设昇腾AI算子开发赛道，推动AI人才与机器人底层算力生态融合。芒果TV展示AIGC“三级跃迁”内容生产路径，多
