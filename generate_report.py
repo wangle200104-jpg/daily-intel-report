@@ -964,9 +964,20 @@ if __name__ == "__main__":
     save_history(history, new_uids)
     update_readme(header, deep_text)
 
-    # 推送（传入deep_list用于文章配图）
+    # 生成 GitHub Pages 静态网页
+    page_url = ""
+    try:
+        from page_generator import publish_page
+        page_url = publish_page(header, deep_text, brief_text,
+                                deep_list=deep_list)
+        print(f"🌐 网页已生成：{page_url}")
+    except Exception as e:
+        print(f"  ⚠️ 页面生成失败（不影响推送）: {e}")
+
+    # 推送（传入deep_list用于文章配图，传入page_url用于网页链接）
     from push import push_all
-    push_all(header, deep_text, brief_text, DATE_STR, deep_list=deep_list)
+    push_all(header, deep_text, brief_text, DATE_STR,
+             deep_list=deep_list, page_url=page_url)
 
     print("\n" + "─"*60)
     print(f"📋 {SESSION} 导读：")
