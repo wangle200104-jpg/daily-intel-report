@@ -1,34 +1,33 @@
 配图建议: 
 
 === 主推（中文）===
+【第1部分】
 今日科技产业信号 📡 2026年06月10日
 
-🔹 台积电3nm产能利用率升至98%，英伟达H200订单拉动，先进封装CoWoS月产能达3.2万片
-🔹 中国AI算力租赁价格单季下降11%，但国产GPU出货占比突破18%，寒武纪思元590在互联网大厂测试份额提升
-🔹 人形机器人核心谐波减速器交付周期从8周压缩至5周，绿的谐波向特斯拉Optimus批量供货，单价降至420美元
-
-产业链视角：台积电先进制程扩产利好设备与材料商，国产GPU替代窗口收窄，主机厂压价推动机器人零部件洗牌
+🔹 人形机器人启动万台级实景实训，单台关节需71个磁编码器，精密传感器赛道进入需求爆发前夜，国产替代窗口收窄
+🔹 存储原厂锁产叠加硅片提价，半导体上游控盘信号明确，设备与材料环节承接成本传导，制造端利润承压
+🔹 Nvidia与SK海力士签署多年长协，HBM产能争夺战升级，SK海力士优先供应权锁定英伟达下一代架构
 
 #AI #半导体 #产业链 @wangsir1w
 
 === 主推（英文）===
+【第2部分】
 Today's key signals from the chip & AI supply chain 📡
 
-🔹 TSMC 3nm utilization hits 98%, driven by Nvidia H200 orders; CoWoS advanced packaging capacity reaches 32K wafers/month
-🔹 China AI computing rental prices drop 11% QoQ, but domestic GPU shipment share climbs to 18%, Cambricon Siyuan 590 gaining traction in hyperscaler testing
-🔹 Humanoid robot harmonic reducer lead time shrinks to 5 weeks; Leaderdrive ships to Tesla Optimus at $420/unit, down from $560
-
-Supply chain impact: advanced node expansion benefits TSMC equipment & materials; domestic GPU substitution window narrows; robot component price war accelerates consolidation
+🔹 China launches 10K-unit humanoid robot training program, each robot requires 71 magnetic encoders — precision sensor demand enters inflection point
+🔹 Memory lock-in production + wafer price hikes: upstream suppliers gain pricing power, midstream fabs face margin squeeze
+🔹 Nvidia & SK Hynix sign multi-year HBM pact, securing priority supply for next-gen Blackwell architecture
 
 #Semiconductor #AIChip #ChinaTech @wangsir1w
 
 === Thread长推 ===
-[1/5] 台积电3nm产能趋紧，产能利用率达98%，几乎满载。英伟达H200紧急加单，CoWoS先进封装月产出突破3.2万片，仍无法完全消化需求。设备商东京电子与ASML预计Q3营收环比增7-9%，先进制程扩产红利集中在少数供应商。
+【第3部分】
+[1/5] 存储锁产与硅片提价形成双重供给约束。SK海力士将2026年LPDDR5X产能锁定至首批客户，三星跟进控货策略。同时环球晶圆宣布12英寸硅片提价5-8%，半导体材料端议价权强化。设备ETF单日涨超2%，市场定价上游红利。
 
-[2/5] 中国AI算力市场出现分化：租赁价格环比下降11%，但国产GPU份额持续上升，Q1出货占比达18.2%，较去年底提升4个百分点。寒武纪思元590在头部互联网厂商推理场景测试中，性能满足率从67%升至82%，国产替代从政策驱动转向性能驱动。
+[2/5] 人形机器人产业进入商业验证元年。专项行动带动万台级规模落地，东航率先展示具身智能机器人矩阵。单台机器人关节需71个磁编码器，纳芯微、麦歌恩等国产磁传感器厂商进入特斯拉Optimus二代B样测试。精密感知赛道量价齐升。
 
-[3/5] 人形机器人谐波减速器交期缩短至5周，产能瓶颈缓解。绿的谐波对特斯拉Optimus供货单价从560美元降至420美元，降幅25%，但仍高于日本哈默纳科380美元报价。国产厂商靠交货速度和定制能力维持份额，毛利承压至32%，行业洗牌加速。
+[3/5] 磁编码器与人形机器人关节强绑定。每台71个分布旋转执行器，精度要求0.01度，单价约40-60元。全球市场由AMS-OSRAM、IC-Haus主导，国产化率不足15%。人形机器人放量将直接拉动2027年该细分市场突破80亿人民币。
 
-[4/5] 中国产业链视角：半导体设备进口额5月同比下滑8%，但国产刻蚀与薄膜沉积设备中标率升至31%。机器人领域，伺服电机国产化率达56%，控制器仍以贝加莱、科尔摩根为主，国产替代从机械层向电控层延伸，估值逻辑面临切换。
+[4/5] 国产替代加速：39亿阿里+长鑫+中微产业联盟落地，突围存储与刻蚀设备瓶颈。华为昇腾生态规模商用，软通动力All in AI。但精密传感器、HBM先进封装仍为卡点，CPO光引擎国产化率仅约12%，技术追赶窗口期约18个月。
 
-[5/5] 今日信号显示：先进封装与3nm产能仍是AI算力硬约束，国产GPU在推理侧加速渗透，机器人供应链从紧缺转向价格竞争。产业时钟从产能扩张转向效率竞争。更多产业链深度分析，关注 @wangsir1w 微信13973780026
+[5/5] 产业链正从算力堆叠转向感知协同与材料控盘。传感端磁编码器、通信端CPO、材料端大硅片三轮驱动。上游控产带来定价红利，中游设备商受益明确。关注结构性短缺带来的估值重构。更多产业链深度分析 @wangsir1w 微信13973780026
