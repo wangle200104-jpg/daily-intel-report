@@ -1,0 +1,28 @@
+配图建议: 
+
+=== 主推（中文）===
+今日科技产业信号 📡 2026年06月10日  
+🔹 人形机器人实景实训专项行动启动，目标万台级落地，具身智能进入商业验证元年  
+🔹 国产算力双突破：1000颗昇腾910C集群跑通1.6万亿参数后训练；摩尔线程GPU首次全栈支撑5D世界模型原生训练  
+🔹 半导体设备替代提速：首台光芯片纳米压印光刻机交付，国产刻蚀机切入全球顶尖供应链，光模块量价齐升  
+受益链：整机与关节模组、先进封装、光通信、半导体材料设备；承压链：海外高端算力供应  
+#AI #半导体 #产业链 @wangsir1w
+
+=== 主推（英文）===
+Today’s key signals from the chip & AI supply chain 📡  
+🔹 China’s humanoid robot field-training initiative targets 10K-scale deployment, marking commercial validation phase  
+🔹 Domestic AI compute hits two milestones: 1,000 Ascend 910C chips complete post-training of a 1.6T-param model; Moore Threads GPU achieves first full-stack native training of a 5D world model  
+🔹 Semiconductor tool substitution accelerates: first nanoimprint lithography system for photonic chips delivered; homegrown etchers join top-tier global supply; optical modules enter volume-price upswing  
+Winners: actuators, advanced packaging, optical transceivers, materials/equipment; Pressure: overseas high-end compute chain  
+#Semiconductor #AIChip #ChinaTech @wangsir1w
+
+=== Thread长推 ===
+[1/5] 国产算力跨过关键门槛。华为1000颗昇腾910C集群成功跑通1.6万亿参数模型后训练，证明国产AI芯片可支撑超大模型完整生命周期。同日，摩尔线程MTT S4000与北大联手，首次实现国产GPU全栈原生训练5D世界模型，算力自主从“可用”走向“原生”。
+
+[2/5] 人形机器人万台级商业验证启动。实景实训专项行动覆盖工业、服务等场景，直接拉动关节模组、六维力传感器、灵巧手等零部件需求。中国银河证券指出具身智能具备强阿尔法属性，主机与关键零部件龙头率先受益，产业链从样机走向量产拐点。
+
+[3/5] 半导体设备多环突破。首台国产光芯片纳米压印光刻机正式交付，降低光子集成制造成本；华海清科获国内首台全自动板级CMP量产订单；国产刻蚀机切入全球顶尖存储产线。半导体设备ETF易方达涨超7%，材料设备多股涨停，单点替代转向系统补链。
+
+[4/5] 信创链多点共振。CPU概念震荡走强，海光信息涨超11%；光模块进入量价齐升甜蜜期，科创创业人工智能ETF捕捉落地机会。鸿蒙生态加速：广州卫健委共建鸿蒙健康，HarmonyOS 7已向内部Beta推送。算力芯片到OS，国产化协同推进。
+
+[5/5] 今日信号核心：万台级机器人落地、国产算力支撑万亿参数后训练、关键设备从交付到纳入全球链。产业链正从单点突破进入系统能力重构区间。更多产业链深度分析，关注 @wangsir1w 微信13973780026。
