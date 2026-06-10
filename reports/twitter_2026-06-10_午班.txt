@@ -1,0 +1,26 @@
+配图建议: 
+
+=== 主推（中文）===
+今日科技产业信号 📡 2026年06月10日
+🔹 存储锁产叠加硅片提价，半导体设备ETF华夏日内涨超2%，设备端受益供给收缩逻辑，封装材料跟涨。
+🔹 阿里、长鑫存储、中微公司组成39亿本土联盟，直指国产存储设备突破，中微及国产零部件供应链订单能见度提升。
+🔹 美国更新军事企业清单，纳入百度、阿里、比亚迪、蔚来、宇树，中国科技企业供应链分化风险上升，国产替代紧迫性再获催化。
+#AI #半导体 #产业链 @wangsir1w
+
+=== 主推（英文）===
+Today's key signals from the chip & AI supply chain 📡
+🔹 Memory output cuts + silicon wafer price hikes drive semiconductor equipment sub-index up over 2% intraday. Equipment makers benefit directly.
+🔹 Alibaba, CXMT, and AMEC form a RMB 3.9 bn domestic alliance for storage equipment, improving AMEC’s backlog visibility.
+🔹 The U.S. adds Baidu, Alibaba, BYD, NIO, Unitree to its military companies list, deepening supply chain bifurcation risk and reinvigorating China’s localization thesis.
+#Semiconductor #AIChip #ChinaTech @wangsir1w
+
+=== Thread长推 ===
+[1/5] 半导体板块核心信号：部分存储原厂锁产，硅片环节上调报价，今日半导体设备ETF华夏涨超2%，设备企业率先受益供给收缩。同时，Nvidia与SK海力士签署多年HBM协议，高带宽存储供应格局趋稳，封装环节价值凸显。
+
+[2/5] 本土重大联盟：阿里、长鑫存储、中微公司宣布39亿“最强产业联盟”，聚焦国产存储设备自主研发。长鑫扩产叠加设备国产化，中微刻蚀与薄膜设备订单可见性增强，国产零部件与材料企业同步受益。
+
+[3/5] 机器人与具身智能升温：人形机器人实景实训专项行动正式启动，东航推出具身智能机器人矩阵。软通动力All in AI，联合华为构建产业生态，传感器、减速器、关节模组需求有望提速，落地场景进一步扩容。
+
+[4/5] 外部限制与中国产业链：美国“中国军事企业清单”新增百度、阿里、比亚迪、蔚来、宇树，供应链不确定性增加。国内华为昇腾生态加速适配，东华软件完成DeepSeek大模型适配，国产算力链与基础软件替代逻辑加强。
+
+[5/5] 综合来看，存储端供给收缩与本土设备联盟托底半导体设备板块，具身智能实训催生机器人零部件增量，外部限制强化自主可控主线。重点关注设备、先进封装、机器人核心部件。更多产业链深度分析 @wangsir1w 微信13973780026
