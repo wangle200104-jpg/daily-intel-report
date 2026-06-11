@@ -1,0 +1,26 @@
+配图建议: 
+
+=== 主推（中文）===
+今日科技产业信号 📡 2026年06月11日
+🔹 半导体设备国产替代进入交付验证期：华海清科拿下国内首台510*515mm板级CMP量产订单，长鑫、阿里、中微联手设立39.1亿元产业链闭环基金，设备“卖铲人”迎来三重周期共振。
+🔹 人形机器人投资拥挤，落地信号同步出现：凤凰网称“不做人形就拒绝99%投资人”，中国移动则召开政企具身智能研讨会，天津河西加速产业跑通B端场景。
+🔹 国产算力底座突破：摩尔线程与北大实现GPU全栈5D世界模型训练，光模块国产替代量价齐升，华为入局AI眼镜打开新终端变量。
+#AI #半导体 #产业链 @wangsir1w
+
+=== 主推（英文）===
+Today's key signals from the chip & AI supply chain 📡
+🔹 China's semi equipment localization enters order delivery phase: Hwatsing won the first domestic 510*515mm panel-level CMP mass production order; CXMT, Alibaba and AMEC jointly formed a 3.91 billion yuan fund to close the supply chain loop.
+🔹 Humanoid robotics sees funding frenzy but also real deployment: "Reject humanoid, reject 99% of investors," yet China Mobile pushes embodied AI into government & enterprise scenarios while Tianjin Hexi accelerates implementation.
+🔹 Domestic computing foundation upgrades: Moore Threads and PKU delivered the first GPU full-stack native training for a 5D world model; optical module import substitution enters volume-price rise cycle; Huawei enters AI glasses.
+#Semiconductor #AIChip #ChinaTech @wangsir1w
+
+=== Thread长推 ===
+[1/5] 半导体设备国产替代进入交付验证阶段。华海清科斩获国内首台510*515mm全自动板级CMP量产订单，代表先进封装设备从验证走向实单。长鑫、阿里、中微联合设立39.1亿元基金，构建存储芯片从设备到材料的产业链闭环。板块PETTM虽超150倍，但“卖铲人”订单能见度支撑高估值。
+
+[2/5] 人形机器人赛道呈现出“投资过热、落地加速”的双面。凤凰网报道称“不想做人形机器人，就拒绝了中国99%的投资人”，显示资金端高度集中。同时中国移动举办具身智能专题研讨会，聚焦政企市场方案落地，天津河西区则把具身智能作为攻坚方向，产业从融资竞赛转向B端可交付场景。
+
+[3/5] 算力与新材料国产化出现标志性事件。摩尔线程与北大团队联手，实现国产GPU首次全栈支撑5D世界模型原生训练，验证了国产算力底座的可行性。光模块环节国产替代提速，进入“量价齐升”甜蜜期，科创创业人工智能ETF景顺(159142)等工具捕捉产业链弹性。华为入局AI眼镜，提示新智能终端落地加速。
+
+[4/5] 从A股产业链视角看，半导体设备稳居C位，国产优势设备、材料、CPU/GPU龙头形成共振向上主线。广东明确算力网投资方向，以多维政策领跑全国AI赛道。市场定价的焦点在于国产替代率提升与估值匹配度，150倍以上的设备PETTM需要高频订单数据持续验证。
+
+[5/5] 半导体设备、人形机器人、国产算力三个节点出现同步突破，资金、政策与订单形成合力，但板块估值已处高位
