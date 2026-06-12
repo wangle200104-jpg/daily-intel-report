@@ -109,15 +109,28 @@ def generate_daily_html(header: str, deep_text: str, brief_text: str,
             if domain else ""
         )
 
-        # 从 deep_list 取图片 URL
-        img_url = ""
+        # 从 deep_list 取图片 URL 和 原文链接
+        img_url  = ""
+        link_url = ""
+        src_name = ""
         if i <= len(deep_list):
-            img_url = deep_list[i-1].get("image", "") or ""
+            img_url  = deep_list[i-1].get("image", "") or ""
+            link_url = deep_list[i-1].get("link", "") or ""
+            src_name = deep_list[i-1].get("source", "") or ""
         img_html = (
             f'<img class="article-img" src="{img_url}" alt="{title}" '
             f'loading="lazy" onerror="this.style.display=\'none\'">'
             if img_url else ""
         )
+        link_html = ""
+        if link_url:
+            link_html = (
+                f'<div class="article-source">'
+                f'<a href="{link_url}" target="_blank" rel="noopener">'
+                f'🔗 查看原文</a>'
+                f'<span>{src_name}</span>'
+                f'</div>'
+            )
 
         art_cards.append(f"""
 <div class="article-card">
@@ -128,6 +141,7 @@ def generate_daily_html(header: str, deep_text: str, brief_text: str,
   </div>
   {img_html}
   <div class="article-body">{md_to_html(body[:1200])}</div>
+  {link_html}
 </div>""")
 
     # 快讯卡片
@@ -287,6 +301,15 @@ a:hover {{ text-decoration:underline; }}
   border-radius:0 6px 6px 0;
   font-size:13px; font-weight:600; color:var(--red);
 }}
+.article-source {{
+  margin-top:10px; padding-top:8px; border-top:1px dashed var(--border);
+  display:flex; align-items:center; gap:10px; font-size:12px;
+}}
+.article-source a {{
+  color:var(--blue); font-weight:600; text-decoration:none;
+}}
+.article-source a:hover {{ text-decoration:underline; }}
+.article-source span {{ color:var(--text2); }}
 
 /* 快讯 */
 .brief-item {{
