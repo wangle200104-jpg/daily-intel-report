@@ -186,6 +186,16 @@ def build_msg1_deep(deep_text, date_str, deep_list=None):
                      'border-radius:6px;margin-bottom:7px;display:block" '
                      'onerror="this.style.display=\'none\'">')
         card += '<div style="font-size:13px;color:' + C_INK2 + ';line-height:1.82">' + _md(body, C_RED) + '</div>'
+        # 原文链接（可查证溯源）
+        link_url = ""
+        if i <= len(deep_list):
+            link_url = deep_list[i-1].get("link", "") or ""
+        if link_url:
+            card += ('<div style="margin-top:6px;padding-top:6px;'
+                     'border-top:1px dashed ' + C_BORDER + '">'
+                     '<a href="' + link_url + '" style="font-size:11px;color:'
+                     + C_BLUE + ';text-decoration:none" target="_blank">'
+                     '🔗 查看原文 →</a></div>')
         card += '</div>'
         cards.append(card)
 
