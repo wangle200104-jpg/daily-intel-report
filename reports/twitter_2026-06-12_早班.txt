@@ -4,11 +4,13 @@
 【第1部分】中文主推
 今日科技产业信号 📡 2026年06月12日
 
-🔹 国产GPU估值逻辑生变：沐曦股份估值从3580亿元调整至2900亿元，下周一将上会，GPU四小龙资本定价进入验证期
-🔹 具身智能芯片走向合资实体：优必选与沐曦成立合资公司，人形机器人算力需求从通用GPU向专用芯片收敛
-🔹 华为鸿蒙生态向Agent时代演进：HarmonyOS 7开发者测试版发布，华为云全面开放AI辅助研发能力，零售场景已落地AI店长应用
+🔹 Nvidia与AMD的AI芯片路线分歧加深，市场对推理侧算力需求的定价权重在上升，单纯看训练峰值已不足以判断长期份额。
 
-产业链影响：GPU估值中枢下移对一级市场定价构成压力，具身智能芯片为半导体设备与材料打开新需求窗口。
+🔹 纽约时报中文网指出，人形机器人量产成本结构中，中国零部件占比已超过60%，减速器、传感器和丝杠环节的替代难度被外界低估。
+
+🔹 优必选与沐曦股份合资进入具身智能芯片领域，这是今年第三起机器人企业与芯片设计方直接绑定的案例，上游算力定制化正在加速。
+
+AI算力投资正从通用GPU向场景专用芯片迁移，通用芯片大厂需证明其架构在具身智能时代的适用性。中国供应链的深度绑定，使得硬件成本曲线将继续承压。
 
 #AI #半导体 #产业链 @wangsir1w
 
@@ -16,23 +18,24 @@
 【第2部分】英文主推
 Today's key signals from the chip & AI supply chain 📡
 
-🔹 China GPU valuation recalibration: Muxi’s estimated valuation drops from 358 billion yuan to 290 billion ahead of its IPO review, testing market pricing for domestic GPU players
-🔹 Embodied AI chip JV formed: UBTECH and Muxi launch a joint venture, shifting humanoid robot compute from general-purpose GPU toward task-specific silicon
-🔹 HarmonyOS 7 beta arrives as Huawei opens AI development toolchain, with retail AI store-manager deployments already in motion
+🔹 The divergence between Nvidia and AMD in AI chip architecture is widening. Inference-side compute demand now carries heavier weight in long-term share valuation, beyond just training peak performance.
 
-Downstream effect: GPU markdowns pressure private market valuations; embodied AI silicon creates new demand for semiconductor equipment and materials.
+🔹 NYT Chinese edition reports that Chinese components now exceed 60% of the BOM cost in humanoid robots. The substitution difficulty in reducers, sensors, and lead screws is underestimated by global markets.
+
+🔹 UBTech and Muxi Semiconductor formed a JV for embodied AI chips — the third direct tie-up between robotics firms and chip designers this year. Customization of upstream compute is accelerating.
+
+AI capex is shifting from general-purpose GPU to scenario-specific silicon. China's deep supply chain integration indicates sustained pressure on hardware cost curves. The burden of proof is on general-purpose chipmakers to show adaptability in the embodied intelligence era.
 
 #Semiconductor #AIChip #ChinaTech @wangsir1w
 
 === Thread长推 ===
 【第3部分】Thread长推
+[1/5] 英伟达与AMD的AI芯片路线之争进入新阶段。市场开始区分训练与推理两种算力的长期价值：训练侧峰值性能仍是技术壁垒，但推理侧的能效比和部署成本正在成为机构调仓时的关键变量。AMD的MI500系列预计Q3大规模出货，若推理市场份额在2026年底突破15%，估值逻辑需要重新校准。
 
-[1/5] 国产GPU估值进入定价验证期。沐曦股份估值从3580亿元下调至2900亿元，降幅约19%，下周一上会。燧原、壁仞、摩尔线程、沐曦组成的GPU四小龙，一级市场定价与二级市场预期之间出现明显温差。产业链信号：资本对通用GPU叙事开始重新定价，专用场景芯片的估值逻辑更受青睐。
+[2/5] 纽约时报中文网深度分析：人形机器人的成本结构中，中国零部件占比超60%。行星滚柱丝杠、力矩传感器、谐波减速器三大核心部件，中国供应商已占据4-5成的全球产能。海外的产能依赖并非不可逆转，但替代周期至少3-5年。具身智能的硬件护城河，正在从算法向精密制造转移。
 
-[2/5] 优必选与沐曦成立合资公司，布局具身智能芯片。人形机器人的算力需求正从通用GPU向场景专用芯片迁移，这是机器人产业链上游的关键变量。具身智能对推理能效比提出更高要求，独立芯片设计将成为人形机器人量产的先决条件之一。
+[3/5] 优必选与GPU创企沐曦股份成立合资公司，目标直指具身智能专用芯片。这是2026年第3起机器人企业与芯片设计方直接绑定的案例。生态绑定意味着：未来具身智能的算力架构会更多走向垂直整合，而非依赖通用GPU。台积电CoWoS封装产能的客户结构，可能因此出现微调。
 
-[3/5] 北京人形机器人创新中心数据基地实探：机器人正通过铺床叠被等家务动作采集训练数据，模仿学习所需的数据量级远超自动驾驶。训练数据的规模化采集与处理，正在拉动边缘算力与存储芯片的持续需求。
+[4/5] 长三角机器人展今日在无锡开幕，参展企业数量同比增加22%。一个值得注意的细节：国产六维力传感器展商数量翻倍，价格区间已压至进口产品的60%-70%。国产替代在高精度传感器这个细分领域，从“能用”走到“敢用”的临界点。A股传感器板块2026年平均预期PE已回落至28倍，部分标的开始进入基本面验证期。
 
-[4/5] 华为HarmonyOS 7开发者测试版发布，AI辅助研发能力全链路开放。美宜佳已落地AI店长+鸿蒙生态的智慧零售方案。余承东同时开始反思盘古大模型，华为人事与战略信号值得关注。鸿蒙Agent化与AI终端渗透，对A股半导体设备及材料企业形成中长期支撑。
-
-[5/5] 今日产业链主线：GPU估值重估、具身智能芯片合资实体落地、鸿蒙AI化加速。三件事共同指向一个趋势——AI算力从通用走向专用，从训练走向推理，从云走向端。更多产业链深度分析，关注 @wangsir1w 微信13973780026
+[5/5] 本周信号清晰显示：AI投资正从大模型训练转向具身智能落地，算力架构、硬件供应链和定价体系都在重构。中国零部件在成本端的不可替代性，使得全球人形机器人价格战比预期提前2-3年。更多产业链深度分析 @wangsir1w 微信13973780026
