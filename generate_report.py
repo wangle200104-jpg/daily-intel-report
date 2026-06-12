@@ -27,7 +27,7 @@ try:
 except ImportError:
     import subprocess
     subprocess.check_call([sys.executable, "-m", "pip", "install",
-                           "requests", "openai", "--break-system-packages", "-q"])
+                           "requests", "openai", "tavily-python", "--break-system-packages", "-q"])
     import requests
     from openai import OpenAI
 
@@ -37,6 +37,9 @@ from sources import ALL_SOURCES, KEYWORDS
 # 配置
 # ──────────────────────────────────────────────────────
 API_KEY   = os.environ.get("DEEPSEEK_API_KEY", "").strip()
+# Tavily 多 Key 轮换：逗号分隔多个 Key，某个用完（1000次/月）自动切下一个
+_tavily_keys_raw = os.environ.get("TAVILY_API_KEY", "").strip()
+TAVILY_KEYS      = [k.strip() for k in _tavily_keys_raw.split(",") if k.strip()]
 MODEL     = "deepseek-v4-pro"          # 全链路使用同一个 Pro 模型
 
 _now_utc  = datetime.datetime.utcnow()
@@ -415,7 +418,244 @@ def score_article(a: dict) -> float:
     return round(score, 1)
 
 # ──────────────────────────────────────────────────────
-# Step 1+2 综合：抓取 → 评分 → 去重 → 分层候选池
+# Step 1b  Tavily 实时搜索（多Key自动轮换）
+# ──────────────────────────────────────────────────────
+
+# 搜索查询列表：以半导体全产业链为核心（32个，覆盖每一个环节）
+# 每次早班/午班各随机选12个执行，保证全面覆盖
+TAVILY_QUERIES = [
+    # ═══ 1. 光刻 & 制程（产业链最上游、壁垒最高）═══
+    "ASML EUV High-NA lithography semiconductor equipment order",
+    "2nm GAA CFET transistor node TSMC Samsung Intel process",
+    "DUV immersion lithography China domestic 28nm mature node",
+
+    # ═══ 2. 半导体设备 WFE（全球千亿美元市场）═══
+    "Applied Materials etching deposition CVD PVD semiconductor revenue",
+    "Lam Research etch semiconductor equipment market share",
+    "KLA metrology inspection process control semiconductor",
+    "Tokyo Electron Screen Holdings semiconductor equipment Japan",
+    "AMEC NAURA ACM Research China semiconductor equipment domestic",
+
+    # ═══ 3. 晶圆代工 Foundry（产能 & 制程竞赛）═══
+    "TSMC foundry revenue utilization rate capacity Arizona Japan",
+    "Samsung foundry GAA yield rate advanced node order",
+    "Intel foundry IFS 18A restructuring external customer",
+    "SMIC China 7nm foundry capacity expansion revenue",
+    "GlobalFoundries UMC mature node automotive IoT capacity",
+
+    # ═══ 4. 存储芯片（HBM = AI时代最大增量）═══
+    "HBM4 HBM3E SK Hynix Samsung Micron bandwidth AI GPU",
+    "DRAM price DDR5 supply demand contract forecast",
+    "NAND flash 3D QLC Kioxia Western Digital Samsung",
+    "YMTC CXMT China memory DRAM NAND domestic production",
+
+    # ═══ 5. 先进封装（算力瓶颈，台积电核心增长点）═══
+    "CoWoS SoIC advanced packaging capacity TSMC AI chip",
+    "chiplet UCIe 3D IC EMIB Foveros hybrid bonding Intel AMD",
+    "OSAT ASE Amkor JCET backend packaging revenue",
+
+    # ═══ 6. 半导体材料（你的专业方向）═══
+    "silicon wafer SUMCO Shin-Etsu substrate price supply",
+    "photoresist EUV CMP slurry etchant gas semiconductor materials",
+    "SiC silicon carbide Wolfspeed Infineon power device wafer",
+    "GaN gallium nitride power semiconductor RF 5G chip",
+
+    # ═══ 7. EDA & IP（设计工具 + 架构授权）═══
+    "Synopsys Cadence EDA semiconductor design AI chip revenue",
+    "ARM RISC-V chip architecture IP licensing Qualcomm Apple",
+
+    # ═══ 8. GPU / AI算力（半导体最大下游驱动力）═══
+    "NVIDIA Blackwell Rubin GB200 B300 GPU revenue datacenter AI",
+    "AMD MI350 Intel Gaudi Qualcomm AI accelerator chip compete",
+    "Huawei Ascend 910C Cambricon Hygon China domestic AI chip GPU",
+
+    # ═══ 9. 地缘政治 & 出口管制（影响整个产业格局）═══
+    "semiconductor export control BIS entity list China restriction",
+    "CHIPS Act subsidy Intel TSMC Samsung fab US policy billion",
+
+    # ═══ 10. 半导体投资 & 市场数据 ═══
+    "semiconductor revenue forecast market SEMI WSTS industry growth",
+    "semiconductor acquisition merger funding capex WFE spending",
+
+    # ═══ 11. 汽车 & 功率半导体 ═══
+    "automotive chip ADAS autonomous driving SiC IGBT power",
+
+    # ═══ 12. 具身智能（次要聚焦）═══
+    "humanoid robot embodied AI Figure Optimus Tesla production",
+
+    # ═══ 13. AI大模型（算力需求的直接驱动）═══
+    "LLM DeepSeek Qwen open source AI training compute inference",
+]
+
+# 优先抓取的国际权威域名（半导体 + 顶级财经为主）
+TAVILY_DOMAINS = [
+    # 全球顶级财经
+    "bloomberg.com", "reuters.com", "ft.com", "wsj.com",
+    "nikkei.com", "economist.com", "caixinglobal.com",
+    # 半导体专业媒体（最核心的8个）
+    "semianalysis.com", "asianometry.com", "eetimes.com",
+    "semiengineering.com", "digitimes.com", "thelec.net",
+    "semiwiki.com", "anysilicon.com",
+    # 工程 & IEEE
+    "spectrum.ieee.org", "eetimes.eu", "eenewseurope.com",
+    # 硬件 & 算力
+    "tomshardware.com", "anandtech.com", "theregister.com",
+    "hpcwire.com", "datacenterknowledge.com", "datacenterdynamics.com",
+    # 科技综合
+    "techcrunch.com", "technologyreview.com", "wired.com",
+    "arstechnica.com", "venturebeat.com",
+    # 中国科技英文
+    "scmp.com",
+    # 学术 & 材料
+    "nature.com",
+    # 行业协会
+    "semi.org", "semiconductors.org",
+]
+
+
+def _get_tavily_client():
+    """
+    多Key轮换：逐个尝试 TAVILY_KEYS，遇到429/额度用完就切下一个。
+    返回 (client, key_index) 或 (None, -1)
+    """
+    if not TAVILY_KEYS:
+        return None, -1
+    try:
+        from tavily import TavilyClient
+    except ImportError:
+        print("  ⏭ tavily-python 未安装")
+        return None, -1
+
+    for i, key in enumerate(TAVILY_KEYS):
+        try:
+            c = TavilyClient(api_key=key)
+            # 用一个轻量查询测试Key是否有效
+            c.search(query="test", max_results=1, search_depth="basic")
+            print(f"  🔑 Tavily Key #{i+1}/{len(TAVILY_KEYS)} 有效")
+            return c, i
+        except Exception as e:
+            err = str(e).lower()
+            if "429" in err or "limit" in err or "quota" in err or "exceeded" in err:
+                print(f"  ⚠️ Key #{i+1} 额度已用完，尝试下一个…")
+                continue
+            elif "401" in err or "invalid" in err or "unauthorized" in err:
+                print(f"  ⚠️ Key #{i+1} 无效，跳过")
+                continue
+            else:
+                # 其他错误也试试下一个
+                print(f"  ⚠️ Key #{i+1} 错误: {str(e)[:50]}，尝试下一个…")
+                continue
+
+    print("  ❌ 所有 Tavily Key 均不可用")
+    return None, -1
+
+
+def collect_tavily(seen_uids: set, seen_titles: list) -> list[dict]:
+    """
+    用 Tavily Search API 实时搜索最新半导体/AI/算力/具身智能热点。
+    - 多Key自动轮换（某个Key月度1000次额度用完→自动切下一个）
+    - 只搜最近24小时的新闻（time_range="day"）
+    - 优先国际权威媒体
+    - 与RSS去重后合并
+    """
+    tavily_client, key_idx = _get_tavily_client()
+    if tavily_client is None:
+        print("  ⏭ Tavily 不可用，跳过实时搜索")
+        return []
+
+    articles = []
+    total_new = 0
+    api_errors = 0
+
+    # 早班/午班使用不同查询子集，确保全天覆盖全产业链
+    seed = int(hashlib.md5(f"{DATE_STR}-{SESSION}-tavily".encode()).hexdigest(), 16)
+    rng  = random.Random(seed)
+    queries = TAVILY_QUERIES[:]
+    rng.shuffle(queries)
+    # 每次执行12个查询（32个查询池，早晚班各12个，基本不重复）
+    queries = queries[:12]
+
+    print(f"\n🔍 Tavily 实时搜索（Key #{key_idx+1}，{len(queries)} 个查询）…")
+
+    for i, query in enumerate(queries, 1):
+        try:
+            resp = tavily_client.search(
+                query=query,
+                topic="news",              # 新闻模式
+                search_depth="advanced",   # 深度搜索
+                max_results=5,
+                time_range="day",          # ← 核心：只要24小时内
+                include_images=True,
+                include_domains=TAVILY_DOMAINS,
+            )
+            results = resp.get("results", [])
+            batch_new = 0
+
+            for r in results:
+                title = (r.get("title") or "").strip()
+                url   = (r.get("url") or "")
+                if not title or len(title) < 10:
+                    continue
+
+                uid = hashlib.md5(title.lower().encode()).hexdigest()[:12]
+                if uid in seen_uids:
+                    continue
+                if any(_title_similar(title, t) for t in seen_titles[-300:]):
+                    continue
+
+                # 从URL提取来源域名
+                import urllib.parse
+                domain = urllib.parse.urlparse(url).netloc.replace("www.", "")
+
+                desc = (r.get("content") or "")[:350]
+                # 尝试拿图片
+                image = ""
+                imgs = resp.get("images", [])
+                if imgs and isinstance(imgs, list):
+                    for img in imgs:
+                        if isinstance(img, str) and img.startswith("http"):
+                            image = img
+                            break
+
+                articles.append({
+                    "uid":    uid,
+                    "title":  title,
+                    "desc":   desc,
+                    "source": f"Tavily·{domain[:20]}",
+                    "weight": 9,
+                    "tags":   ["tavily", "realtime"],
+                    "pub":    "",
+                    "link":   url,
+                    "image":  image,
+                })
+                seen_uids.add(uid)
+                seen_titles.append(title)
+                batch_new += 1
+
+            total_new += batch_new
+            if batch_new:
+                print(f"  [{i}/{len(queries)}] \"{query[:35]}…\" → +{batch_new}")
+            time.sleep(0.3)
+
+        except Exception as e:
+            err = str(e).lower()
+            api_errors += 1
+            if "429" in err or "limit" in err or "quota" in err:
+                print(f"  ⚠️ Key #{key_idx+1} 额度用完（查询{i}），剩余查询跳过")
+                break
+            else:
+                print(f"  ⚠️ 查询{i}失败: {str(e)[:50]}")
+                if api_errors >= 3:
+                    print("  ⚠️ 连续失败过多，停止Tavily搜索")
+                    break
+                time.sleep(1)
+
+    print(f"✅ Tavily 搜索完成：+{total_new} 条实时新闻")
+    return articles
+
+
+# ──────────────────────────────────────────────────────
+# Step 1+2 综合：RSS + Tavily → 评分 → 去重 → 分层候选池
 # ──────────────────────────────────────────────────────
 def collect_news(used_uids: set) -> list[dict]:
     print(f"\n📡 {SESSION} 抓取 {len(SESSION_SOURCES)}/{len(ALL_SOURCES)} 个源…")
@@ -440,7 +680,13 @@ def collect_news(used_uids: set) -> list[dict]:
             print(f"  [{i:2d}/{len(SESSION_SOURCES)}] {src['name']}: +{len(new)}")
         time.sleep(0.15)
 
-    print(f"\n✅ 抓取完成：{len(pool)} 条")
+    print(f"\n✅ RSS抓取完成：{len(pool)} 条")
+
+    # Step 1b: Tavily 实时搜索补充（抓最新24h热点）
+    tavily_arts = collect_tavily(seen_uids, seen_titles)
+    if tavily_arts:
+        pool.extend(tavily_arts)
+        print(f"  📊 合并：RSS {len(pool)-len(tavily_arts)} + Tavily {len(tavily_arts)} = {len(pool)} 条")
 
     # 排除历史已发布
     before = len(pool)
@@ -656,6 +902,19 @@ WRITER_SYSTEM = """你是中国顶级财经记者，具备产业研究员和价�
 ⑤ 重点领域必须有中国视角：国产替代进度、A股产业链意义、地缘政治影响
 ⑥ 禁止感叹号、禁止"颠覆性""革命性""里程碑式"等空洞词
 
+━━ 数据准确性铁律（最高优先级，违反等于失职）━━
+⚠️ 以下规则优先级高于一切写作要求：
+① 所有数字（金额/市值/市占率/产能/营收/增速/百分比）必须100%来自原文摘要
+   → 原文说"营收增长15%"你才能写15%，不能凭记忆写成"约20%"
+   → 原文说"投资50亿美元"你才能写50亿，不能四舍五入写成"近60亿"
+② 如果原文没有提供具体数字，必须写"具体数据未披露"或改写为定性描述
+   → 绝对禁止凭印象、凭常识、凭历史数据杜撰任何数字
+③ 公司名称、产品型号、工艺节点必须与原文完全一致
+   → 原文写"HBM3E"不能写成"HBM4"，原文写"3nm"不能写成"2nm"
+④ 如果对任何事实不确定，宁可模糊表述也不能写一个可能错误的数字
+⑤ 每篇文章末尾必须标注 **来源**：[来源名称]，方便读者溯源验证
+⑥ 营收/利润等财务数据必须标明币种（美元/人民币/韩元）和时间周期（季度/年度）
+
 ━━ 机器人/具身智能专项 ━━
 涉及机器人的文章必须分析产业链：
 上游零部件（电机/谐波减速器/RV减速器/力矩传感器/视觉芯片）
@@ -669,6 +928,7 @@ def write_batch(articles: list[dict], batch_num: int, total: int) -> str:
         items.append(
             f"### 文章{i}（{a.get('domain','科技')}）\n"
             f"来源：{a['source']}\n"
+            f"原文链接：{a.get('link','')}\n"
             f"标题：{a['title']}\n"
             f"摘要：{a['desc']}\n"
             f"写作角度：{a.get('angle','从产业链和投资角度深度分析')}"
@@ -676,7 +936,14 @@ def write_batch(articles: list[dict], batch_num: int, total: int) -> str:
     prompt = (f"今天是{TODAY}（{SESSION}）。请按照写作要求，"
               f"为以下{len(articles)}篇文章逐一撰写深度分析：\n\n"
               + "\n\n".join(items)
-              + f"\n\n---\n输出格式：每篇以 ## 深度{(batch_num-1)*5+1 if len(articles)>1 else batch_num}：[标题] 开头，篇间用 \\n---\\n 分隔。")
+              + f"\n\n---\n"
+              f"⚠️ 数据准确性（最高优先级）：\n"
+              f"1. 所有数字（营收/增速/产能/市占率/金额）必须100%来自上方每篇的'摘要'原文\n"
+              f"2. 原文没有的数字→写'具体数据未披露'，绝对禁止凭记忆或常识杜撰\n"
+              f"3. 公司名/产品型号/工艺节点→必须与原文完全一致，不能混淆\n"
+              f"4. 财务数据必须标明币种和时间（如'2026Q1营收XX亿美元'）\n\n"
+              f"输出格式：每篇以 ## 深度{(batch_num-1)*5+1 if len(articles)>1 else batch_num}：[标题] 开头，篇间用 \\n---\\n 分隔。"
+              f"每篇末尾标注 **来源**：[来源名称]")
     print(f"  📝 深度批次 {batch_num}/{total}（{len(articles)}篇）→ Pro…")
     return _chat([{"role": "user", "content": prompt}],
                  max_tokens=8000, temperature=0.72, system=WRITER_SYSTEM)
@@ -718,12 +985,17 @@ def write_briefs(briefs: list[dict]) -> str:
 ... 以此类推到第{len(briefs)}条，不可省略。"""
 
     print(f"  ⚡ 精选快讯 {len(briefs)} 条 → Pro…")
-    return _chat([{"role": "user", "content": prompt}],
+    return _chat([{"role": "user", "content": prompt
+                   + "\n\n⚠️ 数据铁律：每条快讯里的数字（金额/百分比/产能/增速）"
+                   "必须100%来自原文摘要。原文没有具体数字→改写为定性描述，"
+                   "绝对禁止凭印象杜撰。宁可不写数字也不能写一个可能错的数字。"},
+                 ],
                  max_tokens=5000, temperature=0.5,
                  system=(
                      "你是顶级财经编辑，为高净值投资人写精选科技快讯。"
-                     "每条必须有具体数字和明确的产业链影响。"
-                     "专业名词首次出现必须在括号内即时解释：名词（通俗解释——为什么对投资者重要）。"
+                     "铁律：所有数字必须严格来自原文摘要，不得编造或推测。"
+                     "如果原文无具体数字，用定性描述替代。"
+                     "专业名词首次出现必须括号解释：名词（解释——为什么重要）。"
                      f"必须输出全部{len(briefs)}条，使用===第N条===分隔。"
                  ))
 
@@ -923,6 +1195,7 @@ if __name__ == "__main__":
     print(f"  🧠 每日科技投资简报  ·  {TODAY}  ·  {SESSION}")
     print(f"  模型：{MODEL}  |  深度：{N_DEEP}篇  |  快讯：{N_BRIEF}条")
     print(f"  去重：{HISTORY_DAYS}天  |  新闻时效：{NEWS_DAYS}天")
+    print(f"  Tavily：{'✅ ' + str(len(TAVILY_KEYS)) + '个Key' if TAVILY_KEYS else '❌ 未配置'}")
     print(f"{'═'*60}\n")
 
     # Step 0: 已在顶部执行（SESSION_SOURCES）
