@@ -1,0 +1,22 @@
+配图建议: 
+
+=== 主推（中文）===
+今日科技产业信号 📡 2026年06月12日
+🔹 华为昇腾AI芯片在大模型训练端出货提速，软通动力等伙伴全面适配，算力国产替代拉低英伟达中国区收入预期
+🔹 长鑫、阿里、中微联合发起39.1亿元半导体基金，存储扩产周期下设备端北方华创、中微公司持续受益，半导体设备板块估值PETTM已超150倍
+🔹 银河通用人形机器人于街边小店自主运行超1年，北京具身智能企业订单量加速落地，谐波减速器与传感器等中国零部件份额扩大
+#AI #半导体 #产业链 @wangsir1w
+
+=== 主推（英文）===
+Today's key signals from the chip & AI supply chain 📡
+🔹 Huawei's Ascend AI chips gain traction in large-model training, with ISVs like iSoftStone fully adapting, shifting compute demand away from Nvidia's H20 in China
+🔹 A 3.91 bn yuan semiconductor fund co-launched by CXMT, Alibaba and AMEC targets storage expansion, lifting domestic equipment names while the sector's PE TTM exceeds 150x
+🔹 Galaxy Universal humanoid robot has run autonomously in a street shop for over a year; Beijing embodied-AI firms report order acceleration, solidifying China's grip on precision components
+#Semiconductor #AIChip #ChinaTech @wangsir1w
+
+=== Thread长推 ===
+[1/5] 华为昇腾AI芯片正改写算力版图。软通动力All in AI完成昇腾生态全栈适配，多个万卡智算中心采用昇腾方案。英伟达特供版H20在中国服务器市场的份额面临挤压，2026年Q2昇腾在国产训练卡出货占比预计突破40%。算力链从硬件向ISV扩散，生态成熟度提升
+
+[2/5] 存储扩产带动半导体设备景气。长鑫存储携手阿里、中微设立39.1亿元专项基金，投向存储制造与关键设备。中微、北方华创等国产设备商订单可见度延伸至2027年。但板块PETTM已超150倍，估值对盈利验证要求极高，资本效率与景气拐点同时考验市场
+
+[
