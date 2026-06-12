@@ -27,11 +27,12 @@ jobs:
           cache: 'pip'
 
       - name: 📦 安装依赖
-        run: pip install openai requests
+        run: pip install openai requests tavily-python
 
       - name: 🧠 生成简报 + 推送
         env:
           DEEPSEEK_API_KEY:      ${{ secrets.DEEPSEEK_API_KEY }}
+          TAVILY_API_KEY:        ${{ secrets.TAVILY_API_KEY }}
           WXPUSHER_APP_TOKEN:    ${{ secrets.WXPUSHER_APP_TOKEN }}
           WXPUSHER_UIDS:         ${{ secrets.WXPUSHER_UIDS }}
           SERVERCHAN_KEY:        ${{ secrets.SERVERCHAN_KEY }}
