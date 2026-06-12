@@ -1,0 +1,26 @@
+配图建议: 
+
+=== 主推（中文）===
+今日科技产业信号 📡 2026年06月12日  
+🔹 三星出货HBM4E，英伟达加深绑定SK海力士，存储复合成2026算力最大瓶颈。国内存储扩产周期再确认，半导体设备企业订单能见度延长至2027。  
+🔹 北京人形机器人中试平台年产能锁定5000台，具身智能被类比中国AlphaGo时刻。优必选联手GPU厂商沐曦，从零件到整机的国产链加速闭合。  
+🔹 华为HarmonyOS 7向Agent架构全面演进，智能协作产品7月起全线涨价，芯片成本压力系统性向终端传导。软件侧同步推出AI辅助研发工具DevEco Code。  
+#AI #半导体 #产业链 @wangsir1w
+
+=== 主推（英文）===
+Today's key signals from the chip & AI supply chain 📡  
+🔹 Samsung ships HBM4E as NVIDIA deepens reliance on SK Hynix, cementing memory as the critical bottleneck for 2026 AI compute. Domestic memory expansion is lifting order visibility for China's semiconductor equipment makers into 2027.  
+🔹 Beijing's humanoid robot pilot line targets 5,000 units/year. Embodied AI is framed as China’s AlphaGo moment. UBTECH partners with GPU firm MetaX, closing the loop from components to whole machines.  
+🔹 Huawei launches HarmonyOS 7 with full Agent architecture upgrade. Smart collaboration products face price hikes from July, passing chip cost pressure to end devices. DevEco Code AI-assisted R&D tool released.  
+#Semiconductor #AIChip #ChinaTech @wangsir1w
+
+=== Thread长推 ===
+[1/5] 三星出货HBM4E，英伟达与SK海力士的供给绑定进一步加深。存储带宽已成2026年AI算力的硬约束，HBM扩产竞赛直接影响大模型训练进度。国内存储厂同步扩产，半导体设备企业的新增订单能见度已延伸到2027年，刻蚀、薄膜沉积等环节确定性最高。
+
+[2/5] 北京人形机器人创新中心中试验证平台公布年产5000台目标，并非简单组装，而是打通零件到整机的全链条。智源大会上，具身智能被类比为中国AlphaGo时刻。优必选与沐曦的合作，标志着国产具身智能开始搭建自有算力底座。
+
+[3/5] 材料端，HBM4E对先进封装材料和散热方案提出更高要求，带动界面材料、导热胶等细分赛道小幅提价。机器人方向，行星滚柱丝杠、六维力传感器等核心零部件需求同步放大，国内已有企业进入小批量验证阶段。
+
+[4/5] 中国产业链视角：A股半导体设备ETF上周逆势获得净流入，国产替代逻辑与存储扩产形成共振。华为宣布智能协作产品7月全线涨价，芯片成本向终端传导路径清晰；同时鸿蒙向Agent架构演进，发布DevEco Code和CLI辅助研发工具，软件替代也在提速。
+
+[5/5] 今日信号密集指向三个方向：存储与算力设备、具身智能量产、系统级涨价与Agent进化。产业链分化明显，设备与零部件端受益，整机与消费者端承压。更多产业链拆解与资产映射，关注 @wangsir1w 微信 13973780026
