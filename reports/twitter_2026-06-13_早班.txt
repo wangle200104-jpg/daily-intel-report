@@ -1,0 +1,26 @@
+配图建议: https://i0.wp.com/stratechery.com/wp-content/uploads/2026/06/WhatsApp-Image-2026-06-11-at-11.22.05.jpeg?resize=1700%2C951&#038;ssl=1
+
+=== 主推（中文）===
+今日科技产业信号 📡 2026年06月13日  
+🔹 巴克莱判断自动化3.0启动，人形机器人市场10年后或达2000亿美元，训练与推理算力需求将重新定价AI芯片供应链  
+🔹 中国为人形机器人设立29位身份证编码，产业从野蛮生长转入标准化管理，利好国产零部件与整机厂商，纯概念标的承压  
+🔹 SpaceX启动IPO，低轨星座与星舰商业化提速，倒逼全球航天产业链重新估值  
+#AI #半导体 #产业链 @wangsir1w
+
+=== 主推（英文）===
+Today's key signals from the chip & AI supply chain 📡  
+🔹 Barclays: humanoid robot market could hit $200B in a decade, driving a new layer of AI training & inference chip demand  
+🔹 China issues 29-digit ID codes for humanoid robots, shifting the supply chain from hype to standardization; benefits component leaders, pressures pure-concept plays  
+🔹 SpaceX IPO showcases Musk's dominance, accelerating LEO constellation monetization and forcing a reset in global space industry valuations  
+#Semiconductor #AIChip #ChinaTech @wangsir1w
+
+=== Thread长推 ===
+[1/5] 巴克莱将人形机器人定义为自动化3.0，预测2036年市场规模2000亿美元。具身智能训练需要海量GPU集群，英伟达等算力厂商持续受益。中国同期启动国家级数据训练基地，算力租赁与AI服务器需求被进一步放大。
+
+[2/5] SpaceX正式IPO，星舰+星链变现路径清晰。此次上市将检验市场对航天常态化运营的定价能力，上游火箭零部件及地面终端供应商面临订单与估值双重拉动，传统卫星制造商模式承压。
+
+[3/5] 中国发布人形机器人29位身份证编码规范，统一身份标识意味着准入、追溯与责任体系的建立。AGIBOT同步开放Open-AGIBOT创新平台，国产力矩电机、谐波减速器等上游材料与执行器厂商进入标准化受益窗口。
+
+[4/5] A股机器人板块迎来标准驱动分化：具备编码适配能力的传感器、控制器公司获得确定性增量，缺乏核心零部件的整机组装企业议价空间收窄。第二届世界人形机器人运动会发布奖牌吉祥物，消费级机器人用例加快落地。
+
+[5/5] 从算力硬件到机器人编码，供应链正从概念炒作进入技术标准与商业化闭环。关注细分龙头卡位与成本转嫁能力。更多产业链深度分析 @wangsir1w 微信13973780026
