@@ -1,0 +1,16 @@
+配图建议: 
+
+=== 主推（中文）===
+今日科技产业信号 📡 2026年06月13日
+🔹 ASML最新High-NA EUV单价达3.8亿欧元，台积电公开表示成本过高，2nm以下量产导入或延迟，设备端短期承压，先进制程投资回报率面临重塑
+🔹 台积电26Q1全球晶圆代工市占率升至62%，三星跌破12%，地缘客户转单更集中，二线厂未能有效承接转移需求
+🔹 中国人形机器人“幼儿园”模式落地，已积累超500个物理交互场景数据，具身智能训练数据缺口收窄，力觉/触觉传感器与仿真工具链受益
+#AI #半导体 #产业链 @wangsir1w
+
+=== 主推（英文）===
+Today's key signals from the chip & AI supply chain 📡
+🔹 ASML's latest High-NA EUV priced at €380M/unit. TSMC publicly calls it too costly, potentially delaying sub-2nm ramp. Equipment makers face pricing pushback, reshaping leading-edge capex ROI
+🔹 TSMC
+
+=== Thread长推 ===
+

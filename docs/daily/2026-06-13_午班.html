@@ -1,0 +1,294 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<meta property="og:title" content="每日科技投资简报 2026年06月13日 午班">
+<meta property="og:description" content="早，今天是2026年06月13日，王sir为您汇报今天的重要资讯。
+
+· 台积电罕见公开抱怨ASML最新High-NA EUV光刻机定价过高，单台近4亿美元的成本正构成先进制程扩产瓶颈，可能延缓2nm以下节点部署节奏。
+· **台积电202">
+<meta property="og:url" content="https://wangle200104-jpg.github.io/daily-intel-report/daily/2026-06-13_午班.html">
+<title>🧠 每日科技投资简报 · 2026年06月13日 · 午班</title>
+<style>
+:root {
+  --bg:#0d1117; --card:#161b22; --border:#30363d;
+  --text:#e6edf3; --text2:#8b949e; --light:#adb5bd;
+  --red:#c0392b; --blue:#1a6fc4; --green:#1a7340;
+  --red-bg:#c0392b15; --surface:#1c2128;
+}
+@media (prefers-color-scheme: light) {
+  :root {
+    --bg:#f8f9fa; --card:#ffffff; --border:#e9ecef;
+    --text:#0d1117; --text2:#6c757d; --light:#adb5bd;
+    --surface:#f1f3f5;
+  }
+}
+* { margin:0; padding:0; box-sizing:border-box; }
+body {
+  font-family: -apple-system,BlinkMacSystemFont,"PingFang SC",
+               "Helvetica Neue",sans-serif;
+  background:var(--bg); color:var(--text);
+  font-size:15px; line-height:1.8;
+  max-width:860px; margin:0 auto; padding:20px 16px 60px;
+}
+a { color:var(--blue); text-decoration:none; }
+a:hover { text-decoration:underline; }
+
+/* 导航 */
+.nav {
+  display:flex; align-items:center; justify-content:space-between;
+  padding:12px 0; border-bottom:1px solid var(--border); margin-bottom:24px;
+}
+.nav-brand { font-weight:800; font-size:16px; color:var(--text); }
+.nav-links { display:flex; gap:16px; font-size:13px; }
+
+/* 顶部 */
+.header {
+  padding:28px 0 24px; border-bottom:1px solid var(--border); margin-bottom:28px;
+}
+.header-top { display:flex; align-items:center; gap:10px; margin-bottom:14px; }
+.session-label {
+  font-size:11px; font-weight:700; padding:3px 10px; border-radius:4px;
+  background:var(--red); color:#fff;
+}
+.header-date { font-size:14px; color:var(--text2); }
+.header-title { font-size:28px; font-weight:900; line-height:1.3; }
+
+/* 导读卡片 */
+.intro-card {
+  background:var(--surface); border:1px solid var(--border);
+  border-left:3px solid var(--red); border-radius:0 8px 8px 0;
+  padding:16px 18px; margin-top:16px;
+}
+.intro-card p { color:var(--text); font-size:15px; line-height:1.85; }
+.kw-row { margin-top:12px; display:flex; flex-wrap:wrap; gap:6px; }
+.kw-tag {
+  font-size:11px; font-weight:600; padding:2px 9px;
+  border-radius:20px; cursor:default;
+}
+
+/* 深度文章 */
+.section-label {
+  font-size:12px; font-weight:700; text-transform:uppercase;
+  letter-spacing:1px; color:var(--text2);
+  margin:32px 0 14px; padding-bottom:8px;
+  border-bottom:1px solid var(--border);
+  display:flex; align-items:center; gap:6px;
+}
+.article-card {
+  background:var(--card); border:1px solid var(--border);
+  border-radius:12px; padding:20px 22px; margin-bottom:16px;
+}
+.article-header {
+  display:flex; align-items:flex-start; gap:8px; margin-bottom:12px;
+  flex-wrap:wrap;
+}
+.article-num {
+  font-size:10px; font-weight:800; color:#fff;
+  background:var(--red); padding:2px 6px; border-radius:3px;
+  flex-shrink:0; margin-top:3px;
+}
+.domain-badge {
+  font-size:11px; font-weight:600; padding:2px 8px;
+  border-radius:4px; flex-shrink:0; margin-top:2px;
+}
+.domain-badge.sm { font-size:10px; padding:1px 6px; }
+.article-title {
+  font-size:18px; font-weight:700; line-height:1.4; flex:1;
+}
+.article-body p {
+  font-size:15px; color:var(--text); line-height:1.85; margin-bottom:10px;
+}
+.article-img {
+  width:100%; max-height:240px; object-fit:cover;
+  border-radius:8px; margin-bottom:14px;
+  border:1px solid var(--border); display:block;
+}
+.article-body h3.article-sub {
+  font-size:14px; font-weight:700; color:var(--text2);
+  margin:12px 0 6px;
+}
+.insight {
+  margin-top:12px; padding:10px 14px;
+  background:var(--red-bg); border-left:3px solid var(--red);
+  border-radius:0 6px 6px 0;
+  font-size:13px; font-weight:600; color:var(--red);
+}
+.article-source {
+  margin-top:10px; padding-top:8px; border-top:1px dashed var(--border);
+  display:flex; align-items:center; gap:10px; font-size:12px;
+}
+.article-source a {
+  color:var(--blue); font-weight:600; text-decoration:none;
+}
+.article-source a:hover { text-decoration:underline; }
+.article-source span { color:var(--text2); }
+
+/* 快讯 */
+.brief-item {
+  border-bottom:1px solid var(--border); padding:12px 0;
+}
+.brief-item:last-child { border-bottom:none; }
+.brief-header {
+  display:flex; align-items:flex-start; gap:6px; margin-bottom:6px;
+}
+.brief-num {
+  font-size:11px; font-weight:700; color:var(--light);
+  min-width:22px; text-align:right; flex-shrink:0; margin-top:2px;
+}
+.brief-title { font-size:15px; font-weight:700; line-height:1.4; }
+.brief-body { font-size:13px; color:var(--text2); line-height:1.75; padding-left:28px; }
+.brief-insight {
+  margin-top:5px; padding:4px 10px; margin-left:28px;
+  background:var(--surface); border-radius:4px;
+  font-size:12px; font-weight:600; color:var(--green);
+}
+
+/* 作者卡片 */
+.author-card {
+  background:var(--card); border:1px solid var(--border);
+  border-radius:12px; padding:18px 20px; margin-top:32px;
+  display:flex; align-items:center; gap:16px;
+}
+.author-avatar {
+  width:52px; height:52px; border-radius:50%; flex-shrink:0;
+  background:var(--surface); border:2px solid var(--red);
+  display:flex; align-items:center; justify-content:center;
+  font-size:22px;
+}
+.author-name { font-size:15px; font-weight:700; }
+.author-meta { font-size:13px; color:var(--text2); margin-top:3px; }
+.author-links { display:flex; gap:10px; margin-top:8px; flex-wrap:wrap; }
+.author-link {
+  font-size:12px; padding:3px 10px; border-radius:6px;
+  border:1px solid var(--border); color:var(--text); background:var(--surface);
+}
+.author-link:hover { border-color:var(--blue); text-decoration:none; }
+
+.footer {
+  margin-top:40px; text-align:center; font-size:12px; color:var(--text2); line-height:2;
+  border-top:1px solid var(--border); padding-top:20px;
+}
+</style>
+</head>
+<body>
+
+<div class="nav">
+  <a class="nav-brand" href="../index.html">🧠 每日科技投资简报</a>
+  <div class="nav-links">
+    <a href="https://x.com/wangsir1w" target="_blank">𝕏 @wangsir1w</a>
+    <a href="../feed.xml">📡 RSS</a>
+  </div>
+</div>
+
+<div class="header">
+  <div class="header-top">
+    <span class="session-label">午班 · PM</span>
+    <span class="header-date">2026年06月13日</span>
+  </div>
+  <div class="header-title">每日科技投资简报</div>
+  <div class="intro-card">
+    <p>早，今天是2026年06月13日，王sir为您汇报今天的重要资讯。
+
+· 台积电罕见公开抱怨ASML最新High-NA EUV光刻机定价过高，单台近4亿美元的成本正构成先进制程扩产瓶颈，可能延缓2nm以下节点部署节奏。
+· <strong style="color:#c0392b">台积电2026年一季度代工份额逆势攀升，显示其在AI芯片与高性能计算领域的工艺壁垒短期难以撼动，三星、英特尔追赶压力加大。</strong>
+· 人形机器人“幼儿园”模式浮出水面，通过模仿学习与遥操作采集数据，具身智能训练正从实验室走向规模化，数据质量与多样性成为产业化关键卡点。</p>
+    <div class="kw-row"><span class="kw-tag" style="color:#c0392b;background:#c0392b15;border:1px solid #c0392b40">High-NA</span><span class="kw-tag" style="color:#1a6fc4;background:#1a6fc415;border:1px solid #1a6fc440">EUV定价争议</span><span class="kw-tag" style="color:#1a7340;background:#1a734015;border:1px solid #1a734040">台积电份额</span><span class="kw-tag" style="color:#6f42c1;background:#6f42c115;border:1px solid #6f42c140">人形机器人数据</span><span class="kw-tag" style="color:#d9730d;background:#d9730d15;border:1px solid #d9730d40">具身智能</span></div>
+    <p style="margin-top:10px;font-size:12px;color:var(--text2)">
+      深度长文见下方 · 精选快讯见底部
+    </p>
+  </div>
+</div>
+
+<div class="section-label">📰 深度长文 · 4 篇</div>
+
+<div class="article-card">
+  <div class="article-header">
+    <span class="article-num">01</span>
+    
+    <h2 class="article-title">ASML新一代光刻机定价触及产业链天花板，台积电首次公开质疑性价比</h2>
+  </div>
+  
+  <div class="article-body"><p>ASML（阿斯麦，全球独家EUV光刻机供应商）最新一代High-NA EUV光刻机（高数值孔径极紫外光刻——用于2nm及以下芯片的关键制造设备）正遭遇史上最强阻力，连其最大客户台积电也直言“太贵了”。据《Tech Times》报道，这款单价高达4亿美元的设备，已成为芯片制造工艺向更先进节点推进的显性瓶颈。这是产业逻辑的转折信号：当最核心的生产工具连行业龙头都无法经济化使用时，摩尔定律的物理极限之外，首先抵达的是商业极限。</p>
+<p>从产业链角度看，High-NA EUV处于半导体制造的最上游，其定价直接决定中游晶圆厂的投资回报率和下游芯片设计公司的流片成本。ASML上一代EUV光刻机（0.33数值孔径）单台售价约1.8亿至2亿美元，被台积电、三星、英特尔大规模采购用于5nm/3nm量产。新一代机器将单晶圆曝光分辨率提升了约70%，理论上是通向2nm及GAA（环绕栅极晶体管——替代FinFET的下一代芯片架构，2nm及以下节点的关键工艺）结构的必需工具。但问题在于，价值4亿美元的单机成本叠加配套的掩模、光刻胶、检测设备，将使一条High-NA量产线的总投资膨胀到天文数字。当台积电这样的工艺领先者尚需权衡时，二三线晶圆厂已被彻底排除在这一竞赛之外。</p>
+<p>赢家与输家的格局变得清晰。短期看，ASML的议价权首次出现裂缝。虽然它在WFE（晶圆制造设备——ASML/应用材料/泛林集团等公司卖给芯片厂的机器，AI驱动下全球市场规模超千亿美元）市场的高端垄断地位未变，但客户对价格的公开反弹意味着其毛利率持续扩张的逻辑需要重新审视。台积电的表态更像是一种战略施压，为其自身研发更经济的工艺路径赢取时间。真正受损的是那些寄望于靠采购最快速度的设备来追赶先进制程的竞争者。这笔账很直接：一台High-NA还是四台上一代EUV，哪个折合后的单位晶圆产出成本更低？这是晶圆厂算的账，也正是当前该设备推广受阻的根本原因。</p>
+<div class="insight">💡 ：ASML的定价瓶颈为中国的国产替代提供了弥足珍贵的追赶时间窗口，但前提是国内EUV光源、光学镜头和精密工件台等核心子系统能在未来5年内实现工程化突破。投资者需警惕，当产业链头号玩家的采购意愿动摇时，整个先进制程的扩张叙事——包括相关材料和设备公司的高估值——可能需要重估。</div></div>
+  <div class="article-source"><a href="https://news.google.com/rss/articles/CBMizAFBVV95cUxNUnRZLVh1OTR0LXRNSnRhTkdzMndjWWRRR19EWDA5d0pDb1FvWEVySDA5VTNEQjRtVzU3M1ZrSTh4azc4ekhJWl9peW9sbWg4TWFWOUpEV2FkRXd3VXJibEhGeE90ek0tYllJNTVOX0pfRHdnOGwyM1ExSlNsSUVwZ0JGT0VQMkF1ZnF1NVZWNV9VOHgxUVIyTDlSRy1rUUJmVnFPbU5YX3NfM05DeFpobDJoRTBoMG5DUVdvS2lNR2RYOExVTG12WFlGcHQ?oc=5" target="_blank" rel="noopener">🔗 查看原文</a><span>GNews: ASML EUV光刻</span></div>
+</div>
+<div class="article-card">
+  <div class="article-header">
+    <span class="article-num">02</span>
+    
+    <h2 class="article-title">台积电2026年Q1全球晶圆代工份额继续攀升，“一家独大”格局仍在固化</h2>
+  </div>
+  
+  <div class="article-body"><p>台积电在全球晶圆代工市场的主导地位在第一季度得到进一步强化。据《Semiecosystem》报道，2026年首季其市场份额再度提升。尽管报道未披露具体提升的百分点，这一增长方向本身即释放了明确信号：在AI芯片和高性能计算需求的结构性驱动下，先进的工艺能力正以远超摩尔定律的速度，将市场集中度推向极致。</p>
+<p>晶圆代工位于半导体产业链中游，上承设备与材料，下接芯片设计公司。台积电份额的持续扩张，直接受益于其在下游客户中不可替代的工艺地位。无论是苹果、英伟达、AMD的尖端逻辑芯片，还是博通、Marvell等公司的定制化ASIC（专用集成电路），几乎所有需要用到5nm及以下工艺的量产订单，都高度向台积电集中。这种集中度并非简单的产能分布，更是基于其在CoWoS（台积电的晶圆级封装技术——把GPU和HBM“焊”在同一基板上，英伟达AI芯片的核心工艺）等先进封装领域的系统性壁垒。竞争对手不仅在逻辑工艺上追赶艰难，在将芯片和HBM（高带宽内存——AI训练的“血管”，决定GPU吞吐速度）整合的异构集成能力上同样落后一个身位。</p>
+<p>竞争格局正呈现出清晰的“赢家通吃”状态。台积电的绝对优势使其获得了极强的定价权和超高的产能利用率，这对盈利能力构成了双重保障。相对的，三星电子和英特尔代工服务所面临的挑战进一步加剧。三星在GAA工艺的良率爬坡上尚未完全说服主流客户将大单转过来；英特尔则仍在执行其“四年五个节点”的激进计划，其代工业务的收入规模在当前阶段尚不能对台积电构成直接威胁。对于A股投资者而言，这一格局锁定了中国大陆晶圆代工厂的现实天花板：在先进工艺受制于EUV光刻机（极紫外光刻——制造7nm以下芯片的唯一工具，全球只有ASML会造）禁运的背景下，中国晶圆厂的竞争完全集中在成熟制程领域，需要关注由此可能产生的成熟制程产能过剩风险。</p>
+<div class="insight">💡 ：台积电份额继续攀升的事实，意味着与它深度绑定的先进封装、精密耗材和特种气体等上游供应链公司的需求确定性依然极强。而对中国大陆半导体产业来说，路经只剩下两大条：一是坚定推进全链条国产化，二是将成熟制程与特色工艺做到极致，通过Chiplet等架构创新在系统层面弥补单芯片工艺的差距。</div></div>
+  <div class="article-source"><a href="https://news.google.com/rss/articles/CBMid0FVX3lxTE1LWlBJT1hmZE5kTGM0S3FteWtkWmNOV3VPRjhMTXVZM3E0X2dUT2VmWllpaVdGUE9jSWthZmwwLURzVG00RzBTcVdyUTRtUXFTRDJlTWYzVmJGS3RTX0FKY25UWURsbGZQa2g0OGVvdUV6aUl1TDZn?oc=5" target="_blank" rel="noopener">🔗 查看原文</a><span>GNews: ASML EUV光刻</span></div>
+</div>
+<div class="article-card">
+  <div class="article-header">
+    <span class="article-num">03</span>
+    
+    <h2 class="article-title">人形机器人“幼儿园”模式兴起，数据采集正成为新的产业价值锚点</h2>
+  </div>
+  
+  <div class="article-body"><p>人形机器人正从实验室的预编程运动控制，转向规模化、场景化的“行为学习”阶段。据“活力中国调研行”报道，业界正在建立一种类似“幼儿园”的训练体系，让机器人通过大量重复性操作与模仿学习，掌握辅助人类干活的能力。这揭示了产业链上一个关键的价值转移：竞争壁垒正从本体制造，向上游的训练数据和算法模型构建倾斜。</p>
+<p>这条数据价值链位于机器人产业链的最顶端。中游的本体制造和系统集成商，以前通常专注于电机、谐波减速器（机器人关节的核心精密零件——决定运动精度和寿命）等硬件，但现在它们必须依赖海量的、高质量的操作数据来定义产品力。一个机器人在“幼儿园”里，需要通过遥操作、动作捕捉和真实环境试错，才能学会分拣、擦拭、搬运等柔性动作，这背后是复杂的视觉、力觉和触觉多模态融合数据。谁掌握了生成和清洗这些数据的方法，谁就占据了让机器人从“能动”迈向“能用”的咽喉。国内各公司在该环节的具体成本构成和效率数据目前未被披露，但其重要性已不言而喻。</p>
+<p>这重塑了产业的输赢逻辑。赢家可能不再是组装能力最强的公司，而是那些能够最快捷地构建数据闭环的企业。这正是鸿海（富士康）这类拥有庞大工厂场景的制造巨头，以及特斯拉这样能利用其车队和工厂获取现实世界数据的公司，所享有的隐性壁垒。对于中国产业链，这意味着单纯的减速器、传感器和伺服电机供应商，如果无法融入到数据生态中，其价值可能被逐渐稀释。过去资本热衷于追逐“人形机器人概念股”，但这场“幼儿园”浪潮明确指出，一个没有持续学习能力的机器人本体，其估值逻辑需要重新定价——它更接近一个低毛利的硬件，而非高溢价的智能终端。</p>
+<div class="insight">💡 ：在中国人形机器人产业的投资布局中，应优先关注能提供真实、高密度操作场景的企业，例如拥有大型物流仓、制造产线的集团，它们将扮演机器人产业的“数据工厂”角色。单纯的零部件制造企业亟需证明自身能与数据生态耦合，否则估值将长期受限于传统工业品逻辑。</div></div>
+  <div class="article-source"><a href="https://news.google.com/rss/articles/CBMiZEFVX3lxTE4zNFZtUjZ4Y2VEc3VHS25nSWdnWTZfVXlUMnptY3NoM3RxMUlla0dyS05HMmdDVFYycVVOdHY3R0tHejF6NWZnaTBSSU5ZdzM1Ti1CVTN0SzJlSEpWM3ZGXzRLdVo?oc=5" target="_blank" rel="noopener">🔗 查看原文</a><span>GNews: 中国机器人产业链</span></div>
+</div>
+<div class="article-card">
+  <div class="article-header">
+    <span class="article-num">04</span>
+    
+    <h2 class="article-title">具身智能呼唤专用数据基础，行业正从“堆参数”转向“建语料库”</h2>
+  </div>
+  
+  <div class="article-body"><p>在“人形机器人热”的背后，一个更深层、也更基础的产业瓶颈正浮出水面：数据。据“活力中国调研行”在搜狐网的报道，产业界正集中探讨具身智能需要什么样的数据才能使其具备真正的泛化工作能力。这个焦点的转换，宣告了具身智能正在经历从硬件竞赛向数据工程的关键转折，投资者需要以审视AI大模型产业链的严密眼光，来重新审视机器人上游。</p>
+<p>具身智能所需的数据，与文本和图像大模型有根本不同。它涉及在三维物理世界中的人类操作动作、物体交互的力学反馈和任务成败的完整链条，是一种包含视觉、触觉、力觉的多模态、强时序数据。在当前产业链中，这些数据的获取、标注和仿真成本极为高昂，构成了比电机和减速器更突出的短板。报道揭示的这种需求，正式将“机器人物理世界操作数据库”确立为一个独立的关键上游环节，其地位类似于AI大模型产业链中的“数据标注与清洗”服务商，但其技术复杂度远超后者。目前，全球范围内都没有形成现成、标准化的高质量操作数据集，这是一片亟待开垦的价值洼地。</p>
+<p>这一发现对竞争格局的影响极为深远。首先，它降低了那些仅拥有硬件制造能力、但无数据获取渠道的厂商的长期投资价值。其次，对于能够建立“数据飞轮”的公司，例如那些自身拥有庞大制造、物流场景，可以让机器人在工作实战中实时采集反馈数据的科技巨头，壁垒将指数级增长。对于中国的产业链而言，关于具身数据采集和仿真软件的具体国产化进度在报道中未详细提及，但这篇文章无疑将其重要性提升到了战略高度。一个刚起步的行业，其核心定价权会迅速从“谁能造出机器人”，向“谁能让机器人学会干得更好”迁移。</p>
+<div class="insight">💡 ：具身智能产业已进入“兵马未动，数据先行”的发展阶段。未来的投资研究必须深入考察公司是否具备结构化的操作数据获取能力、是否自建了高效的仿真环境，这将成为区分真伪机器人的核心指标。政府应像支持AI算力新基建一样，及早布局支持具身智能的公共操作数据集和仿真平台建设，这是产业规模化发展的前提。</div></div>
+  <div class="article-source"><a href="https://news.google.com/rss/articles/CBMiiAFBVV95cUxQWTRHU1IxNWpEVGNFc1BWLUxKamFsWXBremxPSHFVeDBtMUk4LUZkR1ptRFJTbGZjbW82enNIam9zUDRYQndHMFJjWU5HN0MxMVFGTEpfSDF2cTRMVDVSdy1mVXhGNlZDNW1laFRMQ29HZVFTakpsd00tM0N5ZVN4YWJjbjFIQkxH?oc=5" target="_blank" rel="noopener">🔗 查看原文</a><span>GNews: 中国机器人产业链</span></div>
+</div>
+
+<div class="section-label">⚡ 精选快讯 · 1 条</div>
+<div class="brief-list">
+
+<div class="brief-item">
+  <div class="brief-header">
+    <span class="brief-num">01</span>
+    <span class="domain-badge sm" style="color:#6c757d;background:#6c757d10;border:1px solid #6c757d40">
+      
+    </span>
+    <span class="brief-title"></span>
+  </div>
+  <div class="brief-body">由于今日没有符合筛选标准的快讯，暂无内容输出。如有后续更新，将第一时间为您整理。</div>
+  
+</div>
+</div>
+
+<div class="author-card">
+  <div class="author-avatar">👤</div>
+  <div>
+    <div class="author-name">王sir · 材料工程师 / 投资人</div>
+    <div class="author-meta">深圳 · 韶音 · 工厂/制造 · 材料创新 · 价值投资</div>
+    <div class="author-links">
+      <a class="author-link" href="https://x.com/wangsir1w" target="_blank">𝕏 @wangsir1w</a>
+      <a class="author-link" href="https://github.com/wangle200104-jpg/daily-intel-report" target="_blank">📦 GitHub</a>
+      <span class="author-link">💬 微信 13973780026</span>
+    </div>
+  </div>
+</div>
+
+<div class="footer">
+  由 GitHub Actions + DeepSeek V4 Pro 自动生成<br>
+  2026年06月13日 · 午班 · 聚焦半导体·算力·材料·AI·机器人
+</div>
+
+</body>
+</html>
