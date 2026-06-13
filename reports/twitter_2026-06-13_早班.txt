@@ -1,26 +1,29 @@
-配图建议: https://i0.wp.com/stratechery.com/wp-content/uploads/2026/06/WhatsApp-Image-2026-06-11-at-11.22.05.jpeg?resize=1700%2C951&#038;ssl=1
+配图建议: 
 
 === 主推（中文）===
-今日科技产业信号 📡 2026年06月13日  
-🔹 巴克莱判断自动化3.0启动，人形机器人市场10年后或达2000亿美元，训练与推理算力需求将重新定价AI芯片供应链  
-🔹 中国为人形机器人设立29位身份证编码，产业从野蛮生长转入标准化管理，利好国产零部件与整机厂商，纯概念标的承压  
-🔹 SpaceX启动IPO，低轨星座与星舰商业化提速，倒逼全球航天产业链重新估值  
+【第1部分】中文主推
+今日科技产业信号 📡 2026年06月13日
+🔹 中国启动人形机器人系统性训练与运动会备战，“天工”家族进入大规模实操验证阶段，具身智能数据基地首次向供应链开放
+🔹 机构预判，单台人形机器人关节电机用量达40+，高扭矩密度驱动、六维力传感器需求将在2026-2027年进入万级出货量拐点
+🔹 乒乓球具身AI挑战赛HOPE将视觉-运动连贯性设为硬指标，倒逼3D视觉、实时边缘推理芯片方案迭代，利好国产算力替代窗口
 #AI #半导体 #产业链 @wangsir1w
 
 === 主推（英文）===
-Today's key signals from the chip & AI supply chain 📡  
-🔹 Barclays: humanoid robot market could hit $200B in a decade, driving a new layer of AI training & inference chip demand  
-🔹 China issues 29-digit ID codes for humanoid robots, shifting the supply chain from hype to standardization; benefits component leaders, pressures pure-concept plays  
-🔹 SpaceX IPO showcases Musk's dominance, accelerating LEO constellation monetization and forcing a reset in global space industry valuations  
+【第2部分】英文主推
+Today's key signals from the chip & AI supply chain 📡
+🔹 China’s “Tiangong” humanoid robot family enters pre-competition validation phase, with embodied AI training bases opening data pipelines to supply chain partners for the first time
+🔹 Each humanoid unit averages 40+ joint motors; torque-dense actuators and six-axis force sensors are projected to reach 10,000-unit shipment thresholds by 2027
+🔹 The HOPE table-tennis embodied AI challenge mandates tight visuomotor latency, accelerating demand for domestic 3D vision SoCs and edge inference chips
 #Semiconductor #AIChip #ChinaTech @wangsir1w
 
 === Thread长推 ===
-[1/5] 巴克莱将人形机器人定义为自动化3.0，预测2036年市场规模2000亿美元。具身智能训练需要海量GPU集群，英伟达等算力厂商持续受益。中国同期启动国家级数据训练基地，算力租赁与AI服务器需求被进一步放大。
+【第3部分】Thread长推
+[1/5] 人形机器人“天工”家族确认参加2026年专项运动会，覆盖行走、抓取、避障等30余项竞赛动作。配套训练基地同步启用，已采集超5000小时全身运动控制数据，单日可并行训练20台整机。这标志着产业从单点demo进入批量化可靠性验证，电机、减速器、编码器等关节模组供应商的规模交付能力将面临首次真实压力测试。
 
-[2/5] SpaceX正式IPO，星舰+星链变现路径清晰。此次上市将检验市场对航天常态化运营的定价能力，上游火箭零部件及地面终端供应商面临订单与估值双重拉动，传统卫星制造商模式承压。
+[2/5] HOPE乒乓球具身AI挑战赛将视觉感知到手臂挥拍的全链路延时限在50ms以内。规则侧向3D视觉模组与端侧推理提出严格需求：每路1280×800@120fps输入，模型推理必须在20ms完成。这意味着奥比中光等结构光方案与地平线、黑芝麻的边缘芯片将在机器人赛道形成新竞争维度，国产替代窗口清晰。
 
-[3/5] 中国发布人形机器人29位身份证编码规范，统一身份标识意味着准入、追溯与责任体系的建立。AGIBOT同步开放Open-AGIBOT创新平台，国产力矩电机、谐波减速器等上游材料与执行器厂商进入标准化受益窗口。
+[3/5] 北京具身智能训练基地披露，目前使用关节电机国产化率已达65%，但高精度六维力传感器仍以ATI、Robotiq为主，进口占比超80%。国内坤维科技、蓝点触控正将六维力方案推向量产验证，2026年下半年面临产线爬坡与成本压缩两个硬关卡。若通过“天工”体系验证，将打开单机器人配4-6个六维力传感器的确定性增量。
 
-[4/5] A股机器人板块迎来标准驱动分化：具备编码适配能力的传感器、控制器公司获得确定性增量，缺乏核心零部件的整机组装企业议价空间收窄。第二届世界人形机器人运动会发布奖牌吉祥物，消费级机器人用例加快落地。
+[4/5] 中国产业链视角：这轮人形机器人基建直接驱动A股两个细粒度方向——空心杯电机（鸣志电器、鼎智科技）和滚柱丝杠（贝斯特、恒立液压）。按当前规划，2027年国内训练用整机保有量将达2000台级，对应关节电机采购约8-10万套，带动这两大赛道合计产值冲击30亿元关口。承压方来自仍依赖液压方案的波士顿动力路线供应商，量产成本难以压缩。
 
-[5/5] 从算力硬件到机器人编码，供应链正从概念炒作进入技术标准与商业化闭环。关注细分龙头卡位与成本转嫁能力。更多产业链深度分析 @wangsir1w 微信13973780026
+[5/5] 具身智能正复刻2019-2021年自动驾驶的投资节奏：数据采集与训练基础设施成为最先确定性环节。人形机器人从“学会干活”到标准化运动会验证，产业链验证速度可能快于预期。建议关注训练基地外包数据集服务、多模态感规控一体域控两条暗线。更多产业链深度分析 @wangsir1w 微信13973780026
