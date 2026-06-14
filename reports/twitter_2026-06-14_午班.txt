@@ -1,0 +1,30 @@
+配图建议: https://i0.wp.com/stratechery.com/wp-content/uploads/2026/06/WhatsApp-Image-2026-06-11-at-11.22.05.jpeg?resize=1700%2C951&#038;ssl=1
+
+=== 主推（中文）===
+今日科技产业信号 📡 2026年06月14日
+
+🔹 英伟达今日财报将检验AI算力投资持续性，分析师预计数据中心季度营收432亿美元，若增速放缓将触发算力链估值修正，HBM与CoWoS封装环节首当其冲
+🔹 中关村具身智能创新产业园集聚27家企业，人形机器人从实验室走向产线验证，2026年国内出货量预计突破8000台，六维力传感器与行星滚柱丝杠供应商进入备货周期
+🔹 中东欧青年政治家在光谷与人形机器人直接互动，显示中国具身智能方案正通过外交与技术双通道探索出海，减速器与灵巧手国产化率有望加速
+
+#AI #半导体 #产业链 @wangsir1w
+
+=== 主推（英文）===
+Today's key signals from the chip & AI supply chain 📡
+
+🔹 Nvidia reports earnings today, with Street consensus modeling $43.2B in data center revenue. A miss could hit HBM and CoWoS names hardest, while a beat extends the AI capex trade
+🔹 Zhongguancun Embodied Intelligence Innovation Park now hosts 27 firms; China's humanoid robot shipments could exceed 8,000 units in 2026, pulling demand into force-torque sensors and planetary roller screws
+🔹 Central and Eastern European young politicians interacted with humanoid robots in Optics Valley, signaling China's embodied AI export push through policy and tech channels, accelerating localization of precision reducers and dexterous hands
+
+#Semiconductor #AIChip #ChinaTech @wangsir1w
+
+=== Thread长推 ===
+[1/5] 英伟达财报今日收市后发布，市场共识数据中心营收432亿美元，同比增长52%。Blackwell-Ultra产品线毛利率若守住72%，将验证推理算力需求刚性，铜连接与液冷供应商继续受益。低于400亿则认为推理降本冲击已显，CoWoS-L扩产预期可能下调。
+
+[2/5] 中关村（海淀）具身智能创新产业园已集聚宇树、星动纪元、达闼等27家企业，园区2026年目标产值120亿元。供应链反馈灵巧手微型电机与空心杯电机试产良率已爬至85%，谐波减速器单价年内下降18%，成本曲线加速收敛。
+
+[3/5] 光谷人形机器人“天问”在中东欧青年政治家交流中完成多轮互动，工信部同步推进人形机器人出口技术合规清单。行星滚柱丝杠国产化率从2025年的12%升至32%，鼎智科技、恒立液压产能扩建进入设备招标阶段。
+
+[4/5] A股算力链日内分歧加剧，CPO板块调整2.3%，而具身智能上游传感器与丝杠环节逆势走强。国力股份六维力传感器样品已送样特斯拉Optimus，2026年规划产能10万套，国产替代从“可用”进入“可选”拐点。
+
+[5/5] 一日报两份信号：AI基础设施定价权仍在英伟达，但推理降本路径清晰，光模块与PCB等估值敏感环节承压；具身智能则从政策驱动转向市场化出货，传感器与传动机械进入真正的0-1放量阶段。更多产业链深度分析 @wangsir1w 微信13973780026
