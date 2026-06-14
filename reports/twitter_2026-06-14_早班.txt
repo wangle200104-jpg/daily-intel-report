@@ -1,0 +1,30 @@
+配图建议: 
+
+=== 主推（中文）===
+今日科技产业信号 📡 2026年06月14日
+
+🔹 工信部与国资委联合推动人形机器人进入医疗康养场景，政策信号明确，产业落地加速
+🔹 巴克莱预测人形机器人市场规模10年后达2000亿美元，"天工"系列已确认参加运动会，应用验证期开启
+🔹 中国"天工"家族集体亮相，国产整机+零部件供应链预期受益，关节电机、力传感器、灵巧手等环节关注度提升
+
+#AI #半导体 #产业链 @wangsir1w
+
+=== 主推（英文）===
+Today's key signals from the chip & AI supply chain 📡
+
+🔹 MIIT and SASAC push humanoid robots into medical and elderly care, marking real deployment readiness
+🔹 Barclays: Humanoid robot market could hit $200B in 10 years; China's "Tiangong" robots set to join sports event for real-world validation
+🔹 AI companies flooding Wall Street with soaring valuations, signal of capital concentration at application layer
+
+#Semiconductor #AIChip #ChinaTech @wangsir1w
+
+=== Thread长推 ===
+[1/5] AI memory stocks are emerging as the new bottleneck play in 2026. As AI training shifts from pure compute to memory bandwidth, HBM3e and next-gen memory architecture companies are attracting significant capital. Stock selection is increasingly tied to memory supply chain positioning rather than GPU-centric narratives. The memory-attached compute paradigm is reshaping semiconductor hierarchy.
+
+[2/5] Space computed costs are shifting: SpaceX reportedly achieves orbital compute at half the cost of terrestrial alternatives. The satellite edge, optical interconnects, and space-grade chips are no longer speculative plays. This puts pressure on ground data center logic while opening new demand for radiation-hardened compute and low-latency routing architectures.
+
+[3/5] Humanoid robots reach policy inflection: MIIT and SASAC officially guide robots into medical and elderly care settings. Barclays forecasts $200B market by 2036. China's "Tiangong" robot family confirmed for public sports event—a signal of functional readiness testing. Supply chain benefits: joint motors, force sensors, dexterous hands enter scaling phase.
+
+[4/5] China's domestic automation supply chain is absorbing policy momentum. Robot components—harmonic reducers, encoders, tactile sensors—face demand pull from state-led deployment. The gap between policy timeline and mass production capability remains the key variable. A-share component makers are front-running market attention but must deliver cost and reliability at scale.
+
+[5/5] Signal summary: AI memory drives new chip hierarchy, humanoid robots enter validation cycle, and policy accelerates medical-care deployment in China. Capital is pricing application-layer AI and robot hardware simultaneously. Supply chain convergence between compute and robotics is the structural trend to watch. For deeper analysis follow @wangsir1w 微信13973780026
