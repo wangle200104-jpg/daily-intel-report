@@ -1,22 +1,26 @@
-配图建议: https://assets.bwbx.io/images/users/iqjWHBFdfxIU/iXffjj4Tk5Gk/v1/1200x-1.jpg
+配图建议: https://img.digitimes.com/newsshow/20260615pd221_files/1_b.jpg
 
 === 主推（中文）===
 今日科技产业信号 📡 2026年06月15日  
-🔹 人形机器人进入“实习期”，超200台本体在汽车、3C产线实测，减速器与力矩传感器订单环比增35%  
-🔹 具身智能物理数据量不足自动驾驶的1%，千寻智能自适应框架将训练效率提升3倍，“GPT-3时刻”仍需2年  
-🔹 苹果新Siri七项端侧改善被指过渡期修补，端侧大模型竞争倒向安卓芯片链，利好高通、联发科NPU  
+🔹 美光CEO将早年签证遭拒经历转化为动力，押注HBM4等AI存储，2030年全球存储市场迈向万亿级，HBM单颗容量扩至36GB  
+🔹 小米武汉智能工厂人形机器人产线对外展示，关节模组成本压低30%，武汉具身智能产业集群产值已破200亿  
+🔹 中国具身智能无人机市场2031年规模预计214亿元，国产惯性导航芯片渗透率仍不足40%，传感器与飞控替代窗口明确  
 #AI #半导体 #产业链 @wangsir1w
 
 === 主推（英文）===
 Today's key signals from the chip & AI supply chain 📡  
-🔹 Humanoid robots enter “internship phase”: 200+ units deployed in auto & 3C pilines, driving reducer/torque sensor orders up 35% QoQ  
-🔹 Embodied AI still short of physical data: Qianxun’s self-adaptive framework lifts training efficiency 3x, but the “GPT-3 moment” may take 2 more years  
-🔹 Apple’s new Siri brings 7 fixes; seen as a stopgap, shifting edge-AI race favour toward Qualcomm/MediaTek NPU ecosystems  
+🔹 Micron CEO shares his visa rejection story, pins future on AI memory; HBM4 to sample in 2H 2026 with 36GB stacks, targeting a $1T+ memory market by 2030  
+🔹 Xiaomi’s Wuhan smart factory runs humanoid robot line, cutting joint module costs by 30%; city's embodied AI cluster has surpassed ¥20B in output  
+🔹 China's embodied AI drone market set to reach ¥21.4B by 2031, yet domestic inertial navigation chip share remains below 40%, opening structural substitution window  
 #Semiconductor #AIChip #ChinaTech @wangsir1w
 
 === Thread长推 ===
-[1/5] 人形机器人开启工厂实习：2026年1-5月超220台人形机器人在一汽、比亚迪等20余家产线试运行，单台作业时长突破800小时。谐波减速器、六维力矩传感器需求激增，国产厂商Q2订单环比增长35%，绿的谐波、柯力传感等直接受益。  
-[2/5] 具身智能数据瓶颈未破：当前人形机器人物理交互数据总量不足自动驾驶的1/100。千寻智能发布SPA自适应框架，通过合成数据+在线学习将新任务训练效率提升3倍，但业内认为“GPT-3时刻”最早在2028年，算力需求将拉动训练芯片持续放量。  
-[3/5] Flexiv Robotics周度回顾显示其力控机器人获新一轮1.2亿美元融资，估值达18亿美元。汽车涂胶场景良率提升至99%，带动上游力传感器出货量Q2同比增60%。该方向正复制工业机器人“本体先行、零部件兑现”路径。  
-[4/5] 中国产业链视角：国产谐波减速器市占率首破40%，人形机器人专项政策预期落地，A股机器人板块本周净流入超55亿人民币。端侧AI竞争加剧，苹果Siri仅靠7项修补难改格局，高通、联发科NPU机型受益，利好中科创达等生态商。  
-[5/5] 从硬件到智能，人形机器人产业链进入关键验证窗口：减速器、力矩传感器与训练芯片确定性最高。具身智能仍处技术爬坡，关注能低成本获取物理数据的厂商。更多产业链深度分析，follow @wangsir1w 微信13973780026
+[1/5] 美光CEO Sanjay Mehrotra披露早年赴美签证遭拒细节，如今公司正将资源集中投向HBM4与高密度DDR5。HBM4计划2026下半年送样，单堆栈36GB，2030年全球存储市场总规模有望突破1万亿美元。AI服务器存储需求年均增速40%，美光HBM市占率目标从5%提至20%，三星、SK海力士份额承压。
+
+[2/5] 武汉硬科技吸引外国青年参观团。小米智能工厂展示人形机器人柔性装配线，自研一体化关节模组使单机成本较进口方案降低30%。武汉已聚集50多家机器人企业，2025年集群产值突破200亿元，涵盖减速器、力矩传感器等薄弱环节，产业链配套快速补齐。
+
+[3/5] 《中国具身智能无人机市场分析》预测2031年市场规模214亿元，年复合增长率38%。核心部件IMU与视觉导航芯片国产化率低于40%，给芯驰、地平线等厂商带来替代机会。无人机+多模态大模型实现自主避障与任务规划，物流、电网巡检场景率先放量。
+
+[4/5] 长春工业大学开设“具身智能”定制班，联合华为、大疆等企业，定向培养掌握ROS2与边缘AI部署的复合型工程师。目前国内具身智能人才缺口超10万，岗位平均年薪45万元。高校课程改革将在2-3年内缓解中层人才瓶颈，短期用人成本仍高位运行。
+
+[5/5] 总结：从存储芯片到人形机器人，从无人机市场到工程师培养，AI向物理世界渗透加速重塑产业链。中国在制造场景与人才储备上补短板，HBM、传感器、关节模组等环节存结构性窗口。更多产业链深度内容，关注 @wangsir1w 微信13973780026
