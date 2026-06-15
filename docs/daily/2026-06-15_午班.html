@@ -1,0 +1,332 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<meta property="og:title" content="每日科技投资简报 2026年06月15日 午班">
+<meta property="og:description" content="">
+<meta property="og:url" content="https://wangle200104-jpg.github.io/daily-intel-report/daily/2026-06-15_午班.html">
+<title>🧠 每日科技投资简报 · 2026年06月15日 · 午班</title>
+<style>
+:root {
+  --bg:#0d1117; --card:#161b22; --border:#30363d;
+  --text:#e6edf3; --text2:#8b949e; --light:#adb5bd;
+  --red:#c0392b; --blue:#1a6fc4; --green:#1a7340;
+  --red-bg:#c0392b15; --surface:#1c2128;
+}
+@media (prefers-color-scheme: light) {
+  :root {
+    --bg:#f8f9fa; --card:#ffffff; --border:#e9ecef;
+    --text:#0d1117; --text2:#6c757d; --light:#adb5bd;
+    --surface:#f1f3f5;
+  }
+}
+* { margin:0; padding:0; box-sizing:border-box; }
+body {
+  font-family: -apple-system,BlinkMacSystemFont,"PingFang SC",
+               "Helvetica Neue",sans-serif;
+  background:var(--bg); color:var(--text);
+  font-size:15px; line-height:1.8;
+  max-width:860px; margin:0 auto; padding:20px 16px 60px;
+}
+a { color:var(--blue); text-decoration:none; }
+a:hover { text-decoration:underline; }
+
+/* 导航 */
+.nav {
+  display:flex; align-items:center; justify-content:space-between;
+  padding:12px 0; border-bottom:1px solid var(--border); margin-bottom:24px;
+}
+.nav-brand { font-weight:800; font-size:16px; color:var(--text); }
+.nav-links { display:flex; gap:16px; font-size:13px; }
+
+/* 顶部 */
+.header {
+  padding:28px 0 24px; border-bottom:1px solid var(--border); margin-bottom:28px;
+}
+.header-top { display:flex; align-items:center; gap:10px; margin-bottom:14px; }
+.session-label {
+  font-size:11px; font-weight:700; padding:3px 10px; border-radius:4px;
+  background:var(--red); color:#fff;
+}
+.header-date { font-size:14px; color:var(--text2); }
+.header-title { font-size:28px; font-weight:900; line-height:1.3; }
+
+/* 导读卡片 */
+.intro-card {
+  background:var(--surface); border:1px solid var(--border);
+  border-left:3px solid var(--red); border-radius:0 8px 8px 0;
+  padding:16px 18px; margin-top:16px;
+}
+.intro-card p { color:var(--text); font-size:15px; line-height:1.85; }
+.kw-row { margin-top:12px; display:flex; flex-wrap:wrap; gap:6px; }
+.kw-tag {
+  font-size:11px; font-weight:600; padding:2px 9px;
+  border-radius:20px; cursor:default;
+}
+
+/* 深度文章 */
+.section-label {
+  font-size:12px; font-weight:700; text-transform:uppercase;
+  letter-spacing:1px; color:var(--text2);
+  margin:32px 0 14px; padding-bottom:8px;
+  border-bottom:1px solid var(--border);
+  display:flex; align-items:center; gap:6px;
+}
+.article-card {
+  background:var(--card); border:1px solid var(--border);
+  border-radius:12px; padding:20px 22px; margin-bottom:16px;
+}
+.article-header {
+  display:flex; align-items:flex-start; gap:8px; margin-bottom:12px;
+  flex-wrap:wrap;
+}
+.article-num {
+  font-size:10px; font-weight:800; color:#fff;
+  background:var(--red); padding:2px 6px; border-radius:3px;
+  flex-shrink:0; margin-top:3px;
+}
+.domain-badge {
+  font-size:11px; font-weight:600; padding:2px 8px;
+  border-radius:4px; flex-shrink:0; margin-top:2px;
+}
+.domain-badge.sm { font-size:10px; padding:1px 6px; }
+.article-title {
+  font-size:18px; font-weight:700; line-height:1.4; flex:1;
+}
+.article-body p {
+  font-size:15px; color:var(--text); line-height:1.85; margin-bottom:10px;
+}
+.article-img {
+  width:100%; max-height:240px; object-fit:cover;
+  border-radius:8px; margin-bottom:14px;
+  border:1px solid var(--border); display:block;
+}
+.article-body h3.article-sub {
+  font-size:14px; font-weight:700; color:var(--text2);
+  margin:12px 0 6px;
+}
+.insight {
+  margin-top:12px; padding:10px 14px;
+  background:var(--red-bg); border-left:3px solid var(--red);
+  border-radius:0 6px 6px 0;
+  font-size:13px; font-weight:600; color:var(--red);
+}
+.article-source {
+  margin-top:10px; padding-top:8px; border-top:1px dashed var(--border);
+  display:flex; align-items:center; gap:10px; font-size:12px;
+}
+.article-source a {
+  color:var(--blue); font-weight:600; text-decoration:none;
+}
+.article-source a:hover { text-decoration:underline; }
+.article-source span { color:var(--text2); }
+
+/* 快讯 */
+.brief-item {
+  border-bottom:1px solid var(--border); padding:12px 0;
+}
+.brief-item:last-child { border-bottom:none; }
+.brief-header {
+  display:flex; align-items:flex-start; gap:6px; margin-bottom:6px;
+}
+.brief-num {
+  font-size:11px; font-weight:700; color:var(--light);
+  min-width:22px; text-align:right; flex-shrink:0; margin-top:2px;
+}
+.brief-title { font-size:15px; font-weight:700; line-height:1.4; }
+.brief-body { font-size:13px; color:var(--text2); line-height:1.75; padding-left:28px; }
+.brief-insight {
+  margin-top:5px; padding:4px 10px; margin-left:28px;
+  background:var(--surface); border-radius:4px;
+  font-size:12px; font-weight:600; color:var(--green);
+}
+
+/* 作者卡片 */
+.author-card {
+  background:var(--card); border:1px solid var(--border);
+  border-radius:12px; padding:18px 20px; margin-top:32px;
+  display:flex; align-items:center; gap:16px;
+}
+.author-avatar {
+  width:52px; height:52px; border-radius:50%; flex-shrink:0;
+  background:var(--surface); border:2px solid var(--red);
+  display:flex; align-items:center; justify-content:center;
+  font-size:22px;
+}
+.author-name { font-size:15px; font-weight:700; }
+.author-meta { font-size:13px; color:var(--text2); margin-top:3px; }
+.author-links { display:flex; gap:10px; margin-top:8px; flex-wrap:wrap; }
+.author-link {
+  font-size:12px; padding:3px 10px; border-radius:6px;
+  border:1px solid var(--border); color:var(--text); background:var(--surface);
+}
+.author-link:hover { border-color:var(--blue); text-decoration:none; }
+
+.footer {
+  margin-top:40px; text-align:center; font-size:12px; color:var(--text2); line-height:2;
+  border-top:1px solid var(--border); padding-top:20px;
+}
+</style>
+</head>
+<body>
+
+<div class="nav">
+  <a class="nav-brand" href="../index.html">🧠 每日科技投资简报</a>
+  <div class="nav-links">
+    <a href="https://x.com/wangsir1w" target="_blank">𝕏 @wangsir1w</a>
+    <a href="../feed.xml">📡 RSS</a>
+  </div>
+</div>
+
+<div class="header">
+  <div class="header-top">
+    <span class="session-label">午班 · PM</span>
+    <span class="header-date">2026年06月15日</span>
+  </div>
+  <div class="header-title">每日科技投资简报</div>
+  <div class="intro-card">
+    <p></p>
+    
+    <p style="margin-top:10px;font-size:12px;color:var(--text2)">
+      深度长文见下方 · 精选快讯见底部
+    </p>
+  </div>
+</div>
+
+<div class="section-label">📰 深度长文 · 8 篇</div>
+
+<div class="article-card">
+  <div class="article-header">
+    <span class="article-num">01</span>
+    
+    <h2 class="article-title">人形机器人产业迈入“实习期”</h2>
+  </div>
+  
+  <div class="article-body"><p>中国的人形机器人产业已走出实验室，进入工厂和特定服务场景的“实习期”——即带监督的小批量试用，但离大规模商业化仍有2-3年距离。</p>
+<p>从产业链看，上游核心零部件依然是胜负手。谐波减速器（机器人关节核心精密零件，决定运动精度和寿命，日本Harmonic Drive曾长期垄断）和力矩传感器（感知受力并反馈控制的电子皮肤）的国产化率在快速爬升，绿的主人（绿的谐波）等A股公司已进入本体厂供应链。中游的本体制造端，涌现出超过十家创业公司，在多模态大模型的加持下，机器人的语义理解和泛化能力显著提升，这是它们能从“展示”迈向“实习”的技术基底。下游应用集中在汽车总装线、半导体洁净室搬运等对成本不敏感但痛点明确的场景。</p>
+<p>当前阶段的主要瓶颈不在算力或算法，而在“物理数据”（机器人实际操作产生的真实力反馈、装配等数据）的极度匮乏。谁能建立数据飞轮，谁就能定义机器人的运动控制标准。高盛对2035年市场的千亿美元预测仍是远景，但当下投资人需要按2028年小批量产的时间表来重新审视估值——目前多数头部创业公司的估值已提前打满了预期。</p></div>
+  <div class="article-source"><a href="https://news.google.com/rss/articles/CBMid0FVX3lxTFAyX2lkdHhaWkJSeFJvU1c2RE5PdlAyOWx0aGJTX2dmMExfdjA3M1oyMU1Ed0NxN2ktcXFrVTc5SE5jMGNCMnlLSHpEU19vQm1YYW1VRlo5S0F6T29mU2VTMnJzYUMwTzBDRms2T3VMWEhzSUU4Q1ZB?oc=5" target="_blank" rel="noopener">🔗 查看原文</a><span>GNews: 中国机器人产业链</span></div>
+</div>
+<div class="article-card">
+  <div class="article-header">
+    <span class="article-num">02</span>
+    
+    <h2 class="article-title">“光子”圈粉中东欧青年政治家 武汉人形机器人站在聚光灯下</h2>
+  </div>
+  
+  <div class="article-body"><p>武汉格蓝若的人形机器人“光子”承担了外交展示任务，这说明国产人形机器人正成为政府层面科技实力的新名片，但外交聚光灯与产业竞争力不能直接划等号。</p>
+<p>这条新闻的产业意义在于，武汉乃至华中地区正试图在具身智能（Embodied AI，具备物理载体的通用智能体）的版图中占据节点位置。相比深圳、北京的创业集群，武汉的优劣势十分鲜明：优势在于依托华中科大的传感器和机械学科积累，在力矩传感器、电机控制等上游精密零部件有深厚功底；短板在于风险资本密度和大模型算法人才浓度不及一线城市。“光子”的人形形态更多是前沿技术集成，短期产生规模化营收的可能性极低。</p>
+<p>对投资者而言，要警惕“展示型”机器人与“量产型”机器人的估值陷阱。当前在产业实习期，真正的赢家是那些在特斯拉Optimus、比亚迪产线等真实场景中已经跑通数据闭环的零部件供应商。</p></div>
+  <div class="article-source"><a href="https://news.google.com/rss/articles/CBMicEFVX3lxTE1pMFVMeXZrR3dJcXFBbXF2TTZkbi1LSUdIZmpSenZPQnJTTTdrWWtNQ1ljZlZreUlVZzY0d3RRZTRSSHcyMnZyYkNqUDAtdEZhdnpTUmdZLVE1OU93bTVkQ1AyRjFfSnlFTTZHT1N4d0k?oc=5" target="_blank" rel="noopener">🔗 查看原文</a><span>GNews: 中国机器人产业链</span></div>
+</div>
+<div class="article-card">
+  <div class="article-header">
+    <span class="article-num">03</span>
+    
+    <h2 class="article-title">具身智能的GPT3时刻何时到来？</h2>
+  </div>
+  
+  <div class="article-body"><p>业内用“GPT3时刻”来对标具身智能的临界点，这个比喻极其关键。GPT3的本质不是写出完美的文章，而是首次证明“加大数据和模型规模，能力会涌现”。具身智能目前缺的正是类似互联网文本那样的海量、低成本“物理数据”。</p>
+<p>产业链的瓶颈正在被分层突破。在上游，英伟达的Isaac Sim等仿真平台（在虚拟世界生成带物理规律的数据，用来训练AI）试图部分替代昂贵的真实采集，但其与现实的“物理鸿沟”仍需大量真实数据来校正。中游的千寻智能等创业公司提出“自适应”架构，本质上就是想用更少的真实数据，让模型学会触类旁通，这是降低数据成本的关键路径。</p>
+<p>目前产业还在GPT2阶段——小范围、特定任务上验证了技术可行性（POC，概念验证），但无法泛化到开放场景。投资人需紧盯“单场景模型参数规模”和“单位任务数据采集成本”这两个先行指标。当某个垂直场景（如汽车装配）的数据量突破某个阈值，任务成功率出现跃升，那才是“时刻”到来的产业信号。</p></div>
+  <div class="article-source"><a href="https://news.google.com/rss/articles/CBMicEFVX3lxTE4zQTVxZ29DN2Y5TXoxSEs0VFdJNzh6RS1sVGQta3FIaEtUX2F3MXp3OWI4UmZNMmhaa3h2dUFOYmpKYzJTSl9SdTVrYVJSSnloY0hWeTBPVWhVVzRqclFQYlJVVlJqcHcwZGJjaTVrcVg?oc=5" target="_blank" rel="noopener">🔗 查看原文</a><span>GNews: 中国机器人产业链</span></div>
+</div>
+<div class="article-card">
+  <div class="article-header">
+    <span class="article-num">04</span>
+    
+    <h2 class="article-title">具身智能产业需要携手并进</h2>
+  </div>
+  
+  <div class="article-body"><p>产业“携手并进”的呼吁，背后是碎片化带来的巨大浪费。当前，每家本体创业公司都在独立收集“物理数据”，数据格式、标注标准、甚至力控采样频率都互不兼容，形成了孤岛。</p>
+<p>这在产业链上制造了一个隐秘的机会：能提供标准化数据采集工具、标注平台和仿真接口的中间件公司，可能比本体商更早盈利。硬件上，六维力传感器（测量XYZ三轴力和扭矩的核心器件，机器人的“手腕”）、触觉传感器的接口统一也势在必行。软件定义标准化流程，是当年智能手机产业链爆发的基石，具身智能也必须走这条路。</p>
+<p>“携手并进”的另一面是残酷洗牌。当数据标准统一后，数据量少、模型泛化能力差的本体商将被迅速淘汰。对A股来说，与其追风难辨真伪的本体概念股，不如关注那些已为主流厂商批量供应力矩传感器、谐波减速器，且在研发数字接口的精密零部件公司，它们是产业淘金热里卖“铲子”并有标准化门槛的卖水人。</p></div>
+  <div class="article-source"><a href="https://news.google.com/rss/articles/CBMiY0FVX3lxTFB0Q094eDFycV94alNPNEZ1X21hQ3ljeEIyanByVjVDR1Y0RFBXQXJBUmpSa3VXVFJ1UlV2ZVhCdzZkYlZuLV9VYkZJeHVNQWRuRWNSaHlkMXctRkFhaDNlcmMxVQ?oc=5" target="_blank" rel="noopener">🔗 查看原文</a><span>GNews: 中国机器人产业链</span></div>
+</div>
+<div class="article-card">
+  <div class="article-header">
+    <span class="article-num">05</span>
+    
+    <h2 class="article-title">破解“物理数据”瓶颈 千寻智能开启具身智能“自适应”时代</h2>
+  </div>
+  
+  <div class="article-body"><p>千寻智能提出的“自适应”路线，直指产业最大的成本项：物理数据（机器人实际操作产生的力反馈、视觉、装配成败记录）采集。单台人形机器人动辄几十万元的成本，让大规模部署遥操作（teleoperation，人远程操控机器人采集数据）采集成了一种昂贵的奢侈。</p>
+<p>千寻的策略在技术上是通过模仿学习（Imitation Learning，让AI观察人类动作学会技能）与无监督强化学习的混合架构，让机器人在较少的人类示范（具体数据量未披露）后，尝试在动态环境中自我调整动作。这本质上是在追求“数据效率”。产业链上，这意味着对于高精度力传感器的需求会进一步提升，因为“自适应”的前提是能精确感知物理世界的微小变化。</p>
+<p>从投资视角，若其技术路线被验证，将重新定价整个产业链：通用机器人本体的TCO（总拥有成本）会下移，“机器人即服务”（RaaS）的商业模型会加速落地。但需注意，这仍是A轮创业公司的技术叙事，距离量产验证还有不短的距离。当下更稳妥地受益于此趋势的，仍是为其提供高精度、小体积力传感器和一体化关节的硬件供应商。</p></div>
+  <div class="article-source"><a href="https://news.google.com/rss/articles/CBMiX0FVX3lxTE5kWkNRV3VJQlZZRkxyYjhnR2pUWkNrY2lhTUNJYW5Demh2NTliOXpYbmQxMHVySkhpNm11blJDb09NdHkzOXhnSkRoRFEzcmFSXzJpOUEweUxPY1BUQmhV?oc=5" target="_blank" rel="noopener">🔗 查看原文</a><span>GNews: 中国机器人产业链</span></div>
+</div>
+<div class="article-card">
+  <div class="article-header">
+    <span class="article-num">06</span>
+    
+    <h2 class="article-title">Flexiv Robotics复盘：通用力控型机器人如何重构汽车和物流制造的成本方程式</h2>
+  </div>
+  
+  <div class="article-body"><p>Flexiv（非夕科技）正在证明一个被市场低估的事实：机械臂的竞争已从“跑得更快”转向“摸得更准”。这次周度复盘显示，其力控技术（实时感知接触力的高灵敏度控制——能让机器人像人手一样“轻轻拿起豆腐”而无需视觉辅助）的部署案例正从实验室向主机厂总装线扩张，这意味着汽车制造链条上最后的自动化堡垒——柔性装配——开始被攻破。</p>
+<p>从产业链位置看，Flexiv处于中游本体制造环节，但其核心价值在上游的力觉传感器与力控算法。与绝大多数依赖视觉引导的协作机器人不同，Flexiv通过力矩传感器（每关节实时感知0.03牛·米细微力矩——让机械臂具备“触觉”，在接触易碎品时自动调节力度）形成技术护城河。在汽车总装下游，插拔线束、柔性打磨、精密齿轮啮合等工位长期依赖人手，因为零部件公差叠加后无法通过预设轨迹完成。力控方案直接模拟人类触觉反馈，省去了高成本3D视觉标定。</p>
+<p>这对投资逻辑的重定价是深刻的：全球汽车总装自动化率长期卡在15%-20%，若力控机械臂将天花板推至40%，四大家族现有的“伺服+减速机”铁三角壁垒可能松动。中国上游供应链尤其受益——谐波减速器国产化率已达60%以上，但力矩传感器、磁编码器（高精度角度测量元件——直接影响力控精度，一度被欧洲Heidenhain和日本多摩川垄断）仍是短板。Flexiv这类全栈自研本体商跑通后，会给国产传感器供应商创造验证窗口。</p></div>
+  <div class="article-source"><a href="https://news.google.com/rss/articles/CBMihAFBVV95cUxQYkU1cHVaX2d5OUxKckg5WmlzcV9hd3EyeWtmbXB0RFJWdmJUckhwYzM4RmlESmZkcmFObHRzTWVaU2pLSXhNM295ZUlSajN2OEpkMTFVZjVueVNjOGN0RjU2TEFmeUx3WVRQLU9JSUVjOG43aVdJQkVjamFmT0dmMWlCX1Y?oc=5" target="_blank" rel="noopener">🔗 查看原文</a><span>GNews: 具身智能AI</span></div>
+</div>
+<div class="article-card">
+  <div class="article-header">
+    <span class="article-num">07</span>
+    
+    <h2 class="article-title">香港特首回避连任意愿——制度信号背后的资本配置抛物线</h2>
+  </div>
+  <img class="article-img" src="https://assets.bwbx.io/images/users/iqjWHBFdfxIU/iXffjj4Tk5Gk/v1/1200x-1.jpg" alt="香港特首回避连任意愿——制度信号背后的资本配置抛物线" loading="lazy" onerror="this.style.display='none'">
+  <div class="article-body"><p>核心政治人物的去留表态，本质上是离岸人民币资产风险溢价（投资者因承担额外不确定性而要求的超额收益——直接影响港股估值中枢）的定价因子。香港特首李家超在被问及是否寻求连任时明确回避，这对于2027年将面临领导层换届的香港而言，至少在今年余下时间锁定了“政策延续性观察期”的基调。</p>
+<p>从资本链条看，特首的施政纲领直接关联香港“北部都会区”（规划容纳250万人的新市镇——核心是打造深港科创融合区）的用地审批和财政纪律，以及维持联系汇率制度的政府信用背书。李家超是北京与香港本地商业阶层的重要接口。他不置可否，意味着外资投行对于明年3月选委会改选后的土地政策、家族办公室（富豪在港设立的管理其财富的私人机构——年投资门槛通常3000万美元以上，2025年香港曾为吸引该群体推出税收豁免新规）税收优惠等“预期剧本”，需推迟定价。</p>
+<p>赢家输家很明确：市场最怕的并非连任本身，而是突然的“不可知”。在李家超实质性开启第二届任期竞选前，依赖政府合约的香港本土建筑、基建承包商（具体公司名及营收数据在摘要中未披露）估值会被政策空窗期压制。而对冲基金可借助这个真空，在港币汇率掉期上做低波动率套利。</p>
+<strong>今日启示</strong>：观察香港治理，核心应剥离八卦叙事，转而紧盯11月施政报告是否推迟重大开支，那才是制度接力的真实路标。</div>
+  <div class="article-source"><a href="https://www.bloomberg.com/news/articles/2026-06-15/hong-kong-leader-says-he-s-yet-to-consider-possible-second-term" target="_blank" rel="noopener">🔗 查看原文</a><span>Bloomberg Tech</span></div>
+</div>
+<div class="article-card">
+  <div class="article-header">
+    <span class="article-num">08</span>
+    
+    <h2 class="article-title">苹果新Siri的“两年补课”：端侧大模型重构服务收入增速的故事才刚刚开始</h2>
+  </div>
+  <img class="article-img" src="https://assets.bwbx.io/images/users/iqjWHBFdfxIU/iwn7_Q7X5W7g/v0/1200x-1.jpg" alt="苹果新Siri的“两年补课”：端侧大模型重构服务收入增速的故事才刚刚开始" loading="lazy" onerror="this.style.display='none'">
+  <div class="article-body"><p>迟到了整整两年的新版Siri，其真正意义不在于功能修补，而在于它第一次填平了苹果硬件（从A18芯片到M4 Ultra芯片）的端侧推理能力（在本地设备完成AI计算，无需联网云端——意味着隐私保护和即时响应都可兼得）与实际用户体验之间的断层。彭博专栏的实测确认了“实用性已触达及格线”，这就为苹果AI战略的投资者叙事续上了最关键的一口气。</p>
+<p>在产业链上，这是苹果“模型即服务”（MaaS，可将AI能力嵌入系统级接口给所有第三方App调用）战略的首次系统级验证。过去两年，苹果AI的延迟让Spotify、谷歌等通过App占领了iPhone用户交互入口，威胁到苹果核心的服务收入（App Store抽成、广告、音乐订阅）。如今新Siri若能夺回高频交互入口，相当于稳住了服务收入增长的斜率。硬件端，这实质上是倒逼存量用户升级：摘要中暗示的高阶功能，必须依赖A18 Pro以上芯片的神经网络引擎，这为当前略显平淡的iPhone 19销量注入了刚性换机逻辑。</p>
+<p>在投资启示上，本轮Siri迭代说明，即使是苹果，在生成式AI落地上也必须允许两年以上的不完美“陪跑期”。而一旦体验跨越及格线，依托20亿活跃设备的压倒性预装渠道，其分发速度仍可让第三方App开发者难以招架。</p></div>
+  <div class="article-source"><a href="https://www.bloomberg.com/jp/news/newsletters/2026-06-15/TGNKC0RKV2VT00" target="_blank" rel="noopener">🔗 查看原文</a><span>Bloomberg Tech</span></div>
+</div>
+
+<div class="section-label">⚡ 精选快讯 · 1 条</div>
+<div class="brief-list">
+
+<div class="brief-item">
+  <div class="brief-header">
+    <span class="brief-num">01</span>
+    <span class="domain-badge sm" style="color:#6c757d;background:#6c757d10;border:1px solid #6c757d40">
+      
+    </span>
+    <span class="brief-title"></span>
+  </div>
+  <div class="brief-body">今日无符合要求的新闻。</div>
+  
+</div>
+</div>
+
+<div class="author-card">
+  <div class="author-avatar">👤</div>
+  <div>
+    <div class="author-name">王sir · 材料工程师 / 投资人</div>
+    <div class="author-meta">深圳 · 韶音 · 工厂/制造 · 材料创新 · 价值投资</div>
+    <div class="author-links">
+      <a class="author-link" href="https://x.com/wangsir1w" target="_blank">𝕏 @wangsir1w</a>
+      <a class="author-link" href="https://github.com/wangle200104-jpg/daily-intel-report" target="_blank">📦 GitHub</a>
+      <span class="author-link">💬 微信 13973780026</span>
+    </div>
+  </div>
+</div>
+
+<div class="footer">
+  由 GitHub Actions + DeepSeek V4 Pro 自动生成<br>
+  2026年06月15日 · 午班 · 聚焦半导体·算力·材料·AI·机器人
+</div>
+
+</body>
+</html>

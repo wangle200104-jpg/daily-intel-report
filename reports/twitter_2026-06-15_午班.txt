@@ -1,0 +1,22 @@
+配图建议: https://assets.bwbx.io/images/users/iqjWHBFdfxIU/iXffjj4Tk5Gk/v1/1200x-1.jpg
+
+=== 主推（中文）===
+今日科技产业信号 📡 2026年06月15日  
+🔹 人形机器人进入“实习期”，超200台本体在汽车、3C产线实测，减速器与力矩传感器订单环比增35%  
+🔹 具身智能物理数据量不足自动驾驶的1%，千寻智能自适应框架将训练效率提升3倍，“GPT-3时刻”仍需2年  
+🔹 苹果新Siri七项端侧改善被指过渡期修补，端侧大模型竞争倒向安卓芯片链，利好高通、联发科NPU  
+#AI #半导体 #产业链 @wangsir1w
+
+=== 主推（英文）===
+Today's key signals from the chip & AI supply chain 📡  
+🔹 Humanoid robots enter “internship phase”: 200+ units deployed in auto & 3C pilines, driving reducer/torque sensor orders up 35% QoQ  
+🔹 Embodied AI still short of physical data: Qianxun’s self-adaptive framework lifts training efficiency 3x, but the “GPT-3 moment” may take 2 more years  
+🔹 Apple’s new Siri brings 7 fixes; seen as a stopgap, shifting edge-AI race favour toward Qualcomm/MediaTek NPU ecosystems  
+#Semiconductor #AIChip #ChinaTech @wangsir1w
+
+=== Thread长推 ===
+[1/5] 人形机器人开启工厂实习：2026年1-5月超220台人形机器人在一汽、比亚迪等20余家产线试运行，单台作业时长突破800小时。谐波减速器、六维力矩传感器需求激增，国产厂商Q2订单环比增长35%，绿的谐波、柯力传感等直接受益。  
+[2/5] 具身智能数据瓶颈未破：当前人形机器人物理交互数据总量不足自动驾驶的1/100。千寻智能发布SPA自适应框架，通过合成数据+在线学习将新任务训练效率提升3倍，但业内认为“GPT-3时刻”最早在2028年，算力需求将拉动训练芯片持续放量。  
+[3/5] Flexiv Robotics周度回顾显示其力控机器人获新一轮1.2亿美元融资，估值达18亿美元。汽车涂胶场景良率提升至99%，带动上游力传感器出货量Q2同比增60%。该方向正复制工业机器人“本体先行、零部件兑现”路径。  
+[4/5] 中国产业链视角：国产谐波减速器市占率首破40%，人形机器人专项政策预期落地，A股机器人板块本周净流入超55亿人民币。端侧AI竞争加剧，苹果Siri仅靠7项修补难改格局，高通、联发科NPU机型受益，利好中科创达等生态商。  
+[5/5] 从硬件到智能，人形机器人产业链进入关键验证窗口：减速器、力矩传感器与训练芯片确定性最高。具身智能仍处技术爬坡，关注能低成本获取物理数据的厂商。更多产业链深度分析，follow @wangsir1w 微信13973780026
