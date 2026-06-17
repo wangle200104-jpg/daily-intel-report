@@ -1,0 +1,325 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<meta property="og:title" content="每日科技投资简报 2026年06月17日 午班">
+<meta property="og:description" content="早，今天是2026年06月17日，王sir为您汇报今天的重要资讯。  
+· **ASML High-NA光刻机Twinscan EXE:5200成为芯片制造焦点，其高数值孔径方案直接关系2nm以下先进制程的量产导入节奏**，影响全球代工竞争">
+<meta property="og:url" content="https://wangle200104-jpg.github.io/daily-intel-report/daily/2026-06-17_午班.html">
+<title>🧠 每日科技投资简报 · 2026年06月17日 · 午班</title>
+<style>
+:root {
+  --bg:#0d1117; --card:#161b22; --border:#30363d;
+  --text:#e6edf3; --text2:#8b949e; --light:#adb5bd;
+  --red:#c0392b; --blue:#1a6fc4; --green:#1a7340;
+  --red-bg:#c0392b15; --surface:#1c2128;
+}
+@media (prefers-color-scheme: light) {
+  :root {
+    --bg:#f8f9fa; --card:#ffffff; --border:#e9ecef;
+    --text:#0d1117; --text2:#6c757d; --light:#adb5bd;
+    --surface:#f1f3f5;
+  }
+}
+* { margin:0; padding:0; box-sizing:border-box; }
+body {
+  font-family: -apple-system,BlinkMacSystemFont,"PingFang SC",
+               "Helvetica Neue",sans-serif;
+  background:var(--bg); color:var(--text);
+  font-size:15px; line-height:1.8;
+  max-width:860px; margin:0 auto; padding:20px 16px 60px;
+}
+a { color:var(--blue); text-decoration:none; }
+a:hover { text-decoration:underline; }
+
+/* 导航 */
+.nav {
+  display:flex; align-items:center; justify-content:space-between;
+  padding:12px 0; border-bottom:1px solid var(--border); margin-bottom:24px;
+}
+.nav-brand { font-weight:800; font-size:16px; color:var(--text); }
+.nav-links { display:flex; gap:16px; font-size:13px; }
+
+/* 顶部 */
+.header {
+  padding:28px 0 24px; border-bottom:1px solid var(--border); margin-bottom:28px;
+}
+.header-top { display:flex; align-items:center; gap:10px; margin-bottom:14px; }
+.session-label {
+  font-size:11px; font-weight:700; padding:3px 10px; border-radius:4px;
+  background:var(--red); color:#fff;
+}
+.header-date { font-size:14px; color:var(--text2); }
+.header-title { font-size:28px; font-weight:900; line-height:1.3; }
+
+/* 导读卡片 */
+.intro-card {
+  background:var(--surface); border:1px solid var(--border);
+  border-left:3px solid var(--red); border-radius:0 8px 8px 0;
+  padding:16px 18px; margin-top:16px;
+}
+.intro-card p { color:var(--text); font-size:15px; line-height:1.85; }
+.kw-row { margin-top:12px; display:flex; flex-wrap:wrap; gap:6px; }
+.kw-tag {
+  font-size:11px; font-weight:600; padding:2px 9px;
+  border-radius:20px; cursor:default;
+}
+
+/* 深度文章 */
+.section-label {
+  font-size:12px; font-weight:700; text-transform:uppercase;
+  letter-spacing:1px; color:var(--text2);
+  margin:32px 0 14px; padding-bottom:8px;
+  border-bottom:1px solid var(--border);
+  display:flex; align-items:center; gap:6px;
+}
+.article-card {
+  background:var(--card); border:1px solid var(--border);
+  border-radius:12px; padding:20px 22px; margin-bottom:16px;
+}
+.article-header {
+  display:flex; align-items:flex-start; gap:8px; margin-bottom:12px;
+  flex-wrap:wrap;
+}
+.article-num {
+  font-size:10px; font-weight:800; color:#fff;
+  background:var(--red); padding:2px 6px; border-radius:3px;
+  flex-shrink:0; margin-top:3px;
+}
+.domain-badge {
+  font-size:11px; font-weight:600; padding:2px 8px;
+  border-radius:4px; flex-shrink:0; margin-top:2px;
+}
+.domain-badge.sm { font-size:10px; padding:1px 6px; }
+.article-title {
+  font-size:18px; font-weight:700; line-height:1.4; flex:1;
+}
+.article-body p {
+  font-size:15px; color:var(--text); line-height:1.85; margin-bottom:10px;
+}
+.article-img {
+  width:100%; max-height:240px; object-fit:cover;
+  border-radius:8px; margin-bottom:14px;
+  border:1px solid var(--border); display:block;
+}
+.article-body h3.article-sub {
+  font-size:14px; font-weight:700; color:var(--text2);
+  margin:12px 0 6px;
+}
+.insight {
+  margin-top:12px; padding:10px 14px;
+  background:var(--red-bg); border-left:3px solid var(--red);
+  border-radius:0 6px 6px 0;
+  font-size:13px; font-weight:600; color:var(--red);
+}
+.article-source {
+  margin-top:10px; padding-top:8px; border-top:1px dashed var(--border);
+  display:flex; align-items:center; gap:10px; font-size:12px;
+}
+.article-source a {
+  color:var(--blue); font-weight:600; text-decoration:none;
+}
+.article-source a:hover { text-decoration:underline; }
+.article-source span { color:var(--text2); }
+
+/* 快讯 */
+.brief-item {
+  border-bottom:1px solid var(--border); padding:12px 0;
+}
+.brief-item:last-child { border-bottom:none; }
+.brief-header {
+  display:flex; align-items:flex-start; gap:6px; margin-bottom:6px;
+}
+.brief-num {
+  font-size:11px; font-weight:700; color:var(--light);
+  min-width:22px; text-align:right; flex-shrink:0; margin-top:2px;
+}
+.brief-title { font-size:15px; font-weight:700; line-height:1.4; }
+.brief-body { font-size:13px; color:var(--text2); line-height:1.75; padding-left:28px; }
+.brief-insight {
+  margin-top:5px; padding:4px 10px; margin-left:28px;
+  background:var(--surface); border-radius:4px;
+  font-size:12px; font-weight:600; color:var(--green);
+}
+
+/* 作者卡片 */
+.author-card {
+  background:var(--card); border:1px solid var(--border);
+  border-radius:12px; padding:18px 20px; margin-top:32px;
+  display:flex; align-items:center; gap:16px;
+}
+.author-avatar {
+  width:52px; height:52px; border-radius:50%; flex-shrink:0;
+  background:var(--surface); border:2px solid var(--red);
+  display:flex; align-items:center; justify-content:center;
+  font-size:22px;
+}
+.author-name { font-size:15px; font-weight:700; }
+.author-meta { font-size:13px; color:var(--text2); margin-top:3px; }
+.author-links { display:flex; gap:10px; margin-top:8px; flex-wrap:wrap; }
+.author-link {
+  font-size:12px; padding:3px 10px; border-radius:6px;
+  border:1px solid var(--border); color:var(--text); background:var(--surface);
+}
+.author-link:hover { border-color:var(--blue); text-decoration:none; }
+
+.footer {
+  margin-top:40px; text-align:center; font-size:12px; color:var(--text2); line-height:2;
+  border-top:1px solid var(--border); padding-top:20px;
+}
+</style>
+</head>
+<body>
+
+<div class="nav">
+  <a class="nav-brand" href="../index.html">🧠 每日科技投资简报</a>
+  <div class="nav-links">
+    <a href="https://x.com/wangsir1w" target="_blank">𝕏 @wangsir1w</a>
+    <a href="../feed.xml">📡 RSS</a>
+  </div>
+</div>
+
+<div class="header">
+  <div class="header-top">
+    <span class="session-label">午班 · PM</span>
+    <span class="header-date">2026年06月17日</span>
+  </div>
+  <div class="header-title">每日科技投资简报</div>
+  <div class="intro-card">
+    <p>早，今天是2026年06月17日，王sir为您汇报今天的重要资讯。  
+· <strong style="color:#c0392b">ASML High-NA光刻机Twinscan EXE:5200成为芯片制造焦点，其高数值孔径方案直接关系2nm以下先进制程的量产导入节奏</strong>，影响全球代工竞争格局；· 国内具身智能机器人产业进入产能落地期，北京亦庄规划超级工厂至2030年产能达50万台，成都企业斩获5000台订单，京津冀同步出现万台级超级工厂，产业链从原型走向规模化交付；· 宇树科技IPO申请获受理，人形机器人领域资本</p>
+    
+    <p style="margin-top:10px;font-size:12px;color:var(--text2)">
+      深度长文见下方 · 精选快讯见底部
+    </p>
+  </div>
+</div>
+
+<div class="section-label">📰 深度长文 · 7 篇</div>
+
+<div class="article-card">
+  <div class="article-header">
+    <span class="article-num">01</span>
+    
+    <h2 class="article-title">High-NA stepper push: why ASML’s Twinscan EXE:5200 matters for chipmaking</h2>
+  </div>
+  
+  <div class="article-body"><p>ASML的High-NA EUV光刻机（高数值孔径极紫外光刻——在晶圆上刻画更细电路的核心工具，数值孔径从0.33提升至0.55，能实现2nm及以下节点的一次曝光）正在将芯片制造带入“后3nm”竞赛的真实门槛。Twinscan EXE:5200的交付意味着先进制程的成本模型和价值分配将被重新书写。</p>
+<p>这处于WFE（晶圆制造设备——芯片厂采购的所有设备总称，ASML/AMAT/LAM等构成千亿美元级市场）的最上游。一台High-NA EUV的售价攀升，直接改变了尖端逻辑芯片和DRAM（动态随机存取存储器——内存主流品类，需要更先进光刻来压缩单元面积）的扩产经济账。节点从3nm下探至2nm时，传统0.33 NA的EUV需要多层曝光，步骤翻倍导致良率风险和工时飙升；EXE:5200的一次曝光能力，减少了多重图形化的工序，理论上可缩短生产周期并控制缺陷密度（芯片生产中的致命弱点——每层电路出错概率累加，直接决定良率）。</p>
+<p>赢家链条清晰：台积电、英特尔、三星这三家能买得起High-NA设备的巨头，与二线晶圆厂的设备代差将进一步拉大。输家则是卡在成熟制程的厂商——当高端设备锁定产能，其产能扩张的边际回报递减。对中国产业链而言，High-NA是当前EUV禁运的延伸，技术鸿沟被第二道墙加固。GAA（环绕栅极晶体管——FinFET的替代结构，用四面栅极控制漏电）工艺极度依赖High-NA的一次曝光能力，国产替代在缺乏EUV实践的现状下，GAA开发的时间和资金成本会更沉重。</p>
+<strong>【今日启示】</strong> 半导体军备竞赛正式进入“High-NA时代”：投资者应重新评估先进制程代工厂的资本开支强度，而非单纯看产能规划。对国产替代，需关注非光刻路径（如先进封装的多芯片集成）能否绕过EUV/High-NA双重壁垒。</div>
+  <div class="article-source"><a href="https://news.google.com/rss/articles/CBMivAFBVV95cUxQbm50bGg5OXAwZTFhUmV2d2tpU1FJZUZBbTZkVW1EWER3bkUtZktLWElFNldaVzlONDF4cG42YjRlVzg2TkhfUVlKY21JVEFCUFM0emUxb1kxalFBSDBQY3J2Y3hxcV9FbEZPaXFwSVlfU2dDaVNqd3dzY2RrRUNRZlUwUTRSTjl3T2ljUXNwUVp2bFlJeFEtSWY0cGFGc1c3R0psdm5GWlFvb1piZmxoMEhOcm1XVWJ6M3d4Rw?oc=5" target="_blank" rel="noopener">🔗 查看原文</a><span>GNews: ASML EUV光刻</span></div>
+</div>
+<div class="article-card">
+  <div class="article-header">
+    <span class="article-num">02</span>
+    
+    <h2 class="article-title">今天，半个具身智能产业链都在亦庄</h2>
+  </div>
+  
+  <div class="article-body"><p>“半个具身智能产业链都在亦庄”不是一个修辞，而是中国机器人产业集群加速从“实验室孤岛”走向“地理集聚”的关键信号。当产业链各环节在地理上高度浓缩，意味着技术和成本的迭代将从研发竞赛转向系统级的规模效率比拼。</p>
+<p>具身智能产业链分三层：上游零部件（谐波减速器、力矩传感器、电机、视觉芯片），中游本体制造与系统集成，以及下游场景应用（汽车/物流/半导体制造）。亦庄的集聚效应源于北京市对“机器人+”产业政策的加码，吸引了头部本体厂商与核心零部件供应商落地。地理集中能让本体的系统集成商以更低协作成本测试不同国产零部件的匹配性，这对降低目前人形机器人单台成本（关节数量多、精度要求高）至关重要。</p>
+<p>这种集聚的赢家是具备全栈协调能力的本体厂商和具有独占性技术的上游供应商——它们能在密集的需求中快速迭代。部分同质化严重、缺乏核心算法的集成商将面临价格绞杀。亦庄模式本质上是政策驱动的快速组团，与珠三角基于家电/3C衍生出的自动化生态不同，其起点更高，直指人形机器人和高动态作业。</p>
+<strong>【今日启示】</strong> 关注区域内能向整机厂输出模块化解决方案的上游企业；整车厂参与度高的机器人项目，其供应链复用的降本潜力要高于纯互联网背景的团队。本地化集采将是对国产零部件寿命和一致性的提前探底。</div>
+  <div class="article-source"><a href="https://news.google.com/rss/articles/CBMiU0FVX3lxTE54ZVpVaXNLV0RVVDhMdWlWcUExaGxHWWNGTlBNVUdYSW5fY3pYWTk3M3RvVWlvay1rVEs3bGZhYVFzb0dSV0ZoU1hMSEtoQ0JjU25n?oc=5" target="_blank" rel="noopener">🔗 查看原文</a><span>GNews: 中国机器人产业链</span></div>
+</div>
+<div class="article-card">
+  <div class="article-header">
+    <span class="article-num">03</span>
+    
+    <h2 class="article-title">2026世界青年发展论坛丨探访湖北人形机器人创新中心</h2>
+  </div>
+  
+  <div class="article-body"><p>湖北人形机器人创新中心的探访揭示了一个被资本市场忽略的逻辑：中部地区正以“关键零部件+特色场景”的中场策略切入具身智能，避免重复沿海地区高举高打的整机竞争。湖北的差异化筹码在于其已有的光电与精密制造基础。</p>
+<p>创新中心的展示必然涉及线性执行器、特种力矩电机与刚柔耦合结构。湖北的产业优势不在整机品牌，而在上游供应链：光通信技术可转化为机器人的高速内部总线与3D视觉传感，东风汽车等大厂提供了人形机器人在汽车装配线上真实且严苛的验证场景。这种“以场景养技术”的路径在产业上比通用型人形机器人更快触及现金流。人形机器人的瓶颈从来不在于组装直立行走，而在于末端执行器的精度与手腕力控在产线作业中的耐久度。</p>
+<p>赢家是那些把汽车零部件精密加工能力移植到机器人关节上的跨界供应商。输家则是缺乏特定工业场景（尤其汽车厂）做负载验证的纯研发机构。尽管湖北的产业声量不如长三角，但其“精密传动+汽车场景”的组合，在具身智能向制造业落地的初期反而更务实。</p>
+<strong>【今日启示】</strong> 投资具身智能不应只看人形形态，更要考察机器人核心部件企业是否有汽车/军工级精密加工底子和真实产线验证机会。中部创新中心的路径提示：能在汽车焊装线上稳定运行的关节，比发布会的跳舞机器人更有产业价值。</div>
+  <div class="article-source"><a href="https://news.google.com/rss/articles/CBMif0FVX3lxTE5UNzRGTi1lUHJVOXlDZ3otbXdZM21GMFVWaGoyRW41NmhmQkQ2TUhjMk9Bd0FtZ1ZnNUs4U1g4ME55V2Qxc1lqcUVmZklkWjVpLU9PTVVMS010aktoemtlcURXWTRyOG1pNm1CdXBZaGZzdmhxWm51V08zdVdacGM?oc=5" target="_blank" rel="noopener">🔗 查看原文</a><span>GNews: 中国机器人产业链</span></div>
+</div>
+<div class="article-card">
+  <div class="article-header">
+    <span class="article-num">04</span>
+    
+    <h2 class="article-title">5000台！成都企业拿下国内具身智能领域大单</h2>
+  </div>
+  
+  <div class="article-body"><p>5000台的订单在具身智能行业堪称“规模化元年”的实际注脚。无论这5000台是人形整机还是集成式关节模组，该量级标志着具身智能正从原型机研制、展会亮相，正式切入了可复制的商业交付通道。这是产业链上游供应商开始享受规模效应的起点。</p>
+<p>以5000台为基准，谐波减速器（机器人关节的核心传动部件——通过弹性变形传递动力，决定定位精度和寿命）和力矩传感器的需求一次性放量。采购模式将从“小批量、多品种、高价科研件”转向“中批量、标准化、严控价”。成都这家企业能拿下如此体量订单，表明西南地区在机器人垂直领域（推测可能涵盖巡检、安防或物流）积累了可产业化的应用生态。在商业侧，大单对交付稳定性而非单纯实验室性能的考验陡增，这将对全部国产供应链的批次一致性做一次压力测试。</p>
+<strong>【今日启示】</strong> 5000台级别订单是上游国产核心零部件（减速器/传感器/电机）的第一次集体大考，能绑进该大单供应体系的企业将率先调试出量产工艺。可重点观察这次订单涉及的品类，这是目前国内可批量落地的最真实路线图。</div>
+  <div class="article-source"><a href="https://news.google.com/rss/articles/CBMiY0FVX3lxTFBXQWxob29MYXZhcHZlVjQ2S0hCdWlIaHowa3ExYks3aGU1UzcyNWxyMGxYZWJHTldnYzBGb3NkWHpXZXhVOHFzNDRVQ0wyTG5wRzF3VlZ3SmwtTzZ4R1lkT3J2TQ?oc=5" target="_blank" rel="noopener">🔗 查看原文</a><span>GNews: 中国机器人产业链</span></div>
+</div>
+<div class="article-card">
+  <div class="article-header">
+    <span class="article-num">05</span>
+    
+    <h2 class="article-title">北京亦庄打造具身智能标杆型超级工厂拟2030年产能达50万台</h2>
+  </div>
+  
+  <div class="article-body"><p>2030年50万台产能的长远规划，让亦庄的具身智能超级工厂超越了传统“装配车间”范畴，本质上它是一项“制造能力的宣言”——建立一套能同时复用于人形机器人、工业机器人和特种机器人的柔性总装体系。但离2030年还有多年，真正值得关注的并非50万台这个远景数字，而是其倒逼的垂直整合深度。</p>
+<p>一座50万台产能的超级工厂，需要将减速器、伺服电机、编码器、力控传感器和控制器等上游核心部件的供应节奏压缩至极致。这意味着工厂周边必将形成“供应商围墙”——核心部件需要在2小时内抵达产线。从产业逻辑看，超级工厂的运转会让“全栈自研”的部分本体厂商承受巨大成本压力，因为超级工厂代表的开放代工模式（OEM或委托设计制造）会拉低行业制造门槛，逼着竞争重心全面转向软件、算法、数据以及场景定义能力。</p>
+<p>中国在这场竞赛中的核心优势不仅是成本，更在于拥有全球最丰富的制造业作业场景库。但挑战同样严峻：50万台级别下，哪怕0.1%的关节失效缺陷率也会导致巨额售后风险，这要求国产核心零部件的寿命和可靠性在2026年起的未来几年内完成对国际一线产品的追赶，时间非常紧迫。</p>
+<strong>【今日启示】</strong> 超级工厂规划将重塑分工模式：硬件制造趋于集中化、低成本化。价值链最厚的部分将从“做一台机器人”转向“教会机器人干活”，能积累特定工序物理世界数据的企业将构建最深的护城河。</div>
+  <div class="article-source"><a href="https://news.google.com/rss/articles/CBMiaEFVX3lxTE5OVEQ0SERjQjh4ZjNMUy1FWXhZZmpjeDJDWW9nVTUzb1VhbjNWU0x4QTVuMmRsRXgtVHEzYXpwRmVmXy1sY1Iza0N6LVFjeVp6WXByUlVXXzVRcFZJVHpnX3VtVTJKQy16?oc=5" target="_blank" rel="noopener">🔗 查看原文</a><span>GNews: 中国机器人产业链</span></div>
+</div>
+<div class="article-card">
+  <div class="article-header">
+    <span class="article-num">06</span>
+    
+    <h2 class="article-title">京津冀万台级人形机器人超级工厂建成，中国产业链规模化进程加速</h2>
+  </div>
+  
+  <div class="article-body"><p>京津冀地区首个万台级具身智能（具备物理身体、能与环境实时交互的智能机器人——区别于“纸上谈兵”的AI，这是技术从数字世界走向物理世界的关键一跃）机器人超级工厂投产，标志着中国机器人产业步入规模化生产阶段，但成本控制和核心零部件自主化仍是关键。</p>
+<p>该工厂位于京津冀区域，规划产能达到万台级别，专注于生产具身智能机器人。这意味着，填补了过去中国机器人产业在整机大规模制造上的空白，将产业链从中游的本体研发，强力拉升至系统集成与批量交付环节。工厂的落成首先利好的是一条清晰的供应链条：上游的精密减速器、力矩传感器（让机器人感知力量大小的核心零件——决定了抓取鸡蛋不碎、拧螺丝不打滑的能力）、电机与关节模组需求将直接放量；中游具备整机设计能力的本体厂商获得了稀缺的规模化验证机会；下游的汽车制造、物流仓储及半导体洁净室搬运等场景则有望获得更稳定、更低成本的解决方案。</p>
+<p>然而，产量的爬坡恰恰是照妖镜。万台级别的产能对产业链的稳定性和一致性提出了严苛考验。目前，中国厂商在机器人本体和系统集成上进展迅速，但在决定运动精度和寿命的谐波减速器（机器人关节的核心精密零件——日本Harmonic Drive长期垄断）、高动态响应的力矩传感器等环节，高端产品与国际头部企业仍存在性能差距。谁能在这轮扩产中，向该超级工厂稳定供应符合车规级标准的核心部件，谁就有机会建立起长期的竞争壁垒。估值逻辑上，市场会开始从追逐“概念样机”转向审视“批量交付能力和毛利率”，这是一次残酷的重新定价。</p></div>
+  <div class="article-source"><a href="https://news.google.com/rss/articles/CBMia0FVX3lxTE9HejQtcXZHZl9jbURKOWNVdWh1TDNiTzBZOXVUcFJBdWV3ZDNqenpiaG1wZjY3aXFaUXlTSk9sLW82RTd2UlNfQmtvcEhrckhZSkR4Ty1ETGJ6ZGVRRXRmNnNFVGVnLVo1TV9v?oc=5" target="_blank" rel="noopener">🔗 查看原文</a><span>GNews: 中国机器人产业链</span></div>
+</div>
+<div class="article-card">
+  <div class="article-header">
+    <span class="article-num">07</span>
+    
+    <h2 class="article-title">宇树科技IPO获受理，加速人形机器人商业化落地进程</h2>
+  </div>
+  
+  <div class="article-body"><p>宇树科技IPO正式获受理，为人形机器人赛道提供了第一个二级市场定价的锚点，直接影响产业链上下游的估值参照系，但商业化的盈利拐点仍是核心待解谜题。</p>
+<p>宇树科技作为国内四足及通用人形机器人领域的头部初创企业，其IPO推进将机器人产业从一级市场的融资叙事，带入二级市场的财务审视阶段。公司若成功上市，将直接为其本体制造和研发募集资金，但更深远的意义在于，它为上游的国产核心零部件供应商打开了确切的、规模化的采购预期。这尤其利好那些已通过宇树验证的电机、力矩传感器和双目视觉芯片企业。然而，人形机器人的终端应用场景仍高度集中于科研、巡检和浅层工业辅助，并未开放出如汽车、消费电子般的万亿级刚性需求市场。宇树的招股书（具体财务数据未披露）将是市场首次系统审视人形机器人厂商真实收入构成、成本结构及亏损幅度的机会。</p>
+<p>从竞争格局看，宇树若成功登陆资本市场，一方面会挤压其他未上市本体厂商的融资空间，形成资金与品牌上的“虹吸效应”；另一方面，也将倒逼其上游供应商快速提升产能和一致性，以适应上市公司供应链的严格要求。对于投资者而言，这是一次将“梦想”转化为“Excel模型”的时刻。核心关注点将不再是机器人的后空翻能力，而是单台BOM（物料清单）成本能否在万台级别下逼近服务业所能接受的回报周期临界点。若招股书显示营收增长未显著快于成本，市场将不得不重估整条赛道的真实商业价值。</p></div>
+  <div class="article-source"><a href="https://news.google.com/rss/articles/CBMiSEFVX3lxTE5RQ1I5NmhPdnhCX3JDRkx6aDQwd20ta1JEUFpLU0hIbks2dWFxZWQ5S2gtYU9wWmtPbFVJXy1fdGl5T0hsLXlXRA?oc=5" target="_blank" rel="noopener">🔗 查看原文</a><span>GNews: 中国机器人产业链</span></div>
+</div>
+
+<div class="section-label">⚡ 精选快讯 · 1 条</div>
+<div class="brief-list">
+
+<div class="brief-item">
+  <div class="brief-header">
+    <span class="brief-num">01</span>
+    <span class="domain-badge sm" style="color:#6c757d;background:#6c757d10;border:1px solid #6c757d40">
+      
+    </span>
+    <span class="brief-title"></span>
+  </div>
+  <div class="brief-body">截至2026年6月17日，未筛选到符合热度评分的精选科技快讯。</div>
+  
+</div>
+</div>
+
+<div class="author-card">
+  <div class="author-avatar">👤</div>
+  <div>
+    <div class="author-name">王sir · 材料工程师 / 投资人</div>
+    <div class="author-meta">深圳 · 韶音 · 工厂/制造 · 材料创新 · 价值投资</div>
+    <div class="author-links">
+      <a class="author-link" href="https://x.com/wangsir1w" target="_blank">𝕏 @wangsir1w</a>
+      <a class="author-link" href="https://github.com/wangle200104-jpg/daily-intel-report" target="_blank">📦 GitHub</a>
+      <span class="author-link">💬 微信 13973780026</span>
+    </div>
+  </div>
+</div>
+
+<div class="footer">
+  由 GitHub Actions + DeepSeek V4 Pro 自动生成<br>
+  2026年06月17日 · 午班 · 聚焦半导体·算力·材料·AI·机器人
+</div>
+
+</body>
+</html>

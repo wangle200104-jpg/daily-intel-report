@@ -1,0 +1,22 @@
+配图建议: 
+
+=== 主推（中文）===
+今日科技产业信号 📡 2026年06月17日
+🔹 高NA光刻机进入交付高峰，ASML Twinscan EXE就绪，单台超3.5亿欧元，台积电、三星2nm以下节点装置竞赛加速，中国先进制程窗口期收窄
+🔹 具身智能供应链在亦庄密集落地：超级工厂远期产能50万台，成都企业单笔5000台订单落地，宇树科技IPO获受理，产业链从原型走向万台级量产
+🔹 受益方为本土执行器、传感器及系统集成企业；承压方为高端AI芯片和精密传动部件进口依赖环节
+#AI #半导体 #产业链 @wangsir1w
+
+=== 主推（英文）===
+Today's key signals from the chip & AI supply chain 📡
+🔹 High-NA EUV ramp-up: ASML's Twinscan EXE gains traction, >€350M per tool, critical for TSMC & Samsung's sub-2nm moves, narrowing China's advanced-node window
+🔹 China's embodied AI hits scale: Yizhuang super factory targeting 500K units by 2030, a Chengdu firm lands 5,000-unit order, Unitree IPO filed—shifting from prototype to mass production
+🔹 Local actuator & sensor makers benefit; pressure remains on advanced chip imports and precision components
+#Semiconductor #AIChip #ChinaTech @wangsir1w
+
+=== Thread长推 ===
+[1/5] 半导体设备：ASML高NA光刻机Twinscan EXE系列定价突破3.5亿欧元，2026年交付提速，台积电、三星先后导入用于2nm以下逻辑与下一代DRAM。高NA将光刻分辨率推向8nm以下，但设备复杂度陡升，单台年产能仅约200片晶圆，配套检测和光刻胶供应链同步承压。中国因出口管制仍无法采购，先进制程代差风险在2027–2028年可能拉大到三代。
+[2/5] 具身智能规模化：北京亦庄标杆超级工厂规划至2030年产能50万台，同期成都企业宣布国内单笔最大订单5000台。京津冀首个万台级机器人超级工厂已开放探访，宇树科技科创板IPO获受理，预计估值超200亿元。产业从十台级试制跨越到万台级交付，核心驱动来自物流、巡检和家庭服务场景。
+[3/5] 核心零部件：万台级量产倒逼上游供给，谐波减速器、无框力矩电机、六维力传感器、3D视觉模组进入快速上量期。以绿的谐波、汇川技术为代表的国产替代已切入第二梯队，但高端编码器、专用AI推理芯片进口占比仍超70%。亦庄供应链园区已锁定15家一级供应商，本地化率目标2028年达到65%。
+[4/5] 国产替代视角：具身智能产业链成为中国应对半导体受限的新载体——通过规模制造拉动机器人专用芯片、操作系统和仿真平台的本土化。但当前风险在于：高端执行器精密加工设备、实时控制总线协议仍由欧日主导。若地缘摩擦升级，供应链安全将倒逼第二波国产替代窗口，尤其在力控和实时OS层。
+[5/5] 总结：高NA光刻机锁定制程天花板，具身智能打开规模制造新赛道。一边是设备禁令下的技术追赶压缩，一边是万台级工厂带动的供应链重构，中国在终端集成侧有明显加速度，上游短板仍在芯片和精密件。更多产业链节奏与隐形标的拆解，关注 @wangsir1w 微信13973780026
