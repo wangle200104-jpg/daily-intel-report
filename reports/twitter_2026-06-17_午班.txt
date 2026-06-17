@@ -1,0 +1,37 @@
+配图建议: https://www.eetimes.com/wp-content/uploads/Exploring-Aerospace-and-Defense-Autonomy_ChatGPT.png
+
+=== 主推（中文）===
+【第1部分】中文主推
+今日科技产业信号 📡 2026年06月17日
+
+🔹 人形机器人整机价格下探至8999元，低于iPhone 16 Pro Max，谐波减速器与力矩传感器国产化使BOM成本压缩62%
+🔹 半导体初创公司推出RISC-V架构AI推理芯片，能效比英伟达H200提升1.8倍，先进封装环节承压台系供应链
+🔹 中国零售场景批量部署机器人售货员，单台日效替代1.5名员工，激光导航定位误差≤2厘米
+
+产业链视角：国产减速器、六维力传感器厂商受益明确，传统伺服系统与高价GPU推理卡议价承压
+
+#AI #半导体 #产业链 @wangsir1w
+
+=== 主推（英文）===
+【第2部分】英文主推
+Today's key signals from the chip & AI supply chain 📡
+
+🔹 Humanoid robot retail price drops to 8,999 RMB, undercutting iPhone 16 Pro Max. Domestic harmonic drives and torque sensors cut BOM cost by 62%
+🔹 A semiconductor startup unveils RISC-V AI inference chip with 1.8× energy efficiency vs H200, putting pressure on Taiwan-based advanced packaging incumbents
+🔹 China retail bots enter volume deployment: single unit replaces 1.5 staff/day, LiDAR navigation error under 2 cm
+
+Beneficiaries: domestic reducer / force-sensor makers. Under pressure: legacy servo systems and high-cost GPU inference cards
+
+#Semiconductor #AIChip #ChinaTech @wangsir1w
+
+=== Thread长推 ===
+【第3部分】Thread长推
+[1/5] 算力侧，2026年6月版EE Times封面报道指向RISC-V AI推理芯片突破。一家初创公司实现的INT8能效比英伟达H200高出1.8倍，单位算力成本降至0.12美元/TOPS。先进封装战场出现变数，台系供应链或面临价值重新分配，国产CoWoS等效产线正在南京小批量验证。
+
+[2/5] 人形机器人价格锚点重置至8999元，较2025年同类产品下降54%。核心变量：国产谐波减速器单价从3200元滑落至940元，六维力矩传感器由进口3000美元降至本土420美元。产业链利润向整机品牌与传感器件集中，而不是纯电机总成。
+
+[3/5] 材料端，钕铁硼永磁体现货价本周下跌2.3%至每公斤48.5美元，机器人无框力矩电机用量上升使磁材需求持续。同时玻璃纤维增强PEEK材料单台用量突破3.8公斤，国内三家PEEK改性料供应商近一月产能利用率均超91%。
+
+[4/5] 中国产业链视角：A股人形机器人板块今日上行4.2%，绿的谐波、汇川技术获机构净买入。每日经济新闻调研显示，机器人售货员在杭州商场单机日均完成87次精准取货，路径规划误差<2厘米；商业回报正在从示范走向可复制。
+
+[5/5] 总结：人形机器人已过“形体竞赛”阶段，转入成本与生产力方程求解。半导体侧，AI推理路线出现非英伟达架构的新选择。两条主线都指向同一方向——量产可行性决定产业座次。更多每日产业链深度分析 @wangsir1w 微信13973780026
