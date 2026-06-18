@@ -1,0 +1,26 @@
+配图建议: 
+
+=== 主推（中文）===
+今日科技产业信号 📡 2026年06月18日  
+🔹 巴克莱报告定义自动化3.0，人形机器人市场十年后有望触及2000亿美元，算力与精密传动部件需求共振  
+🔹 越南VinRobotics启动人形机器人项目，复刻中国供应链路径，本土减速器、伺服厂商迎来外溢订单窗口  
+🔹 成都企业签署5000台具身智能订单，国内人形机器人量产信号明确，整机组装与传感器环节直接受益  
+#AI #半导体 #产业链 @wangsir1w
+
+=== 主推（英文）===
+Today's key signals from the chip & AI supply chain 📡  
+🔹 Barclays sees humanoid robot market reaching $200 B by 2036, driving a new wave of edge computing and precision actuator demand  
+🔹 Vietnam's VinRobotics follows China's playbook, opening opportunities for component exports from China's drive and reducer suppliers  
+🔹 A Chengdu firm lands a 5,000-unit embodied intelligence order—clear volume signal for China's humanoid robot production  
+#Semiconductor #AIChip #ChinaTech @wangsir1w
+
+=== Thread长推 ===
+[1/5] 巴克莱提出自动化3.0概念，预计2035年人形机器人市场规模达2000亿美元。这意味着从AI芯片、力矩传感器到行星滚柱丝杠，硬件价值链全面激活，边缘算力需求将二次加速。
+
+[2/5] 越南VinRobotics入局人形机器人，核心团队多来自中国产业链。其初期BOM表高度依赖中国产减速器与关节模组，属于典型的供应链外溢，而非替代。
+
+[3/5] 成都企业拿下5000台具身智能订单，涉及物流与巡检场景。北京亦庄同步推进全球具身智能标杆工厂建设，中国开始从实验室演示转向小批量交付。
+
+[4/5] 中国产业链机会集中在三个环节：高精度谐波减速器、六维力传感器、空心杯电机。湖北人形机器人创新中心已进入样机迭代阶段，国产化率有望从目前的40%向70%迈进。
+
+[5/5] 人形机器人正从叙事走向订单，但传感器和精密传动仍是瓶颈。后续关键要看5000台级订单交付质量与成本曲线。更多产业链拆解与A股映射，关注 @wangsir1w 微信13973780026。
