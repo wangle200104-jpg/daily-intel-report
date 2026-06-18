@@ -1,0 +1,283 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<meta property="og:title" content="每日科技投资简报 2026年06月18日 午班">
+<meta property="og:description" content="">
+<meta property="og:url" content="https://wangle200104-jpg.github.io/daily-intel-report/daily/2026-06-18_午班.html">
+<title>🧠 每日科技投资简报 · 2026年06月18日 · 午班</title>
+<style>
+:root {
+  --bg:#0d1117; --card:#161b22; --border:#30363d;
+  --text:#e6edf3; --text2:#8b949e; --light:#adb5bd;
+  --red:#c0392b; --blue:#1a6fc4; --green:#1a7340;
+  --red-bg:#c0392b15; --surface:#1c2128;
+}
+@media (prefers-color-scheme: light) {
+  :root {
+    --bg:#f8f9fa; --card:#ffffff; --border:#e9ecef;
+    --text:#0d1117; --text2:#6c757d; --light:#adb5bd;
+    --surface:#f1f3f5;
+  }
+}
+* { margin:0; padding:0; box-sizing:border-box; }
+body {
+  font-family: -apple-system,BlinkMacSystemFont,"PingFang SC",
+               "Helvetica Neue",sans-serif;
+  background:var(--bg); color:var(--text);
+  font-size:15px; line-height:1.8;
+  max-width:860px; margin:0 auto; padding:20px 16px 60px;
+}
+a { color:var(--blue); text-decoration:none; }
+a:hover { text-decoration:underline; }
+
+/* 导航 */
+.nav {
+  display:flex; align-items:center; justify-content:space-between;
+  padding:12px 0; border-bottom:1px solid var(--border); margin-bottom:24px;
+}
+.nav-brand { font-weight:800; font-size:16px; color:var(--text); }
+.nav-links { display:flex; gap:16px; font-size:13px; }
+
+/* 顶部 */
+.header {
+  padding:28px 0 24px; border-bottom:1px solid var(--border); margin-bottom:28px;
+}
+.header-top { display:flex; align-items:center; gap:10px; margin-bottom:14px; }
+.session-label {
+  font-size:11px; font-weight:700; padding:3px 10px; border-radius:4px;
+  background:var(--red); color:#fff;
+}
+.header-date { font-size:14px; color:var(--text2); }
+.header-title { font-size:28px; font-weight:900; line-height:1.3; }
+
+/* 导读卡片 */
+.intro-card {
+  background:var(--surface); border:1px solid var(--border);
+  border-left:3px solid var(--red); border-radius:0 8px 8px 0;
+  padding:16px 18px; margin-top:16px;
+}
+.intro-card p { color:var(--text); font-size:15px; line-height:1.85; }
+.kw-row { margin-top:12px; display:flex; flex-wrap:wrap; gap:6px; }
+.kw-tag {
+  font-size:11px; font-weight:600; padding:2px 9px;
+  border-radius:20px; cursor:default;
+}
+
+/* 深度文章 */
+.section-label {
+  font-size:12px; font-weight:700; text-transform:uppercase;
+  letter-spacing:1px; color:var(--text2);
+  margin:32px 0 14px; padding-bottom:8px;
+  border-bottom:1px solid var(--border);
+  display:flex; align-items:center; gap:6px;
+}
+.article-card {
+  background:var(--card); border:1px solid var(--border);
+  border-radius:12px; padding:20px 22px; margin-bottom:16px;
+}
+.article-header {
+  display:flex; align-items:flex-start; gap:8px; margin-bottom:12px;
+  flex-wrap:wrap;
+}
+.article-num {
+  font-size:10px; font-weight:800; color:#fff;
+  background:var(--red); padding:2px 6px; border-radius:3px;
+  flex-shrink:0; margin-top:3px;
+}
+.domain-badge {
+  font-size:11px; font-weight:600; padding:2px 8px;
+  border-radius:4px; flex-shrink:0; margin-top:2px;
+}
+.domain-badge.sm { font-size:10px; padding:1px 6px; }
+.article-title {
+  font-size:18px; font-weight:700; line-height:1.4; flex:1;
+}
+.article-body p {
+  font-size:15px; color:var(--text); line-height:1.85; margin-bottom:10px;
+}
+.article-img {
+  width:100%; max-height:240px; object-fit:cover;
+  border-radius:8px; margin-bottom:14px;
+  border:1px solid var(--border); display:block;
+}
+.article-body h3.article-sub {
+  font-size:14px; font-weight:700; color:var(--text2);
+  margin:12px 0 6px;
+}
+.insight {
+  margin-top:12px; padding:10px 14px;
+  background:var(--red-bg); border-left:3px solid var(--red);
+  border-radius:0 6px 6px 0;
+  font-size:13px; font-weight:600; color:var(--red);
+}
+.article-source {
+  margin-top:10px; padding-top:8px; border-top:1px dashed var(--border);
+  display:flex; align-items:center; gap:10px; font-size:12px;
+}
+.article-source a {
+  color:var(--blue); font-weight:600; text-decoration:none;
+}
+.article-source a:hover { text-decoration:underline; }
+.article-source span { color:var(--text2); }
+
+/* 快讯 */
+.brief-item {
+  border-bottom:1px solid var(--border); padding:12px 0;
+}
+.brief-item:last-child { border-bottom:none; }
+.brief-header {
+  display:flex; align-items:flex-start; gap:6px; margin-bottom:6px;
+}
+.brief-num {
+  font-size:11px; font-weight:700; color:var(--light);
+  min-width:22px; text-align:right; flex-shrink:0; margin-top:2px;
+}
+.brief-title { font-size:15px; font-weight:700; line-height:1.4; }
+.brief-body { font-size:13px; color:var(--text2); line-height:1.75; padding-left:28px; }
+.brief-insight {
+  margin-top:5px; padding:4px 10px; margin-left:28px;
+  background:var(--surface); border-radius:4px;
+  font-size:12px; font-weight:600; color:var(--green);
+}
+
+/* 作者卡片 */
+.author-card {
+  background:var(--card); border:1px solid var(--border);
+  border-radius:12px; padding:18px 20px; margin-top:32px;
+  display:flex; align-items:center; gap:16px;
+}
+.author-avatar {
+  width:52px; height:52px; border-radius:50%; flex-shrink:0;
+  background:var(--surface); border:2px solid var(--red);
+  display:flex; align-items:center; justify-content:center;
+  font-size:22px;
+}
+.author-name { font-size:15px; font-weight:700; }
+.author-meta { font-size:13px; color:var(--text2); margin-top:3px; }
+.author-links { display:flex; gap:10px; margin-top:8px; flex-wrap:wrap; }
+.author-link {
+  font-size:12px; padding:3px 10px; border-radius:6px;
+  border:1px solid var(--border); color:var(--text); background:var(--surface);
+}
+.author-link:hover { border-color:var(--blue); text-decoration:none; }
+
+.footer {
+  margin-top:40px; text-align:center; font-size:12px; color:var(--text2); line-height:2;
+  border-top:1px solid var(--border); padding-top:20px;
+}
+</style>
+</head>
+<body>
+
+<div class="nav">
+  <a class="nav-brand" href="../index.html">🧠 每日科技投资简报</a>
+  <div class="nav-links">
+    <a href="https://x.com/wangsir1w" target="_blank">𝕏 @wangsir1w</a>
+    <a href="../feed.xml">📡 RSS</a>
+  </div>
+</div>
+
+<div class="header">
+  <div class="header-top">
+    <span class="session-label">午班 · PM</span>
+    <span class="header-date">2026年06月18日</span>
+  </div>
+  <div class="header-title">每日科技投资简报</div>
+  <div class="intro-card">
+    <p></p>
+    
+    <p style="margin-top:10px;font-size:12px;color:var(--text2)">
+      深度长文见下方 · 精选快讯见底部
+    </p>
+  </div>
+</div>
+
+<div class="section-label">📰 深度长文 · 4 篇</div>
+
+<div class="article-card">
+  <div class="article-header">
+    <span class="article-num">01</span>
+    
+    <h2 class="article-title">ASML EUV光刻机的未来——超大规模时代的技术路线与产业链重构</h2>
+  </div>
+  
+  <div class="article-body"><p>ASML正将EUV（极紫外光刻——制造7nm以下芯片的唯一工具，全球只有荷兰ASML会造，一台价值2亿美元）推向新极限，其战略核心不再是单纯提高分辨率，而是服务于“超大规模”（Hyperscale）计算时代对能耗和芯片面积的新要求。这一转向将深刻重塑芯片制造产业链的价值分配。</p>
+<p>从产业链位置看，ASML处于半导体设备（WFE，晶圆制造设备——ASML/应用材料/泛林等公司卖给芯片厂的机器，AI驱动下全球市场规模超千亿美元）的绝对顶端。传统的演进逻辑是缩微晶体管提高性能，但AI芯片对功耗和互联密度的需求，使单纯追求更小纳米数（如2nm以下）的边际收益递减。ASML的下一代规划转向了高数值孔径（High-NA）EUV，它能以更少的光刻步骤制造更复杂的芯片结构，这对于制造逻辑与内存高度集成的AI加速器至关重要。</p>
+<p>竞争格局中，赢家与输家界限分明。最直接受益的是已预订High-NA EUV的尖端客户，如英特尔、三星和台积电，它们能率先构建面向AI超算的芯片能力。次级受益者是配套的检测、光刻胶和掩模版供应商，技术升级意味着更高的客单价。输家则是无法负担单台超3亿欧元设备的二三线晶圆厂，它们与头部公司在先进制程上的差距将被永久性拉大，被迫转向成熟制程或特殊工艺市场。对中国产业链而言，EUV的持续禁运意味着在单一芯片算力密度上仍存在代差，突围路径更加依赖于先进封装（如CoWoS，晶圆级封装技术——将GPU和HBM焊在同一基板上）和系统架构层面的创新来弥补。</p></div>
+  <div class="article-source"><a href="https://news.google.com/rss/articles/CBMifkFVX3lxTE1VLVE1VllhSmJsb1lsTGdKVjF0M3otajl0Y3Y0bVAxb0hBR19yTW51cUtxU0VJZER1cTJXbHgwZWU1NUljLVV4emhrQnRnTDFRbzFmUkJGcGRDU3hQcHBLaHZXU2ZrZS11UlM5bUdlMkJvTDlSZ2hVaFlPaHU4Z9IBgwFBVV95cUxOMFVLdlFERGEwcEJ6ZFR3TnlnSXFEVUJLWGpvN2lGYlR6MnctNmZIT2Qtak9qVEVnSVlDbjJXUnJJOGhldjdGSzhONTdRcEI2T2hScFNmYkRja3dfd20tVUNxaHluNDl2VkVjTlZHMl9CeFk0SFUyQjBKNmVmMUZ1OXVVNA?oc=5" target="_blank" rel="noopener">🔗 查看原文</a><span>GNews: ASML EUV光刻</span></div>
+</div>
+<div class="article-card">
+  <div class="article-header">
+    <span class="article-num">02</span>
+    
+    <h2 class="article-title">越南VinRobotics入局人形机器人——摸着中国过河的产业链意义</h2>
+  </div>
+  
+  <div class="article-body"><p>越南最大民企Vingroup旗下VinRobotics正式发布人形机器人，其策略名确提出“摸着中国过河”，这标志着全球人形机器人产业链正从中国单极探索，进入“中国技术外溢+本地化应用”的新阶段。</p>
+<p>在产业链位置中，越南直接切入的是本体制造与系统集成环节。中国过去几年已跑通了“上游核心零部件突破—中游本体成本快速下降—下游场景定义”的闭环。越南的路径是规避上游高壁垒研发，利用中国已趋成熟的谐波减速器（机器人关节核心精密零件，决定运动精度和寿命）、力矩传感器、电机等供应链，直接进行本体组装和应用软件开发。这种模式类似于早期智能手机产业的“交钥匙方案”，核心价值在于快速定义符合东南亚本地需求的场景，如制造业、物流和服务业。</p>
+<p>投资视角下，赢家是中国的核心零部件供应商。越南的本土化生产将拉动新一轮出货量，特别是那些已具备成本优势、渴望海外扩张的国产减速器、驱控一体关节模组厂商。输家则是中国那些缺乏核心技术、仅靠低价投标获取项目的中小本体集成商，它们将面临更廉价竞争对手的冲击。这一事件也在为全球产业链估值重新定价：单纯的本体制造壁垒正在消失，价值加速向上游核心部件和下游垂直场景的数据壁垒集中。这意味着，只有掌握了减速器、工艺算法或独家场景数据的公司，才能守住长期利润。</p></div>
+  <div class="article-source"><a href="https://news.google.com/rss/articles/CBMiV0FVX3lxTE91TlRTNDBWYWZST1dlOS1PQm0zTG9BeDF0akVVSWoxMmJXR3Q5V01md3NUS2Qyby16MmpiZWgwdWljclhPS3hrNnFTNzQ0d0xMVXFiWmdBMA?oc=5" target="_blank" rel="noopener">🔗 查看原文</a><span>GNews: 中国机器人产业链</span></div>
+</div>
+<div class="article-card">
+  <div class="article-header">
+    <span class="article-num">03</span>
+    
+    <h2 class="article-title">ADAS扩展至10+摄像头——封装方案升级背后的价值链迁移</h2>
+  </div>
+  <img class="article-img" src="https://i0.wp.com/semiengineering.com/wp-content/uploads/2026/06/amkor-1.png?resize=647%2C440&#038;ssl=1" alt="ADAS扩展至10+摄像头——封装方案升级背后的价值链迁移" loading="lazy" onerror="this.style.display='none'">
+  <div class="article-body"><p>汽车ADAS（高级驾驶辅助系统）向超过10个摄像头演进，核心瓶颈已从芯片算力转移至封装可靠性。新的OBGA（有机基板球栅阵列——一种高耐受性的芯片封装形式）方案成为关键，这正在将投资焦点从单纯的车规级芯片设计，拉向封装材料和工艺环节。</p>
+<p>从产业链来看，ADAS摄像头模组链条为：图像传感器（上游）—图像信号处理器与串行器（中游芯片）—封装基板与可靠性测试（中游封装）—Tier 1系统集成（下游）。传统上，车用芯片通过AEC-Q100认证即可，但当摄像头数量激增且集中布置于高热区域时，封装基板的热应力和震动失效成为主要风险。OBGA方案通过优化基板材料和焊球布局，能够同时满足高可靠性（车规寿命15年以上）和高速信号传输（每秒数Gbps）的要求。这对于投资者重要的原因是，一辆汽车从4-5颗摄像头升级到10颗以上，封装成本在整个模组中的占比可能从5%跃升至15%以上。</p>
+<p>竞争格局中，封装基板供应商（尤其是具备车规级经验的IBIDEN、三星电机及少数国内厂商）是明确赢家，产品价值量将数倍于消费电子基板。图像传感器巨头（如安森美、索尼）因向下游提供模组级方案，也在攫取更多价值。潜在输家是那些仅提供裸芯片、缺乏配套封装参考设计的设计公司，其议价空间将被压缩。中国视角下，这一趋势为国产车规芯片厂商提出了警示：没有自主可控的可靠封装方案，高像素ADAS芯片就难以进入汽车供应链的“白名单”。</p></div>
+  <div class="article-source"><a href="https://semiengineering.com/scaling-adas-to-10-cameras/" target="_blank" rel="noopener">🔗 查看原文</a><span>Semiconductor Engineering</span></div>
+</div>
+<div class="article-card">
+  <div class="article-header">
+    <span class="article-num">04</span>
+    
+    <h2 class="article-title">傅利叶机器人在马来西亚落地——中国机器人出海的商业验证</h2>
+  </div>
+  
+  <div class="article-body"><p>傅利叶智能拿下马来西亚社保机构千万级人民币项目，是中国康复/人形机器人厂商首次在东南亚公共服务体系内实现规模化落地，这验证了一个关键商业假设：中国机器人产品的竞争力正从“供应链成本”转向“场景适用性”。</p>
+<p>在产业链中，傅利叶属于中游本体制造商。康复机器人的核心上游是力矩电机、精密减速器和力控传感器，目前国内已可实现大部分自主供应。马来西亚项目（具体金额未披露）的性质决定其不是一次简单的设备出口，而是带有服务运营和长期维护的系统性交付。这要求厂商必须具备本地化的算法适配和7×24小时的响应能力，远比销售硬件困难。</p>
+<p>赢家是傅利叶及其同类具备全栈能力（硬件+算法+服务）的中国企业，通过进入外国政府采购体系，能建立起难以被低价替代的信任壁垒和运维数据飞轮。一旦社保机构这类高信誉客户形成复购，将形成对其他东南亚国家极强的示范效应。输家则是海外传统康复机器人巨头（如瑞士Hocoma），它们的高定价（通常单台均价上百万人民币）在性价比上难以抗衡。这一事件告诉投资者，评估机器人赛道，不能再简单对比其与特斯拉Optimus的技术参数；在医疗、公共服务等垂直市场，基于本地化部署的“服务收入+耗材”模式，正率先跑通商业闭环，这是比纯粹卖硬件更值得关注的估值模型转折点。</p></div>
+  <div class="article-source"><a href="https://news.google.com/rss/articles/CBMid0FVX3lxTE9oVHFxMnVQR2FxVVlSRFdBSHh3Z3habV8tWHJ2YjJZbzdRbzI0ZVhmMFF3WGY4VU5hTkt6V2ZIYmtjZTRmbUtlRHpPMDg3bXB2Q2JBQ0l1VzdtcmlUTnQyUFpDbFhTRlVHVEhMb3FncmNEQ1JaUmI4?oc=5" target="_blank" rel="noopener">🔗 查看原文</a><span>GNews: 中国机器人产业链</span></div>
+</div>
+
+<div class="section-label">⚡ 精选快讯 · 1 条</div>
+<div class="brief-list">
+
+<div class="brief-item">
+  <div class="brief-header">
+    <span class="brief-num">01</span>
+    <span class="domain-badge sm" style="color:#6c757d;background:#6c757d10;border:1px solid #6c757d40">
+      
+    </span>
+    <span class="brief-title"></span>
+  </div>
+  <div class="brief-body">今日无精选科技快讯。</div>
+  
+</div>
+</div>
+
+<div class="author-card">
+  <div class="author-avatar">👤</div>
+  <div>
+    <div class="author-name">王sir · 材料工程师 / 投资人</div>
+    <div class="author-meta">深圳 · 韶音 · 工厂/制造 · 材料创新 · 价值投资</div>
+    <div class="author-links">
+      <a class="author-link" href="https://x.com/wangsir1w" target="_blank">𝕏 @wangsir1w</a>
+      <a class="author-link" href="https://github.com/wangle200104-jpg/daily-intel-report" target="_blank">📦 GitHub</a>
+      <span class="author-link">💬 微信 13973780026</span>
+    </div>
+  </div>
+</div>
+
+<div class="footer">
+  由 GitHub Actions + DeepSeek V4 Pro 自动生成<br>
+  2026年06月18日 · 午班 · 聚焦半导体·算力·材料·AI·机器人
+</div>
+
+</body>
+</html>

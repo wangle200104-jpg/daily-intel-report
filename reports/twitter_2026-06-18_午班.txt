@@ -1,0 +1,26 @@
+配图建议: https://i0.wp.com/semiengineering.com/wp-content/uploads/2026/06/amkor-1.png?resize=647%2C440&#038;ssl=1
+
+=== 主推（中文）===
+今日科技产业信号 📡 2026年06月18日  
+🔹 ASML下一代Hyper EUV路线图浮现，单台成本较当前High-NA 3.5亿欧元再增约30%，先进制程扩产门槛进一步抬升。  
+🔹 ADAS标配摄像头突破10个，2027年单车视觉硬件价值量预计提升40%，算力芯片与高速传输环节量价齐升。  
+🔹 傅利叶拿下马来西亚社保机构千万级项目，中国人形机器人出海带动伺服与减速器供应链外溢。  
+#AI #半导体 #产业链 @wangsir1w
+
+=== 主推（英文）===
+Today's key signals from the chip & AI supply chain 📡  
+🔹 ASML sets path toward Hyper EUV, with per-tool cost likely exceeding €4.5bn, further concentrating advanced node investments among top foundries.  
+🔹 ADAS moving to 10+ cameras per vehicle, driving 40% higher silicon content per car by 2027, benefiting vision processors and SerDes suppliers.  
+🔹 Fourier Intelligence lands a multi-million-USD deal with Malaysia's social security agency, opening global public-sector demand for Chinese robotics.  
+#Semiconductor #AIChip #ChinaTech @wangsir1w
+
+=== Thread长推 ===
+[1/5] ASML正式勾勒Hyper NA EUV路线图，面向亚2nm节点。当前High-NA EUV单台成本已达3.5亿欧元，Hyper预计再增30%以上，设备资本密集度持续攀升。台积电、三星在1.4nm竞赛中的设备开支门槛被进一步推高，先进制程进一步向少数巨头集中，ASML议价权增强。
+
+[2/5] 视觉感知驱动ADAS：L2+系统摄像头数量正从8个标配向10-12个方案迁移。2027年单车图像传感器价值量预计提升40%，对应SerDes、ISP与AI SoC需求同步放大。受益环节包括Omnivision、Sony、地平线及TI等，汽车半导体第三波成长曲线成型。
+
+[3/5] 越南VinRobotics切入人形机器人赛道，复制中国电子供应链整合模式，初期对减速器、无框力矩电机有明确采购需求。同一日，傅利叶智能宣布拿下马来西亚社保机构千万级康复机器人订单，标志着中国协作机器人在公共服务领域从试点进入规模化交付。
+
+[4/5] 中国产业链视角：傅利叶出海验证了国产伺服电机、谐波减速器、力传感器在真实场景的可靠性，后续绿的谐波、汇川技术等供应商有望跟随进入东南亚公卫体系。A股机器人板块从主题驱动转向订单驱动，海外收入占比成为新估值锚点。
+
+[5/5] 三条主线今日交汇：光刻机定义算力天花板，ADAS推动边缘AI规模化，机器人全栈出海落地收入。供应链深度分化中，上游设备与核心零组件公司确定性更高。更多产业链订单与估值拆解关注 @wangsir1w 微信13973780026。
