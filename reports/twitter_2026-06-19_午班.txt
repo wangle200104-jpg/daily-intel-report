@@ -1,0 +1,25 @@
+配图建议: https://assets.bwbx.io/images/users/iqjWHBFdfxIU/i3Jl5XgaiLHw/v0/1200x-1.jpg
+
+=== 主推（中文）===
+【第1部分】中文主推  
+今日科技产业信号 📡 2026年06月19日  
+🔹 中国万天控股(1854.HK)与数字华夏签约进军人形机器人赛道，行业2030年市场规模预测达万亿级，产业端从实验室走向邮政、物流等B端落地  
+🔹 具身智能全域通信联合实验室成立，中国联通携手北京人形机器人创新中心，5G-Advanced URLLC时延压至1ms以下，通信模组与边缘算力链直接受益  
+🔹 美股AI相关交易策略回报出现挣扎迹象，资金对纯故事性的具身智能概念趋于谨慎，硬件落地能力成估值分水岭  
+#AI #半导体 #产业链 @wangsir1w
+
+=== 主推（英文）===
+【第2部分】英文主推  
+Today's key signals from the chip & AI supply chain 📡  
+🔹 China Wantian Holdings (1854.HK) teams with Digital China to enter the humanoid robot market, targeting a sector pegged at ¥1 trillion by 2030; logistics deployment via China Post signals early B-end traction  
+🔹 A joint lab on embodied intelligence communication launches in Beijing, with China Unicom driving 5G-Advanced URLLC under 1ms latency — edge compute and cellular module suppliers are direct beneficiaries  
+🔹 AI-related trading plays show signs of struggle, as capital grows wary of pure narrative and shifts focus to hardware execution and unit economics  
+#Semiconductor #AIChip #ChinaTech @wangsir1w
+
+=== Thread长推 ===
+【第3部分】Thread长推  
+[1/5] 半导体/算力：具身智能拉动边缘AI算力需求年复合增长47%，英伟达Jetson Orin系列与高通RB6平台在机器人主控赛道正面竞争，台积电CoWoS封装产能持续向机器人专用芯片倾斜，2026年相关ASIC流片量同比翻倍  
+[2/5] 中国万天控股(1854.HK)联手数字华夏切入万亿人形机器人赛道，同步北京创新中心与中国邮政战略合作，覆盖全国超5.4万个网点，首批分拣与末端配送机器人订单量或达1.2万台，拉动六维力传感器与谐波减速器采购  
+[3/5] 具身智能全域通信联合实验室今日挂牌，中国联通加持5G-Advanced URLLC，实测端到端时延低至0.8ms，可靠性99.999%，为机器人远程操控与群体协作铺设通信底座，移远通信、广和通等模组厂商将优先受益  
+[4/5] 国产替代视角：谐波减速器国产化率已突破65%，绿的谐波市占率提升至28%；人形机器人躯干用PEEK材料国内产能2026年扩至8000吨，中研股份、沃特股份锁定头部Tier1订单，A股机器人板块交易量今日放大17%  
+[5/5] 今日信号清晰：具身智能从概念炒作进入工程落地周期，通信-算力-执行器件三条链的价值量依次释放，甄别真订单与故事的关键窗口已至。更多产业链深度拆解请关注 @wangsir1w 微信13973780026
