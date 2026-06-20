@@ -1,0 +1,26 @@
+配图建议: https://i0.wp.com/stratechery.com/wp-content/uploads/2026/06/GettyImages-2281474623.jpg?resize=1700%2C1133&#038;ssl=1
+
+=== 主推（中文）===
+今日科技产业信号 📡 2026年06月20日
+🔹 中国万天控股（1854.HK）跨界入局人形机器人，与数字华夏签署战略协议，直指万亿级具身智能赛道
+🔹 缅甸总统参访宇树科技，中国机器人持续渗透新兴市场，出海从产品输出走向技术标准输出
+🔹 产业链视角：减速器、力传感器、灵巧手等环节订单能见度延长，传统工业本体短期承压
+#AI #半导体 #产业链 @wangsir1w
+
+=== 主推（英文）===
+Today's key signals from the chip & AI supply chain 📡
+🔹 China Wantian Holdings (1854.HK) enters the humanoid robotics sector via strategic deal with Digital China, targeting a trillion-yuan embodied intelligence market
+🔹 Myanmar's president visits Unitree Robotics—Chinese robots expanding footprint in emerging markets, shifting from product export to technical influence
+🔹 Supply chain impact: precision reducers, force sensors, dexterous hand suppliers benefit; traditional industrial robot OEMs face near-term margin pressure
+#Semiconductor #AIChip #ChinaTech @wangsir1w
+
+=== Thread长推 ===
+[1/5] 人形机器人赛道升温：中国万天控股(1854.HK)与数字华夏签署战略框架协议，正式切入具身智能。高工产业研究院预计2030年中国人形机器人市场规模将突破8700亿元，产业链上游核心零部件最先兑现业绩。
+
+[2/5] 缅甸总统敏昂莱今日参访宇树科技，实地考察四足机器人及人形机型。宇树科技出货量已超2万台，覆盖50余个国家和地区，新兴市场政企合作正加速中国机器人标准输出。
+
+[3/5] AGIBOT正式发布Open-AGIBOT创新平台，向全球开发者开放超过200个API接口，首批配套20余台教学版机器人。降低开发门槛将加快具身智能在物流、巡检等场景的渗透，算法层公司率先受益。
+
+[4/5] 中国机器人登陆美国零售渠道，沃尔玛部分门店已引入清洁与盘点机器人。国产谐波减速器、六维力传感器供应商订单同比增长45%以上，绿波、柯力等上市公司产能利用率已拉升至90%附近，国产替代逻辑持续强化。
+
+[5/5] 从整机出海到核心零部件放量，中国机器人产业链正进入量价共振期。一级市场与二级市场的估值锚点均向上移动。更多产业链深度分析，请关注 @wangsir1w 微信13973780026。
