@@ -1,0 +1,30 @@
+配图建议: 
+
+=== 主推（中文）===
+今日科技产业信号 📡 2026年06月20日
+
+🔹 英伟达H200订单超预期，台积电CoWoS-L产能再扩30%，先进封装设备厂持续受益
+🔹 中国大基金三期首笔试产落地，向长鑫存储注资200亿元，DRAM国产替代逻辑强化
+🔹 美国拟限制GAA晶体管技术出口，三星3nm GAA良率爬至70%但影响不明，中芯国际先进制程扩产面临不确定性
+
+#AI #半导体 #产业链 @wangsir1w
+
+=== 主推（英文）===
+Today's key signals from the chip & AI supply chain 📡
+
+🔹 NVIDIA H200 orders beat expectations, TSMC expands CoWoS-L capacity by 30%, benefiting advanced packaging tool vendors
+🔹 China's Big Fund Phase III injects 20 billion yuan into CXMT, accelerating domestic DRAM substitution
+🔹 US weighs curbs on GAA transistor tech; Samsung's 3nm GAA yield reaches 70% but may face licensing headwinds, adding uncertainty for SMIC's node roadmap
+
+#Semiconductor #AIChip #ChinaTech @wangsir1w
+
+=== Thread长推 ===
+[1/5] 算力层：英伟达H200在云厂商订单拉动下追加投片，台积电同步将CoWoS-L先进封装月产能由40k扩至52k片，增长30%。受益链：弘塑、万润等湿制程设备商，以及辛耘、均豪等检测设备商出货可见度延伸至2027上半年。
+
+[2/5] 存储：大基金三期首笔注资落地，长鑫存储获得200亿元人民币，用于19nm DRAM扩产至月产12万片。合肥周边设备与材料供应链（如安集科技、鼎龙股份）订单能见度提高，国产化率从15%向25%爬升。
+
+[3/5] 制程与材料：美国商务部拟将GAA晶体管技术纳入出口管制清单。三星3nm GAA良率虽已达70%，但对中国授权受阻。中芯国际N+2平台扩产计划因此推迟评估，国产前驱体与光刻胶供应商荣大感光、南大光电短期需求逻辑受扰。
+
+[4/5] 中国产业链：以上动态显示，设备与材料去美化主线依然清晰。长鑫200亿注资将拉动中微公司刻蚀、拓荆科技PECVD订单；但GAA限制压缩了中芯国际先进逻辑平台想象空间，A股设备板块分化加剧，资金向存储链集中。
+
+[5/5] 综上，今日信号指向：AI先进封装动能不减，存储国产化获真金白银加注，但制程代差风险因管制而放大。更多产业链深度拆解，关注 @wangsir1w 微信 13973780026
