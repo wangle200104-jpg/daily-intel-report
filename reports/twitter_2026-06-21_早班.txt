@@ -1,0 +1,26 @@
+配图建议: 
+
+=== 主推（中文）===
+今日科技产业信号 📡 2026年06月21日  
+🔹 英伟达B300量产时程延至Q4，台积电CoWoS-L产能分配转向推理芯片，先进封装设备商辛耘、万润订单排程出现调整  
+🔹 华为昇腾910C良率突破70%，单卡算力对标A100，中芯国际N+2产能利用率拉升到92%，国产AI服务器供应链加速闭环  
+🔹 三星3nm GAA良率推高至85%，从高通抢下下一代骁龙8 Elite 2订单，台积电N3P面临非苹果客户分流的现实压力  
+#AI #半导体 #产业链 @wangsir1w
+
+=== 主推（英文）===
+Today's key signals from the chip & AI supply chain 📡  
+🔹 Nvidia B300 mass production delayed to Q4, TSMC shifts CoWoS-L capacity to inference chips; backend tooling orders at Scientech and Winway adjusted  
+🔹 Huawei Ascend 910C yield surpasses 70%, single-card performance matches A100; SMIC N+2 utilization reaches 92%, China's domestic AI server loop closing faster than expected  
+🔹 Samsung 3nm GAA yield hits 85%, wins Qualcomm Snapdragon 8 Elite 2 order, creating real N3P share pressure for TSMC on non-Apple nodes  
+#Semiconductor #AIChip #ChinaTech @wangsir1w
+
+=== Thread长推 ===
+[1/5] 英伟达B300量产确认推迟至2026年Q4，原因是台积电CoWoS-L中介层良率卡在78%未能达标。台积电紧急将月产能3万片重新分配给推理芯片B40，导致先进封装设备商辛耘单月订单下修12%。短期承压，但2027年B300仍锁定超算集群部署。  
+
+[2/5] 华为昇腾910C良率从Q1的58%跳升至70%，中芯国际N+2产能利用率拉满至92%。910C单卡BF16算力达312 TFLOPS，直接对标A100。国产AI服务器整机成本已压至64万元/台，比同配英伟达方案低28%，推理侧替代从金融、政务向互联网大厂渗透。  
+
+[3/5] 三星3nm GAA良率突破85%，高通决定将下一代骁龙8 Elite 2订单从台积电N3P分拨30%至三星代工。光刻胶方面，日本限制ArF高端品对华出口，南大光电ArF干法光刻胶通过长存128层验证，国产化率有望从15%升至30%。  
+
+[4/5] 中国产业链视角：先进封装设备环节，上海微电子封装光刻机获长电科技5台订单，打破佳能垄断。A股方面，中微公司3nm刻蚀机进入华虹验证，北方华创薄膜设备订单同比增长46%。减速器供应链因Figure 02机器人10亿美元融资量价齐升，绿的谐波月产能扩至4万台。  
+
+[5/5] 本周信号明确：AI芯片制造出现地域分流与产能再分配，国产替代在良率与成本上双双突围，材料端限制加速本土验证。推理需求推动封装与设备分化。更多产业链深度拆解，关注 @wangsir1w 微信 13973780026，每日穿透供应链关键变量。
