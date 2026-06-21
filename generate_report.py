@@ -700,33 +700,40 @@ def collect_news(used_uids: set) -> list[dict]:
 
     # 分层候选池（保证各领域都有足够候选）
     SEMI_KW = ["semiconductor","chip","gpu","hbm","tsmc","nvidia","amd","asml",
-               "cowos","chiplet","packaging","foundry","算力","芯片","半导体",
-               "封装","存储","制程","光刻","euv","hpc","datacenter"]
+               "lam","kla","applied materials","tokyo electron","micron","sk hynix",
+               "cowos","chiplet","packaging","foundry","wafer","euv","dram","nand",
+               "eda","sic","gan","ascend","smic","ymtc","cxmt","intel","samsung",
+               "算力","芯片","半导体","封装","存储","制程","光刻","晶圆","昇腾",
+               "中芯","设备","碳化硅","氮化镓","hpc","datacenter"]
     AI_KW   = ["llm","gpt","claude","gemini","deepseek","openai","anthropic",
                "large language","大模型","人工智能","ai agent","inference"]
-    MAT_KW  = ["materials","battery","solid-state","rare-earth","sic","gan",
-               "新材料","碳化硅","稀土","固态电池","robot","humanoid","embodied",
-               "人形机器人","具身智能","减速器"]
+    ROBOT_KW = ["robot","humanoid","embodied","optimus","figure","reducer",
+                "人形机器人","具身智能","减速器","谐波","机器人"]
+    MAT_KW  = ["materials","battery","solid-state","rare-earth","新材料",
+               "稀土","固态电池","perovskite","钙钛矿","graphene","石墨烯"]
     CN_KW   = ["china","chinese","华为","中国","国产","a股","产业链","国产替代"]
 
     def tag(a):
         t = (a["title"] + " " + a["desc"]).lower()
-        if any(k in t for k in SEMI_KW):  return "semi"
-        if any(k in t for k in MAT_KW):   return "mat"
-        if any(k in t for k in CN_KW):    return "cn"
-        if any(k in t for k in AI_KW):    return "ai"
+        if any(k in t for k in SEMI_KW):   return "semi"   # 半导体优先级最高
+        if any(k in t for k in ROBOT_KW):  return "robot"
+        if any(k in t for k in MAT_KW):    return "mat"
+        if any(k in t for k in CN_KW):     return "cn"
+        if any(k in t for k in AI_KW):     return "ai"
         return "other"
 
-    buckets = {"semi": [], "ai": [], "mat": [], "cn": [], "other": []}
+    buckets = {"semi": [], "ai": [], "robot": [], "mat": [], "cn": [], "other": []}
     for a in sorted(pool, key=lambda x: x["score"], reverse=True):
         buckets[tag(a)].append(a)
 
     print(f"  分桶 → 半导体:{len(buckets['semi'])} AI:{len(buckets['ai'])} "
-          f"材料机器人:{len(buckets['mat'])} 中国:{len(buckets['cn'])} 其他:{len(buckets['other'])}")
+          f"机器人:{len(buckets['robot'])} 材料:{len(buckets['mat'])} "
+          f"中国:{len(buckets['cn'])} 其他:{len(buckets['other'])}")
 
-    # 构建候选池：半导体优先，各桶按比例抽取
+    # 构建候选池：半导体绝对优先，机器人严格限额（最多5条进池）
     candidate, seen2 = [], set()
-    for cat, quota in [("semi",100), ("ai",20), ("mat",20), ("cn",20), ("other",10)]:
+    for cat, quota in [("semi",120), ("ai",15), ("cn",15),
+                       ("mat",10), ("robot",5), ("other",5)]:
         for a in buckets[cat][:quota]:
             if a["uid"] not in seen2:
                 candidate.append(a)
@@ -853,24 +860,46 @@ B. 精选快讯（恰好{N_BRIEF}条，不与A重复）— 半导体必须占8�
                   "sic","gan","ascend","cambricon","smic","ymtc","cxmt",
                   "算力","芯片","半导体","封装","制程","光刻","存储","晶圆",
                   "昇腾","中芯","设备","碳化硅","氮化镓"]
+    # 机器人/具身智能词 —— 这类最多只保留1篇，其余强制替换为半导体
+    ROBOT_CHECK = ["robot","humanoid","embodied","optimus","figure",
+                   "机器人","具身","减速器","谐波","reducer","actuator"]
     def is_semi(a):
         t = (a.get("title","") + a.get("desc","") + a.get("domain","")).lower()
         return any(k in t for k in SEMI_CHECK)
+    def is_robot(a):
+        t = (a.get("title","") + a.get("desc","") + a.get("domain","")).lower()
+        return any(k in t for k in ROBOT_CHECK) and not is_semi(a)
 
+    # 步骤1：机器人文章最多保留1篇，多余的标记为待替换
+    robot_arts = [a for a in deep if is_robot(a)]
+    if len(robot_arts) > 1:
+        for a in robot_arts[1:]:
+            if a in deep:
+                deep.remove(a)
+        print(f"  🤖 机器人文章超额，移除 {len(robot_arts)-1} 篇（最多保留1篇）")
+
+    # 步骤2：半导体不足8篇，从候选池补充
     semi_cnt = sum(1 for a in deep if is_semi(a))
     if semi_cnt < 8:
-        pool_semi = [a for a in pool if is_semi(a) and a["uid"] not in {x["uid"] for x in deep}]
-        non_core  = [a for a in deep if not is_semi(a)]
-        add = min(8 - semi_cnt, len(non_core), len(pool_semi))
+        used = {x["uid"] for x in deep}
+        # 候选池：优先评分高的半导体文章
+        pool_semi = [a for a in pool if is_semi(a) and a["uid"] not in used]
+        # 待替换：非半导体文章（机器人优先替换，其次其他非核心）
+        non_core  = sorted([a for a in deep if not is_semi(a)],
+                           key=lambda x: (0 if is_robot(x) else 1))
+        add = min(8 - semi_cnt, len(pool_semi))
         for i in range(add):
-            deep.remove(non_core[i])
-            pool_semi[i]["domain"] = "半导体"
+            if i < len(non_core):
+                deep.remove(non_core[i])
+            pool_semi[i]["domain"] = pool_semi[i].get("domain") or "半导体"
             pool_semi[i]["angle"]  = "从产业链和投资角度分析对全球及中国芯片产业的影响"
             deep.append(pool_semi[i])
-        print(f"  ⚡ 半导体配额补充 +{add} 篇（目标8/10篇）")
+        deep = deep[:N_DEEP]
+        print(f"  ⚡ 半导体配额补充 +{add} 篇（目标8/10篇，当前候选池半导体{len(pool_semi)}篇）")
 
+    semi_final = sum(1 for a in deep if is_semi(a))
     domains = [a.get("domain","?") for a in deep]
-    print(f"✅ 选题完成 → 深度 {len(deep)} 篇 · 快讯 {len(brief)} 条")
+    print(f"✅ 选题完成 → 深度 {len(deep)} 篇（半导体 {semi_final} 篇）· 快讯 {len(brief)} 条")
     print(f"   领域：{' | '.join(domains)}")
     return deep, brief
 
