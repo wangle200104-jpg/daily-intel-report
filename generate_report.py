@@ -726,7 +726,7 @@ def collect_news(used_uids: set) -> list[dict]:
 
     # 构建候选池：半导体优先，各桶按比例抽取
     candidate, seen2 = [], set()
-    for cat, quota in [("semi",50), ("ai",30), ("mat",30), ("cn",25), ("other",20)]:
+    for cat, quota in [("semi",100), ("ai",20), ("mat",20), ("cn",20), ("other",10)]:
         for a in buckets[cat][:quota]:
             if a["uid"] not in seen2:
                 candidate.append(a)
@@ -783,22 +783,23 @@ def select_topics(pool: list[dict]) -> tuple[list[dict], list[dict]]:
 以下是按评分排序的候选新闻（共{len(items)}条，评分越高优先级越高）：
 {news_text}
 
-━━ 选题任务 ━━
+━━ 选题任务（半导体产业占80%，是绝对核心）━━
 
-A. 深度长文（恰好{N_DEEP}条）— 硬性配额，不可违反：
-  1. 半导体/芯片/GPU/算力/HBM/封装/光刻  → 必须3篇
-  2. 人工智能/大模型/推理/Agent           → 必须2篇
-  3. AI+人形机器人/具身智能/产业链        → 必须2篇（写明上下游：电机/减速器→本体→应用）
-  4. 中国科技/国产替代/A股产业链          → 必须1篇
-  5. 投资/融资/估值/商业模式              → 必须1篇
-  6. 宏观/政策/地缘/出口管制/新材料       → 必须1篇
-  禁止：软件工程/SaaS/企业服务 占用上述名额
+A. 深度长文（恰好{N_DEEP}条）— 半导体必须占8篇：
+  1. 半导体设备/光刻/制程/晶圆代工         → 必须3篇（ASML/AMAT/Lam/KLA/TSMC/三星代工）
+  2. HBM/先进封装/存储芯片                 → 必须2篇（HBM4/CoWoS/SK海力士/美光）
+  3. GPU/算力芯片/AI加速器                 → 必须2篇（英伟达/AMD/华为昇腾/寒武纪）
+  4. 中国半导体/国产替代/出口管制/材料     → 必须1篇（中芯/光刻胶/SiC/稀土）
+  5. AI大模型/具身智能/投资（与芯片相关）  → 必须2篇
+  核心原则：10篇中至少8篇必须直接与半导体产业链相关（设备/制程/封装/存储/算力芯片/材料/EDA）
+  优先级：推特/X上讨论度最高的半导体热点话题优先选
+  禁止：纯软件/SaaS/社交媒体/消费电子/非芯片话题占用名额
 
-B. 精选快讯（恰好{N_BRIEF}条，不与A重复）— 宁缺毋滥，每条必须有具体数字：
-  1. 半导体/芯片/算力/HBM  → 必须3条
-  2. AI/大模型/机器人      → 必须3条
-  3. 中国科技/A股/产业链   → 必须2条
-  4. 投资/融资/并购/政策   → 必须2条
+B. 精选快讯（恰好{N_BRIEF}条，不与A重复）— 半导体必须占8条：
+  1. 半导体设备/晶圆代工/封装/制程  → 必须4条
+  2. HBM/存储/GPU/算力芯片         → 必须2条
+  3. 中国半导体/国产替代/材料       → 必须2条
+  4. AI/投资/并购/政策             → 必须2条
 
 仅输出 JSON，不要其他任何文字：
 {{
@@ -809,7 +810,7 @@ B. 精选快讯（恰好{N_BRIEF}条，不与A重复）— 宁缺毋滥，每条
     print("  🎯 选题中（Pro）…")
     raw = _chat([{"role": "user", "content": prompt}],
                 max_tokens=3000, temperature=0.2,
-                system="你是专注半导体和AI产业的资深选题编辑。必须严格按配额执行，半导体/算力是最高优先级。")
+                system="你是专注半导体全产业链的资深选题编辑。半导体设备/制程/封装/存储/算力芯片是绝对核心，10篇深度长文中必须有8篇直接与半导体产业链相关，只有2篇可以是相关的AI/具身智能/投资话题。优先选推特/X上讨论度最高的半导体热点。")
 
     if not raw:
         print("  ⚠️ 选题返回空，使用评分前N条兜底")
@@ -844,25 +845,29 @@ B. 精选快讯（恰好{N_BRIEF}条，不与A重复）— 宁缺毋滥，每条
     deep_uids = {a["uid"] for a in deep}
     brief     = [a for a in brief if a["uid"] not in deep_uids][:N_BRIEF]
 
-    # 验证半导体配额
-    SEMI_CHECK = ["semiconductor","chip","gpu","hbm","tsmc","nvidia",
-                  "算力","芯片","半导体","封装","制程","光刻","asml"]
+    # 验证半导体配额（目标80% = 8篇）
+    SEMI_CHECK = ["semiconductor","chip","gpu","hbm","tsmc","nvidia","amd",
+                  "asml","lam","kla","applied materials","tokyo electron",
+                  "samsung","intel","micron","sk hynix","foundry","wafer",
+                  "cowos","chiplet","packaging","euv","dram","nand","eda",
+                  "sic","gan","ascend","cambricon","smic","ymtc","cxmt",
+                  "算力","芯片","半导体","封装","制程","光刻","存储","晶圆",
+                  "昇腾","中芯","设备","碳化硅","氮化镓"]
     def is_semi(a):
         t = (a.get("title","") + a.get("desc","") + a.get("domain","")).lower()
         return any(k in t for k in SEMI_CHECK)
 
     semi_cnt = sum(1 for a in deep if is_semi(a))
-    if semi_cnt < 3:
+    if semi_cnt < 8:
         pool_semi = [a for a in pool if is_semi(a) and a["uid"] not in {x["uid"] for x in deep}]
-        non_core  = [a for a in deep if not is_semi(a)
-                     and a.get("domain","") not in ["人工智能","大模型","中国科技"]]
-        add = min(3 - semi_cnt, len(non_core), len(pool_semi))
+        non_core  = [a for a in deep if not is_semi(a)]
+        add = min(8 - semi_cnt, len(non_core), len(pool_semi))
         for i in range(add):
             deep.remove(non_core[i])
             pool_semi[i]["domain"] = "半导体"
-            pool_semi[i]["angle"]  = "从产业链和投资角度分析对中国算力/芯片产业的影响"
+            pool_semi[i]["angle"]  = "从产业链和投资角度分析对全球及中国芯片产业的影响"
             deep.append(pool_semi[i])
-        print(f"  ⚡ 半导体配额补充 +{add} 篇")
+        print(f"  ⚡ 半导体配额补充 +{add} 篇（目标8/10篇）")
 
     domains = [a.get("domain","?") for a in deep]
     print(f"✅ 选题完成 → 深度 {len(deep)} 篇 · 快讯 {len(brief)} 条")
