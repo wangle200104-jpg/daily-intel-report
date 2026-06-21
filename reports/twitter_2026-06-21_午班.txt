@@ -1,0 +1,26 @@
+配图建议: 
+
+=== 主推（中文）===
+今日科技产业信号 📡 2026年06月21日  
+🔹 台积电3nm产能利用率升至95%，英伟达B200 Ultra订单拉动后道封装，日月光6月先进封装营收环比增12%  
+🔹 特斯拉Optimus Gen-3进入比亚迪产线实测，单台成本压至2.2万美元，中国谐波减速器供应商绿的谐波获追加订单  
+🔹 美国对华HBM3E出口审批延迟，长江存储232层NAND量产良率突破80%，国产替代加速但设备端仍承压  
+#AI #半导体 #产业链 @wangsir1w
+
+=== 主推（英文）===
+Today's key signals from the chip & AI supply chain 📡  
+🔹 TSMC N3 utilization hits 95%, driven by B200 Ultra pull-in; ASE advanced packaging revenue up 12% MoM in June  
+🔹 Tesla Optimus Gen-3 starts trial at BYD lines, unit cost down to $22k; China's Leaderdrive secures follow-on orders for harmonic reducers  
+🔹 US delays HBM3E export licenses to China; YMTC 232L NAND yield surpasses 80%, accelerating domestic substitution while equipment remains the bottleneck  
+#Semiconductor #AIChip #ChinaTech @wangsir1w
+
+=== Thread长推 ===
+[1/5] TSMC 3nm capacity utilization rises to 95% in June, largely driven by NVIDIA B200 Ultra pull-in. ASE advanced packaging revenue increased 12% MoM, CoWoS-L demand remains tight. Backend supply chain, including materials and substrate, benefits while mature nodes see price pressure.
+
+[2/5] Elon Musk confirms Optimus Gen-3 is being tested at BYD assembly lines. Unit cost has fallen to $22,000, a 35% reduction from Gen-2. China’s harmonic reducer leader Leaderdrive received an additional order of 6,000 units, reflecting deepening localization of robot actuators.
+
+[3/5] SUMCO announces 12-inch silicon wafer price recovery delayed to Q4 2026. Wafer fab utilization at 8-inch stays below 60%, but SiC substrate demand remains solid, with Wolfspeed reporting 200mm SiC yield improving to 70%, easing supply for EV inverters.
+
+[4/5] US HBM3E export license review for China stalled. Meanwhile YMTC 232-layer NAND flash yield reaches 80%, mass production target set at 100K wafers/month by Q4. Naura and AMEC benefit from tool localization demand, yet lithography constraints remain acute.
+
+[5/5] The supply chain is bifurcating: AI-pulled advanced packaging absorbs most capex, robot adoption accelerates localization in China, and legacy semiconductor faces inventory correction. 更多产业链深度分析请关注 @wangsir1w 微信13973780026

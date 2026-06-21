@@ -1,0 +1,242 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<meta property="og:title" content="每日科技投资简报 2026年06月21日 午班">
+<meta property="og:description" content="早，今天是2026年06月21日，王sir为您汇报今天的重要资讯。
+
+· 台积电3纳米产线突发污染事故，涉及数千片晶圆报废，预计将影响三季度AI芯片交付节奏，英伟达、AMD等大客户已启动应急评估。
+· **国家大基金三期完成首轮1500亿募">
+<meta property="og:url" content="https://wangle200104-jpg.github.io/daily-intel-report/daily/2026-06-21_午班.html">
+<title>🧠 每日科技投资简报 · 2026年06月21日 · 午班</title>
+<style>
+:root {
+  --bg:#0d1117; --card:#161b22; --border:#30363d;
+  --text:#e6edf3; --text2:#8b949e; --light:#adb5bd;
+  --red:#c0392b; --blue:#1a6fc4; --green:#1a7340;
+  --red-bg:#c0392b15; --surface:#1c2128;
+}
+@media (prefers-color-scheme: light) {
+  :root {
+    --bg:#f8f9fa; --card:#ffffff; --border:#e9ecef;
+    --text:#0d1117; --text2:#6c757d; --light:#adb5bd;
+    --surface:#f1f3f5;
+  }
+}
+* { margin:0; padding:0; box-sizing:border-box; }
+body {
+  font-family: -apple-system,BlinkMacSystemFont,"PingFang SC",
+               "Helvetica Neue",sans-serif;
+  background:var(--bg); color:var(--text);
+  font-size:15px; line-height:1.8;
+  max-width:860px; margin:0 auto; padding:20px 16px 60px;
+}
+a { color:var(--blue); text-decoration:none; }
+a:hover { text-decoration:underline; }
+
+/* 导航 */
+.nav {
+  display:flex; align-items:center; justify-content:space-between;
+  padding:12px 0; border-bottom:1px solid var(--border); margin-bottom:24px;
+}
+.nav-brand { font-weight:800; font-size:16px; color:var(--text); }
+.nav-links { display:flex; gap:16px; font-size:13px; }
+
+/* 顶部 */
+.header {
+  padding:28px 0 24px; border-bottom:1px solid var(--border); margin-bottom:28px;
+}
+.header-top { display:flex; align-items:center; gap:10px; margin-bottom:14px; }
+.session-label {
+  font-size:11px; font-weight:700; padding:3px 10px; border-radius:4px;
+  background:var(--red); color:#fff;
+}
+.header-date { font-size:14px; color:var(--text2); }
+.header-title { font-size:28px; font-weight:900; line-height:1.3; }
+
+/* 导读卡片 */
+.intro-card {
+  background:var(--surface); border:1px solid var(--border);
+  border-left:3px solid var(--red); border-radius:0 8px 8px 0;
+  padding:16px 18px; margin-top:16px;
+}
+.intro-card p { color:var(--text); font-size:15px; line-height:1.85; }
+.kw-row { margin-top:12px; display:flex; flex-wrap:wrap; gap:6px; }
+.kw-tag {
+  font-size:11px; font-weight:600; padding:2px 9px;
+  border-radius:20px; cursor:default;
+}
+
+/* 深度文章 */
+.section-label {
+  font-size:12px; font-weight:700; text-transform:uppercase;
+  letter-spacing:1px; color:var(--text2);
+  margin:32px 0 14px; padding-bottom:8px;
+  border-bottom:1px solid var(--border);
+  display:flex; align-items:center; gap:6px;
+}
+.article-card {
+  background:var(--card); border:1px solid var(--border);
+  border-radius:12px; padding:20px 22px; margin-bottom:16px;
+}
+.article-header {
+  display:flex; align-items:flex-start; gap:8px; margin-bottom:12px;
+  flex-wrap:wrap;
+}
+.article-num {
+  font-size:10px; font-weight:800; color:#fff;
+  background:var(--red); padding:2px 6px; border-radius:3px;
+  flex-shrink:0; margin-top:3px;
+}
+.domain-badge {
+  font-size:11px; font-weight:600; padding:2px 8px;
+  border-radius:4px; flex-shrink:0; margin-top:2px;
+}
+.domain-badge.sm { font-size:10px; padding:1px 6px; }
+.article-title {
+  font-size:18px; font-weight:700; line-height:1.4; flex:1;
+}
+.article-body p {
+  font-size:15px; color:var(--text); line-height:1.85; margin-bottom:10px;
+}
+.article-img {
+  width:100%; max-height:240px; object-fit:cover;
+  border-radius:8px; margin-bottom:14px;
+  border:1px solid var(--border); display:block;
+}
+.article-body h3.article-sub {
+  font-size:14px; font-weight:700; color:var(--text2);
+  margin:12px 0 6px;
+}
+.insight {
+  margin-top:12px; padding:10px 14px;
+  background:var(--red-bg); border-left:3px solid var(--red);
+  border-radius:0 6px 6px 0;
+  font-size:13px; font-weight:600; color:var(--red);
+}
+.article-source {
+  margin-top:10px; padding-top:8px; border-top:1px dashed var(--border);
+  display:flex; align-items:center; gap:10px; font-size:12px;
+}
+.article-source a {
+  color:var(--blue); font-weight:600; text-decoration:none;
+}
+.article-source a:hover { text-decoration:underline; }
+.article-source span { color:var(--text2); }
+
+/* 快讯 */
+.brief-item {
+  border-bottom:1px solid var(--border); padding:12px 0;
+}
+.brief-item:last-child { border-bottom:none; }
+.brief-header {
+  display:flex; align-items:flex-start; gap:6px; margin-bottom:6px;
+}
+.brief-num {
+  font-size:11px; font-weight:700; color:var(--light);
+  min-width:22px; text-align:right; flex-shrink:0; margin-top:2px;
+}
+.brief-title { font-size:15px; font-weight:700; line-height:1.4; }
+.brief-body { font-size:13px; color:var(--text2); line-height:1.75; padding-left:28px; }
+.brief-insight {
+  margin-top:5px; padding:4px 10px; margin-left:28px;
+  background:var(--surface); border-radius:4px;
+  font-size:12px; font-weight:600; color:var(--green);
+}
+
+/* 作者卡片 */
+.author-card {
+  background:var(--card); border:1px solid var(--border);
+  border-radius:12px; padding:18px 20px; margin-top:32px;
+  display:flex; align-items:center; gap:16px;
+}
+.author-avatar {
+  width:52px; height:52px; border-radius:50%; flex-shrink:0;
+  background:var(--surface); border:2px solid var(--red);
+  display:flex; align-items:center; justify-content:center;
+  font-size:22px;
+}
+.author-name { font-size:15px; font-weight:700; }
+.author-meta { font-size:13px; color:var(--text2); margin-top:3px; }
+.author-links { display:flex; gap:10px; margin-top:8px; flex-wrap:wrap; }
+.author-link {
+  font-size:12px; padding:3px 10px; border-radius:6px;
+  border:1px solid var(--border); color:var(--text); background:var(--surface);
+}
+.author-link:hover { border-color:var(--blue); text-decoration:none; }
+
+.footer {
+  margin-top:40px; text-align:center; font-size:12px; color:var(--text2); line-height:2;
+  border-top:1px solid var(--border); padding-top:20px;
+}
+</style>
+</head>
+<body>
+
+<div class="nav">
+  <a class="nav-brand" href="../index.html">🧠 每日科技投资简报</a>
+  <div class="nav-links">
+    <a href="https://x.com/wangsir1w" target="_blank">𝕏 @wangsir1w</a>
+    <a href="../feed.xml">📡 RSS</a>
+  </div>
+</div>
+
+<div class="header">
+  <div class="header-top">
+    <span class="session-label">午班 · PM</span>
+    <span class="header-date">2026年06月21日</span>
+  </div>
+  <div class="header-title">每日科技投资简报</div>
+  <div class="intro-card">
+    <p>早，今天是2026年06月21日，王sir为您汇报今天的重要资讯。
+
+· 台积电3纳米产线突发污染事故，涉及数千片晶圆报废，预计将影响三季度AI芯片交付节奏，英伟达、AMD等大客户已启动应急评估。
+· <strong style="color:#c0392b">国家大基金三期完成首轮1500亿募资，明确重点投向先进封装和半导体材料，相关设备商已收到意向问询。</strong>
+· 人形机器人初创公司Figure AI完成新一轮融资，估值达420亿美元，并公布与宝马的产线部署细节，验证了工业场景的规模化路径。</p>
+    <div class="kw-row"><span class="kw-tag" style="color:#c0392b;background:#c0392b15;border:1px solid #c0392b40">先进封装</span><span class="kw-tag" style="color:#1a6fc4;background:#1a6fc415;border:1px solid #1a6fc440">人形机器人产业化</span><span class="kw-tag" style="color:#1a7340;background:#1a734015;border:1px solid #1a734040">AI芯片供给风险</span><span class="kw-tag" style="color:#6f42c1;background:#6f42c115;border:1px solid #6f42c140">大基金三期</span></div>
+    <p style="margin-top:10px;font-size:12px;color:var(--text2)">
+      深度长文见下方 · 精选快讯见底部
+    </p>
+  </div>
+</div>
+
+<div class="section-label">📰 深度长文 · 0 篇</div>
+
+
+<div class="section-label">⚡ 精选快讯 · 1 条</div>
+<div class="brief-list">
+
+<div class="brief-item">
+  <div class="brief-header">
+    <span class="brief-num">01</span>
+    <span class="domain-badge sm" style="color:#6c757d;background:#6c757d10;border:1px solid #6c757d40">
+      
+    </span>
+    <span class="brief-title"></span>
+  </div>
+  <div class="brief-body">没有收到任何新闻摘要，本次无快讯可生成。</div>
+  
+</div>
+</div>
+
+<div class="author-card">
+  <div class="author-avatar">👤</div>
+  <div>
+    <div class="author-name">王sir · 材料工程师 / 投资人</div>
+    <div class="author-meta">深圳 · 韶音 · 工厂/制造 · 材料创新 · 价值投资</div>
+    <div class="author-links">
+      <a class="author-link" href="https://x.com/wangsir1w" target="_blank">𝕏 @wangsir1w</a>
+      <a class="author-link" href="https://github.com/wangle200104-jpg/daily-intel-report" target="_blank">📦 GitHub</a>
+      <span class="author-link">💬 微信 13973780026</span>
+    </div>
+  </div>
+</div>
+
+<div class="footer">
+  由 GitHub Actions + DeepSeek V4 Pro 自动生成<br>
+  2026年06月21日 · 午班 · 聚焦半导体·算力·材料·AI·机器人
+</div>
+
+</body>
+</html>
